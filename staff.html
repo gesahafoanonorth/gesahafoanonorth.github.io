@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES Ahafo Ano North - Staff Registration</title>
+    <title>GES Ahafo Ano North - Staff Register</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         body {
@@ -17,212 +17,295 @@
             padding: 20px;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
         }
 
-        .form-container {
+        .register-container {
             background: #ffffff;
             width: 100%;
-            max-width: 600px;
-            padding: 30px 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(139, 0, 0, 0.1);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 15px;
-        }
-
-        .district-badge {
-            display: inline-block;
-            background-color: rgba(139, 0, 0, 0.08);
-            color: #8b0000;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .header h1 {
-            font-size: 18px;
-            color: #8b0000;
-            font-weight: 700;
-            margin-bottom: 5px;
-            line-height: 1.3;
-        }
-
-        .header h2 {
-            font-size: 15px;
-            color: #333333;
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #333333;
-            margin-bottom: 6px;
-        }
-
-        .form-group label span {
-            color: #d9534f;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            font-size: 15px;
-            border: 1px solid #cccccc;
+            max-width: 1200px;
+            padding: 25px;
             border-radius: 8px;
-            outline: none;
-            background-color: #fafafa;
-            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #cccccc;
         }
 
-        .select-wrapper {
-            position: relative;
+        .header-title {
+            text-align: center;
+            color: #2b579a;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
         }
 
-        .select-wrapper::after {
-            content: "▼";
-            font-size: 10px;
-            color: #666666;
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-        }
-
-        .form-group select {
-            appearance: none;
-            -webkit-appearance: none;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            border-color: #8b0000;
-            background-color: #ffffff;
-            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
-        }
-
-        .btn-container {
+        /* Top Bar: Academic Info & Actions */
+        .top-bar {
+            border: 2px solid #8b2500;
+            padding: 12px;
+            border-radius: 4px;
             display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
             gap: 15px;
-            margin-top: 25px;
+            margin-bottom: 25px;
+            background-color: #fafafa;
+        }
+
+        .top-input-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-input-group label {
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .top-input-group input {
+            padding: 6px 10px;
+            border: 1px solid #cccccc;
+            outline: none;
+            width: 150px;
+        }
+
+        /* Action Buttons Header Layout */
+        .action-buttons {
+            display: flex;
+            gap: 8px;
         }
 
         .btn {
-            flex: 1;
-            padding: 14px;
-            font-size: 15px;
-            font-weight: 600;
-            border-radius: 8px;
+            padding: 6px 16px;
+            font-size: 13px;
+            font-weight: bold;
+            color: white;
+            border: 1px solid #555555;
             cursor: pointer;
-            border: none;
-            transition: all 0.2s ease;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-save { background-color: #5cb85c; }
+        .btn-new { background-color: #5bc0de; }
+        .btn-update { background-color: #f0ad4e; }
+        .btn-delete { background-color: #d9534f; }
+        .btn-clear { background-color: #ffffff; color: #333; }
+        .btn-back { background-color: #777777; }
+
+        /* Main Form Grid Configuration */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
         }
 
-        .btn-back {
-            background-color: #e0e0e0;
+        fieldset {
+            border: 2px solid #2b579a;
+            border-radius: 6px;
+            padding: 15px;
+            background-color: #ffffff;
+        }
+
+        legend {
+            font-size: 14px;
+            font-weight: bold;
+            color: #d9534f;
+            padding: 0 8px;
+        }
+
+        .field-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .field-row label {
+            width: 140px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #444444;
+            text-transform: uppercase;
+        }
+
+        .field-row input, .field-row select {
+            flex: 1;
+            padding: 6px 8px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .field-row input:focus, .field-row select:focus {
+            border-color: #2b579a;
+        }
+
+        .read-only-bg {
+            background-color: #fff3cd;
+        }
+
+        /* Full Width Section Styles */
+        .full-width-section {
+            grid-column: 1 / -1;
+        }
+
+        .finance-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .finance-row .field-row {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        /* Bottom Search & Table Layout */
+        .search-container {
+            margin-top: 30px;
+            border-top: 1px solid #cccccc;
+            padding-top: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            max-width: 500px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #2b579a;
+            padding: 10px;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .data-table th {
+            background-color: #fafafa;
             color: #333333;
-        }
-
-        .btn-back:hover {
-            background-color: #d0d0d0;
-        }
-
-        .btn-submit {
-            background-color: #8b0000;
-            color: #ffffff;
-        }
-
-        .btn-submit:hover {
-            background-color: #660000;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <div class="header">
-            <span class="district-badge">Staff Records</span>
-            <h1>AHAFO ANO NORTH EDUCATION DIRECTORATE</h1>
-            <h2>New Personnel Registration</h2>
-        </div>
+    <div class="register-container">
+        <div class="header-title">Staff Register</div>
 
-        <form id="staffForm" onsubmit="event.preventDefault(); alert('Staff member successfully recorded!'); window.location.href='dashboard.html';">
-            <!-- Full Name -->
-            <div class="form-group">
-                <label for="fullName">Full Name (Surname First) <span>*</span></label>
-                <input type="text" id="fullName" placeholder="e.g. Osei Mensah Kwame" required>
-            </div>
+        <form id="registerForm" onsubmit="event.preventDefault();">
+            
+            <!-- Top Controls bar -->
+            <div class="top-bar">
+                <div class="top-input-group">
+                    <label>ACADEMIC YEAR</label>
+                    <input type="text" placeholder="e.g. 2026/2027">
+                </div>
+                <div class="top-input-group">
+                    <label>ACADEMIC TERM</label>
+                    <input type="text" placeholder="e.g. Term 1">
+                </div>
 
-            <!-- Staff ID -->
-            <div class="form-group">
-                <label for="staffId">Staff ID Number / Reg. No <span>*</span></label>
-                <input type="text" id="staffId" placeholder="e.g. GES-123456" required>
-            </div>
-
-            <!-- Gender Dropdown -->
-            <div class="form-group">
-                <label for="gender">Gender <span>*</span></label>
-                <div class="select-wrapper">
-                    <select id="gender" required>
-                        <option value="" disabled selected>-- Select Gender --</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-save" onclick="alert('Record Saved Successfully!')">💾 SAVE</button>
+                    <button type="button" class="btn btn-new" onclick="document.getElementById('registerForm').reset()">📄 NEW ENTRY</button>
+                    <button type="button" class="btn btn-update" onclick="alert('Record Updated!')">🔄 UPDATE</button>
+                    <button type="button" class="btn btn-delete" onclick="alert('Record Deleted!')">❌ DELETE</button>
+                    <button type="button" class="btn btn-clear" onclick="document.getElementById('registerForm').reset()">CLEAR</button>
+                    <button type="button" class="btn btn-back" onclick="window.location.href='dashboard.html'">BACK</button>
                 </div>
             </div>
 
-            <!-- Professional Rank -->
-            <div class="form-group">
-                <label for="rank">Professional Rank <span>*</span></label>
-                <div class="select-wrapper">
-                    <select id="rank" required>
-                        <option value="" disabled selected>-- Select Current Rank --</option>
-                        <option value="Superintendent II">Superintendent II</option>
-                        <option value="Superintendent I">Superintendent I</option>
-                        <option value="Senior Superintendent II">Senior Superintendent II</option>
-                        <option value="Senior Superintendent I">Senior Superintendent I</option>
-                        <option value="Principal Superintendent">Principal Superintendent</option>
-                        <option value="Assistant Director II">Assistant Director II</option>
-                        <option value="Assistant Director I">Assistant Director I</option>
-                    </select>
-                </div>
-            </div>
+            <div class="form-grid">
+                
+                <!-- Group 1: Personal Information -->
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <div class="field-row">
+                        <label>Teacher ID</label>
+                        <input type="text">
+                    </div>
+                    <div class="field-row">
+                        <label>Title</label>
+                        <select>
+                            <option value=""></option>
+                            <option value="Mr">Mr.</option>
+                            <option value="Mrs">Mrs.</option>
+                            <option value="Ms">Ms.</option>
+                            <option value="Dr">Dr.</option>
+                        </select>
+                    </div>
+                    <div class="field-row">
+                        <label>Surname</label>
+                        <input type="text">
+                    </div>
+                    <div class="field-row">
+                        <label>Other Names</label>
+                        <input type="text">
+                    </div>
+                    <div class="field-row">
+                        <label>Gender</label>
+                        <select>
+                            <option value=""></option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="field-row">
+                        <label>Date of Birth</label>
+                        <input type="date">
+                    </div>
+                    <div class="field-row">
+                        <label>Age</label>
+                        <input type="text" class="read-only-bg" placeholder="Auto-calculated">
+                    </div>
+                    <div class="field-row">
+                        <label>Religion</label>
+                        <select>
+                            <option value=""></option>
+                            <option value="Christianity">Christianity</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Traditional">Traditional</option>
+                        </select>
+                    </div>
+                </fieldset>
 
-            <!-- Station / School Assigned -->
-            <div class="form-group">
-                <label for="schoolAssigned">Station / Current School <span>*</span></label>
-                <input type="text" id="schoolAssigned" placeholder="e.g. Tepa R/C Primary School" required>
-            </div>
-
-            <!-- Phone Number -->
-            <div class="form-group">
-                <label for="phone">Phone Number <span>*</span></label>
-                <input type="tel" id="phone" placeholder="e.g. 024XXXXXXX" maxlength="10" required>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="btn-container">
-                <button type="button" class="btn btn-back" onclick="window.location.href='dashboard.html'">Cancel</button>
-                <button type="submit" class="btn btn-submit">Save Staff Record</button>
-            </div>
-        </form>
-    </div>
-
-</body>
-</html>
+                <!-- Group 2: Academic And School Details -->
+                <fieldset>
+                    <legend>Academic And School Details</legend>
+                    <div class="field-row">
+                        <label>Circuit</label>
+                        <select><option></option></select>
+                    </div>
+                    <div class="field-row">
+                        <label>Name of School</label>
+                        <select><option></option></select>
+                    </div>
+                    <div class="field-row">
+                        <label>Association Type</label>
+                        <select><option></option></select>
+                    </div>
+                    <div class="field-row">
+                        <label>Staff Type</label>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES Ahafo Ano North - MMDA Identification</title>
+    <title>GES Ahafo Ano North - Dashboard</title>
     <style>
         * {
             box-sizing: border-box;
@@ -21,7 +21,7 @@
             min-height: 100vh;
         }
 
-        .form-container {
+        .dashboard-container {
             background: #ffffff;
             width: 100%;
             max-width: 600px;
@@ -51,245 +51,126 @@
         }
 
         .header h1 {
-            font-size: 20px;
+            font-size: 18px;
             color: #8b0000;
             font-weight: 700;
             margin-bottom: 5px;
+            line-height: 1.3;
         }
 
         .header h2 {
-            font-size: 16px;
-            color: #333333;
-            font-weight: 600;
-        }
-
-        .progress-container {
-            margin-bottom: 25px;
-        }
-
-        .progress-bar {
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            height: 8px;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background-color: #8b0000;
-            height: 100%;
-            width: 33%;
-            transition: width 0.3s ease;
-        }
-
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: #666666;
-            margin-top: 5px;
-            font-weight: 500;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #333333;
-            margin-bottom: 8px;
-        }
-
-        .form-group label span {
-            color: #d9534f;
-        }
-
-        .form-group select, .form-group input {
-            width: 100%;
-            padding: 12px;
             font-size: 15px;
-            border: 1px solid #cccccc;
-            border-radius: 8px;
-            outline: none;
-            background-color: #fafafa;
-            transition: all 0.2s ease;
-            appearance: none;
-            -webkit-appearance: none;
+            color: #333333;
+            font-weight: 600;
         }
 
-        .select-wrapper {
-            position: relative;
-        }
-
-        .select-wrapper::after {
-            content: "▼";
-            font-size: 10px;
-            color: #666666;
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-        }
-
-        .form-group select:focus, .form-group input:focus {
-            border-color: #8b0000;
-            background-color: #ffffff;
-            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
-        }
-
-        .disabled-field {
-            background-color: #eeeeee !important;
-            color: #888888;
-            cursor: not-allowed;
-        }
-
-        .btn-container {
+        /* Menu Grid Wrapper */
+        .menu-grid {
             display: flex;
+            flex-direction: column;
             gap: 15px;
-            margin-top: 25px;
+            margin-bottom: 30px;
         }
 
-        .btn {
-            flex: 1;
-            padding: 14px;
+        /* Interactive Action Buttons */
+        .menu-card {
+            background-color: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 18px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            width: 100%;
+        }
+
+        .menu-card:hover {
+            border-color: #8b0000;
+            background-color: rgba(139, 0, 0, 0.02);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.05);
+        }
+
+        .menu-info h3 {
             font-size: 16px;
+            color: #8b0000;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .menu-info p {
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .arrow-icon {
+            color: #8b0000;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .btn-logout {
+            width: 100%;
+            padding: 14px;
+            font-size: 15px;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
             border: none;
-            transition: all 0.2s ease;
-        }
-
-        .btn-back {
             background-color: #e0e0e0;
             color: #333333;
+            transition: background-color 0.2s ease;
         }
 
-        .btn-back:hover {
+        .btn-logout:hover {
             background-color: #d0d0d0;
-        }
-
-        .btn-submit {
-            background-color: #8b0000;
-            color: #ffffff;
-        }
-
-        .btn-submit:hover {
-            background-color: #660000;
         }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
+    <div class="dashboard-container">
         <div class="header">
-            <span class="district-badge">GES Data Entry Portal</span>
+            <span class="district-badge">GES Management Hub</span>
             <h1>AHAFO ANO NORTH EDUCATION DIRECTORATE</h1>
-            <h2>MMDA Identification</h2>
+            <h2>Main Control Panel</h2>
         </div>
 
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-text">
-                <span>Section: MMDA Identity</span>
-                <span id="progressPercent">33% Complete</span>
-            </div>
+        <div class="menu-grid">
+            <!-- Button 1: School Identification -->
+            <button class="menu-card" onclick="alert('Navigating to School Identification Modules...');">
+                <div class="menu-info">
+                    <h3>School Identification</h3>
+                    <p>Register and manage basic institute profile details</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </button>
+
+            <!-- Button 2: Manage Staff -->
+            <button class="menu-card" onclick="alert('Opening Staff Management System...');">
+                <div class="menu-info">
+                    <h3>Manage Staff</h3>
+                    <p>Track teachers, staff records, IDs, and allocations</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </button>
+
+            <!-- Button 3: Manage Student -->
+            <button class="menu-card" onclick="alert('Opening Student Data Portal...');">
+                <div class="menu-info">
+                    <h3>Manage Student</h3>
+                    <p>Update enrollment data, attendance, and registers</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </button>
         </div>
 
-        <form id="mmdaForm">
-            <div class="form-group">
-                <label for="mmdeoStatus">MMDEO Status <span>*</span></label>
-                <div class="select-wrapper">
-                    <select id="mmdeoStatus" required onchange="handleStatusChange()">
-                        <option value="" disabled selected>-- Select Status --</option>
-                        <option value="autonomous">Autonomous MMDA</option>
-                        <option value="sub-district">Sub-District / Dependent</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="mmdaName">Name of MMDA <span>*</span></label>
-                <div class="select-wrapper">
-                    <select id="mmdaName" class="disabled-field" disabled required onchange="updateProgress()">
-                        <option value="" disabled selected>-- Select MMDA --</option>
-                        <option value="ahafo-ano-north">Ahafo Ano North Municipal</option>
-                        <option value="ahafo-ano-south-west">Ahafo Ano South West</option>
-                        <option value="ahafo-ano-south-east">Ahafo Ano South East</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="gpsAddress">Digital Address (GhanaPOST GPS) <span>*</span></label>
-                <input type="text" id="gpsAddress" placeholder="e.g. AN-0002-1234" maxlength="12" required oninput="formatGPS(this)">
-            </div>
-
-            <div class="btn-container">
-                <button type="button" class="btn btn-back" onclick="window.location.href='index.html'">Logout</button>
-                <button type="submit" class="btn btn-submit">Next Section</button>
-            </div>
-        </form>
+        <!-- Back/Logout Action -->
+        <button type="button" class="btn-logout" onclick="window.location.href='index.html'">Logout</button>
     </div>
 
-    <script>
-        function handleStatusChange() {
-            const statusSelect = document.getElementById('mmdeoStatus');
-            const nameSelect = document.getElementById('mmdaName');
-            
-            if (statusSelect.value !== "") {
-                nameSelect.disabled = false;
-                nameSelect.classList.remove('disabled-field');
-            } else {
-                nameSelect.disabled = true;
-                nameSelect.classList.add('disabled-field');
-                nameSelect.value = "";
-            }
-            updateProgress();
-        }
-
-        function formatGPS(input) {
-            let value = input.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
-            let formatted = '';
-            
-            if (value.length > 0) {
-                formatted += value.substring(0, 2);
-            }
-            if (value.length > 2) {
-                formatted += '-' + value.substring(2, 6);
-            }
-            if (value.length > 6) {
-                formatted += '-' + value.substring(6, 10);
-            }
-            
-            input.value = formatted;
-            updateProgress();
-        }
-
-        function updateProgress() {
-            const status = document.getElementById('mmdeoStatus').value;
-            const name = document.getElementById('mmdaName').value;
-            const gps = document.getElementById('gpsAddress').value;
-            
-            let score = 33;
-            if (status) score += 22;
-            if (name) score += 22;
-            if (gps.length >= 11) score += 23;
-            
-            document.getElementById('progressFill').style.width = score + '%';
-            document.getElementById('progressPercent').innerText = score + '% Complete';
-        }
-
-        document.getElementById('mmdaForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('MMDA Details validated successfully! Moving to next system block...');
-        });
-    </script>
 </body>
 </html>

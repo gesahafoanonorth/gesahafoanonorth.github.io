@@ -7,15 +7,30 @@
     <!-- Links to your existing responsive style profile -->
     <link rel="stylesheet" href="style.css">
     <style>
+        /* CRITICAL COLOR FIX: Forces text labels and legends to be completely visible */
+        .register-container *, 
+        fieldset, 
+        legend, 
+        .field-row label {
+            color: #333333 !important;
+        }
+        
+        legend {
+            font-weight: bold !important;
+        }
+
         /* Extra custom styling elements for student table grid */
-        .student-table th { background-color: #f2f2f2; font-size: 11px; font-weight: bold; }
-        .student-table td { font-size: 11px; }
+        .student-table th { background-color: #f2f2f2; font-size: 11px; font-weight: bold; color: #333333 !important; }
+        .student-table td { font-size: 11px; color: #333333 !important; }
+        
+        /* Keep operation buttons legible with white text */
+        .action-buttons button { color: #ffffff !important; }
         .btn-save-s { background-color: #00a2e8 !important; }
-        .btn-new-s { background-color: #ffffff; color: #333 !important; }
+        .btn-new-s { background-color: #ffffff; color: #333333 !important; }
         .btn-delete-s { background-color: #ed1c24 !important; }
-        .btn-update-s { background-color: #fff200; color: #333 !important; }
-        .btn-clear-s { background-color: #ffffff; color: #333 !important; }
-        .btn-back-s { background-color: #e2a87c; color: #333 !important; }
+        .btn-update-s { background-color: #fff200; color: #333333 !important; }
+        .btn-clear-s { background-color: #ffffff; color: #333333 !important; }
+        .btn-back-s { background-color: #e2a87c; color: #333333 !important; }
     </style>
 </head>
 <body>

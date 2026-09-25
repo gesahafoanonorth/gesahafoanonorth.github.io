@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHAFO ANO NORTH EDUCATION DIRECTORATE - Login Portal</title>
+    <title>GES Ahafo Ano North - Login Portal</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #f9f6f0; /* Off-white background matching the original style */
+            background-color: #f9f6f0; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,7 +28,7 @@
             padding: 30px 25px;
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(139, 0, 0, 0.1); /* Subtle deep red border accent */
+            border: 1px solid rgba(139, 0, 0, 0.1); 
         }
 
         .header {
@@ -37,15 +37,16 @@
         }
 
         .header h1 {
-            font-size: 22px;
-            color: #8b0000; /* Deep crimson/maroon accent color */
-            margin-bottom: 8px;
+            font-size: 20px;
+            color: #8b0000; 
             font-weight: 700;
+            line-height: 1.3;
         }
 
         .header p {
             font-size: 14px;
             color: #666666;
+            margin-top: 8px;
         }
 
         .form-group {
@@ -134,14 +135,24 @@
 
     <div class="login-container">
         <div class="header">
-            <span class="district-badge">MUNICIPAL INFORMATION HUB</span>
+            <span class="district-badge">GES District Portal</span>
             <h1>AHAFO ANO NORTH EDUCATION DIRECTORATE</h1>
-            <p>Sign in to access your MMDA Dashboard</p>
+            <p>Sign in to access your MMDA dashboard</p>
         </div>
 
-        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Login submitted! Next step: connect authentication script.');">
+        <!-- Corrected JavaScript logic checking for username and password -->
+        <form action="#" method="POST" onsubmit="
+            event.preventDefault(); 
+            const code = document.getElementById('emis-code').value; 
+            const pass = document.getElementById('password').value; 
+            if(code === 'AN-ADMIN' && pass === 'Tepa2026') { 
+                window.location.href='dashboard.html'; 
+            } else { 
+                alert('Invalid EMIS Code or Password. Please try again.'); 
+            }
+        ">
             <div class="form-group">
-                <label for="emis-code">EMIS Code<span>*</span></label>
+                <label for="emis-code">EMIS Code / Staff ID <span>*</span></label>
                 <input type="text" id="emis-code" placeholder="Enter your official code" required>
             </div>
 

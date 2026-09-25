@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GES Ahafo Ano North - Staff Registration</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9f6f0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            padding: 30px 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(139, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+
+        .district-badge {
+            display: inline-block;
+            background-color: rgba(139, 0, 0, 0.08);
+            color: #8b0000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            color: #8b0000;
+            font-weight: 700;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .header h2 {
+            font-size: 15px;
+            color: #333333;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 6px;
+        }
+
+        .form-group label span {
+            color: #d9534f;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            outline: none;
+            background-color: #fafafa;
+            transition: all 0.2s ease;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: "▼";
+            font-size: 10px;
+            color: #666666;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .form-group select {
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #8b0000;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-back {
+            background-color: #e0e0e0;
+            color: #333333;
+        }
+
+        .btn-back:hover {
+            background-color: #d0d0d0;
+        }
+
+        .btn-submit {
+            background-color: #8b0000;
+            color: #ffffff;
+        }
+
+        .btn-submit:hover {
+            background-color: #660000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="header">
+            <span class="district-badge">Staff Records</span>
+            <h1>AHAFO ANO NORTH EDUCATION DIRECTORATE</h1>
+            <h2>New Personnel Registration</h2>
+        </div>
+
+        <form id="staffForm" onsubmit="event.preventDefault(); alert('Staff member successfully recorded!'); window.location.href='dashboard.html';">
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="fullName">Full Name (Surname First) <span>*</span></label>
+                <input type="text" id="fullName" placeholder="e.g. Osei Mensah Kwame" required>
+            </div>
+
+            <!-- Staff ID -->
+            <div class="form-group">
+                <label for="staffId">Staff ID Number / Reg. No <span>*</span></label>
+                <input type="text" id="staffId" placeholder="e.g. GES-123456" required>
+            </div>
+
+            <!-- Gender Dropdown -->
+            <div class="form-group">
+                <label for="gender">Gender <span>*</span></label>
+                <div class="select-wrapper">
+                    <select id="gender" required>
+                        <option value="" disabled selected>-- Select Gender --</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Professional Rank -->
+            <div class="form-group">
+                <label for="rank">Professional Rank <span>*</span></label>
+                <div class="select-wrapper">
+                    <select id="rank" required>
+                        <option value="" disabled selected>-- Select Current Rank --</option>
+                        <option value="Superintendent II">Superintendent II</option>
+                        <option value="Superintendent I">Superintendent I</option>
+                        <option value="Senior Superintendent II">Senior Superintendent II</option>
+                        <option value="Senior Superintendent I">Senior Superintendent I</option>
+                        <option value="Principal Superintendent">Principal Superintendent</option>
+                        <option value="Assistant Director II">Assistant Director II</option>
+                        <option value="Assistant Director I">Assistant Director I</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Station / School Assigned -->
+            <div class="form-group">
+                <label for="schoolAssigned">Station / Current School <span>*</span></label>
+                <input type="text" id="schoolAssigned" placeholder="e.g. Tepa R/C Primary School" required>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+                <label for="phone">Phone Number <span>*</span></label>
+                <input type="tel" id="phone" placeholder="e.g. 024XXXXXXX" maxlength="10" required>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="btn-container">
+                <button type="button" class="btn btn-back" onclick="window.location.href='dashboard.html'">Cancel</button>
+                <button type="submit" class="btn btn-submit">Save Staff Record</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -145,14 +145,14 @@
             event.preventDefault(); 
             const code = document.getElementById('emis-code').value; 
             const pass = document.getElementById('password').value; 
-            if(code === 'AN-ADMIN' && pass === 'Tepa2026') { 
+            if(code === 'ADMIN' && pass === '123456') { 
                 window.location.href='dashboard.html'; 
             } else { 
                 alert('Invalid EMIS Code or Password. Please try again.'); 
             }
         ">
             <div class="form-group">
-                <label for="emis-code">EMIS Code / Staff ID <span>*</span></label>
+                <label for="emis-code">EMIS Code<span>*</span></label>
                 <input type="text" id="emis-code" placeholder="Enter your official code" required>
             </div>
 

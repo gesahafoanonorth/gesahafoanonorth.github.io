@@ -1,1 +1,163 @@
-<h1>Welcome to GES Ahafo Ano North</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GES Ahafo Ano North - Login Portal</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9f6f0; /* Off-white background matching the original style */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(139, 0, 0, 0.1); /* Subtle deep red border accent */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            color: #8b0000; /* Deep crimson/maroon accent color */
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 6px;
+        }
+
+        .form-group label span {
+            color: #d9534f;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            outline: none;
+            background-color: #fafafa;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #8b0000;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: #8b0000;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #660000;
+        }
+
+        .footer-links {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .footer-links a {
+            color: #8b0000;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .district-badge {
+            display: inline-block;
+            background-color: rgba(139, 0, 0, 0.08);
+            color: #8b0000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="header">
+            <span class="district-badge">GES District Portal</span>
+            <h1>Ahafo Ano North</h1>
+            <p>Sign in to access your MMDA dashboard</p>
+        </div>
+
+        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Login submitted! Next step: connect authentication script.');">
+            <div class="form-group">
+                <label for="emis-code">EMIS Code / Staff ID <span>*</span></label>
+                <input type="text" id="emis-code" placeholder="Enter your official code" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password <span>*</span></label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Sign In</button>
+        </form>
+
+        <div class="footer-links">
+            <p><a href="#">Forgot Password?</a></p>
+            <p style="margin-top: 10px; color: #888888; font-size: 11px;">Official Ghana Education Service Gateway</p>
+        </div>
+    </div>
+
+</body>
+</html>

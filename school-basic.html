@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GES - Basic Schools Register</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .register-container * { color: #333333 !important; }
+        .action-buttons button { color: #ffffff !important; }
+        fieldset { border: 2px solid #2b579a; border-radius: 6px; padding: 15px; margin-bottom: 20px; }
+        legend { font-weight: bold; color: #d9534f !important; padding: 0 6px; }
+        .btn-save-b { background-color: #22b14c !important; }
+        .btn-back-b { background-color: #777777 !important; }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <div class="header-title" style="color: #2b579a !important;">Basic Schools Data Compiling</div>
+    
+    <form id="basicSchoolForm" onsubmit="event.preventDefault(); alert('Basic School Data successfully validated!'); window.location.href='dashboard.html';">
+        <div class="top-bar" style="border-color: #2b579a;">
+            <div class="action-buttons">
+                <button type="submit" class="btn btn-save-b">SAVE RECORD</button>
+                <button type="button" class="btn btn-back-b" onclick="window.location.href='dashboard.html'">BACK</button>
+            </div>
+        </div>
+
+        <div class="form-grid">
+            <fieldset>
+                <legend>Institution Identification</legend>
+                <div class="field-row">
+                    <label>1. MMDA Name</label>
+                    <input type="text" value="Ahafo Ano North Municipal" required>
+                </div>
+                <div class="field-row">
+                    <label>2. School Name</label>
+                    <input type="text" placeholder="Official name with precise spelling" required>
+                </div>
+                <div class="field-row">
+                    <label>3. Circuit</label>
+                    <input type="text" placeholder="e.g. Tepa Circuit" required>
+                </div>
+                <div class="field-row">
+                    <label>4. School EMIS Code</label>
+                    <input type="text" pattern="[0-9]*" inputmode="numeric" placeholder="Numbers only" required>
+                </div>
+                <div class="field-row">
+                    <label>5. School Email</label>
+                    <input type="email" placeholder="e.g. school@ges.gov.gh">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Classification & Setup</legend>
+                <div class="field-row">
+                    <label>6. School Model</label>
+                    <select id="basicModel" required>
+                        <option value="" disabled selected>-- Select Model --</option>
+                        <option value="Mainstream">Mainstream</option>
+                        <option value="Integrated">Integrated</option>
+                        <option value="Special">Special</option>
+                        <option value="STEM ONLY">STEM ONLY</option>
+                    </select>
+                </div>
+                <div class="field-row">
+                    <label>7. Level Covered</label>
+                    <select id="basicLevel" required>
+                        <option value="" disabled selected>-- Select Level --</option>
+                        <option value="KG Only">KG Only</option>
+                        <option value="Primary Only">Primary Only</option>
+                        <option value="JHS Only">JHS Only</option>
+                        <option value="KG & Primary">KG & Primary</option>
+                        <option value="KG & JHS">KG & JHS</option>
+                        <option value="Primary & JHS">Primary & JHS</option>
+                        <option value="Basic (KG, Primary & JHS)">Basic (KG, Primary & JHS)</option>
+                    </select>
+                </div>
+                <div class="field-row">
+                    <label>8. Affiliation Type</label>
+                    <select id="basicAffiliation" required>
+                        <option value="" disabled selected>-- Select Affiliation --</option>
+                        <option value="Public/Non-Religious (Government)">Public/Non-Religious (Government)</option>
+                        <option value="Religious (Mission/Faith-Based)">Religious (Mission/Faith-Based)</option>
+                        <option value="Private (Non-Religious)">Private (Non-Religious)</option>
+                    </select>
+                </div>
+                <div class="field-row">
+                    <label>9. Ownership Type</label>
+                    <select id="basicOwnership" required>
+                        <option value="" disabled selected>-- Select Ownership --</option>
+                        <option value="Government/Public">Government/Public</option>
+                        <option value="Private">Private</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Administration & Administration Head</legend>
+                <div class="field-row">
+                    <label>10. Headteacher Name</label>
+                    <input type="text" placeholder="Surname First" required>
+                </div>
+                <div class="field-row">
+                    <label>11. Headteacher Staff ID</label>
+                    <input type="text" placeholder="e.g. GES-XXXXXX" required>
+                </div>
+                <div class="field-row">
+                    <label>12. Headteacher Phone</label>
+                    <input type="tel" maxlength="10" placeholder="e.g. 024XXXXXXX" required>
+                </div>
+                <div class="field-row">
+                    <label>13. Headteacher Email</label>
+                    <input type="email" placeholder="e.g. head@gmail.com">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Location Metrics</legend>
+                <div class="field-row">
+                    <label>14. Area Type</label>
+                    <select id="basicArea" required>
+                        <option value="" disabled selected>-- Select Area Type --</option>
+                        <option value="Urban">Urban</option>
+                        <option value="Rural">Rural</option>
+                        <option value="Peri-Urban">Peri-Urban</option>
+                    </select>
+                </div>
+                <div class="field-row">
+                    <label>15. School Location</label>
+                    <input type="text" placeholder="Town / Community Name" required>
+                </div>
+            </fieldset>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

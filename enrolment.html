@@ -5,78 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GES - Basic Enrolment Ledger</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .register-container * { color: #333333 !important; }
-        .action-buttons button { color: #ffffff !important; }
-        
-        /* Explicitly match section border accent highlights from your design chart */
-        .kg-fieldset { border: 3px solid #b5e61d !important; border-radius: 8px; padding: 20px; margin-bottom: 25px; }
-        .primary-fieldset { border: 3px solid #8b2500 !important; border-radius: 8px; padding: 20px; margin-bottom: 25px; }
-        .jhs-fieldset { border: 3px solid #000000 !important; border-radius: 8px; padding: 20px; margin-bottom: 25px; }
-        
-        legend { font-weight: bold; padding: 0 10px; font-size: 14px; text-transform: uppercase; text-align: center; }
-        .kg-fieldset legend { color: #22b14c !important; }
-        .primary-fieldset legend { color: #8b2500 !important; }
-        .jhs-fieldset legend { color: #ed1c24 !important; }
-
-        .btn-save-en { background-color: #22b14c !important; }
-        .btn-back-en { background-color: #777777 !important; }
-        .read-only-bg { background-color: #f2f2f2 !important; font-weight: bold; text-align: center; border: 1px solid #cccccc !important; }
-
-        /* Widescreen Multi-Column Stage Formatting Grid */
-        .stage-row-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .inner-class-card {
-            border: 1px solid #e0e0e0;
-            padding: 10px;
-            background: #fafafa;
-            border-radius: 4px;
-        }
-
-        .inner-class-card h4 {
-            font-size: 12px;
-            text-align: center;
-            margin-bottom: 8px;
-            border-bottom: 1px dashed #ccc;
-            padding-bottom: 4px;
-        }
-
-        .sub-input-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 6px;
-            gap: 10px;
-        }
-
-        .sub-input-row label {
-            font-size: 11px;
-            font-weight: bold;
-            width: 50px;
-        }
-
-        .sub-input-row input {
-            width: 75px;
-            padding: 4px;
-            font-size: 13px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
 
 <div class="register-container">
-    <div class="header-title" style="color: #2b579a !important;">Basic Enrolment Log</div>
+    <div class="header-title">Basic Enrolment Log</div>
 
     <form id="enrolmentForm">
         <!-- Action Control Header -->
-        <div class="top-bar" style="border-color: #cccccc;">
+        <div class="top-bar">
             <div class="action-buttons">
                 <button type="submit" class="btn btn-save-en">SAVE RECORD</button>
                 <button type="button" class="btn btn-back-en" onclick="window.location.href='dashboard.html'">BACK</button>
@@ -84,8 +21,8 @@
         </div>
 
         <!-- METADATA INFORMATION BAR -->
-        <fieldset style="border: 2px solid #ccc; margin-bottom: 25px;">
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+        <fieldset class="meta-fieldset">
+            <div class="meta-grid">
                 <div>
                     <div class="field-row"><label>ACADEMIC YEAR</label><input type="text" value="2026/27" name="academicYear" required></div>
                     <div class="field-row"><label>ACADEMIC TERM</label><input type="text" value="FIRST TERM" name="academicTerm" required></div>
@@ -111,23 +48,23 @@
                 <!-- KG 1 -->
                 <div class="inner-class-card">
                     <h4>KG 1</h4>
-                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="kg1_b"></div>
-                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="kg1_g"></div>
-                    <div class="sub-input-row" style="margin-top:10px;"><label>TOTAL</label><input type="text" class="read-only-bg" id="kg1_t" readonly value="0"></div>
+                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="kg1_b" name="kg1_b"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="kg1_g" name="kg1_g"></div>
+                    <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg" id="kg1_t" readonly value="0"></div>
                 </div>
                 <!-- KG 2 -->
                 <div class="inner-class-card">
                     <h4>KG 2</h4>
-                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="kg2_b"></div>
-                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="kg2_g"></div>
-                    <div class="sub-input-row" style="margin-top:10px;"><label>TOTAL</label><input type="text" class="read-only-bg" id="kg2_t" readonly value="0"></div>
+                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="kg2_b" name="kg2_b"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="kg2_g" name="kg2_g"></div>
+                    <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg" id="kg2_t" readonly value="0"></div>
                 </div>
                 <!-- KG GRANDTOTAL -->
-                <div class="inner-class-card" style="background-color: #f1fcd4;">
+                <div class="inner-class-card total-card-kg">
                     <h4>GRANDTOTAL</h4>
                     <div class="sub-input-row"><label>BOYS</label><input type="text" class="read-only-bg" id="kg_gt_b" readonly value="0"></div>
                     <div class="sub-input-row"><label>GIRLS</label><input type="text" class="read-only-bg" id="kg_gt_g" readonly value="0"></div>
-                    <div class="sub-input-row" style="margin-top:10px;"><label>TOTAL</label><input type="text" class="read-only-bg" id="kg_gt_t" readonly value="0" style="background-color: #fff3cd !important;"></div>
+                    <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg summary-highlight" id="kg_gt_t" readonly value="0"></div>
                 </div>
             </div>
         </fieldset>
@@ -140,45 +77,80 @@
             <div class="stage-row-grid">
                 <div class="inner-class-card">
                     <h4>PRIMARY 1</h4>
-                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p1_b"></div>
-                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p1_g"></div>
+                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p1_b" name="p1_b"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p1_g" name="p1_g"></div>
                     <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg" id="p1_t" readonly value="0"></div>
                 </div>
                 <div class="inner-class-card">
                     <h4>PRIMARY 2</h4>
-                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p2_b"></div>
-                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p2_g"></div>
+                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p2_b" name="p2_b"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p2_g" name="p2_g"></div>
                     <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg" id="p2_t" readonly value="0"></div>
                 </div>
                 <div class="inner-class-card">
                     <h4>PRIMARY 3</h4>
-                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p3_b"></div>
-                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p3_g"></div>
+                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p3_b" name="p3_b"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p3_g" name="p3_g"></div>
                     <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg" id="p3_t" readonly value="0"></div>
                 </div>
             </div>
 
             <!-- Row Two: P4, P5, P6 -->
-            <div class="stage-row-grid" style="margin-top: 15px;">
+            <div class="stage-row-grid grid-spacer">
                 <div class="inner-class-card">
                     <h4>PRIMARY 4</h4>
-                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p4_b"></div>
-                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p4_g"></div>
+                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p4_b" name="p4_b"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p4_g" name="p4_g"></div>
                     <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg" id="p4_t" readonly value="0"></div>
                 </div>
                 <div class="inner-class-card">
                     <h4>PRIMARY 5</h4>
-                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p5_b"></div>
-                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p5_g"></div>
+                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p5_b" name="p5_b"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p5_g" name="p5_g"></div>
                     <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg" id="p5_t" readonly value="0"></div>
                 </div>
                 <div class="inner-class-card">
                     <h4>PRIMARY 6</h4>
-                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p6_b"></div>
-                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p6_g"></div>
+                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="p6_b" name="p6_b"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="p6_g" name="p6_g"></div>
                     <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg" id="p6_t" readonly value="0"></div>
                 </div>
             </div>
 
-            <!-- Primary Grand Total Area -->
-            <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+            <!-- Row Three: Primary Grand Total -->
+            <div class="stage-row-grid grid-spacer">
+                <div></div>
+                <div></div>
+                <div class="inner-class-card total-card-primary">
+                    <h4>PRIMARY GRANDTOTAL</h4>
+                    <div class="sub-input-row"><label>BOYS</label><input type="text" class="read-only-bg" id="p_gt_b" readonly value="0"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="text" class="read-only-bg" id="p_gt_g" readonly value="0"></div>
+                    <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg summary-highlight" id="p_gt_t" readonly value="0"></div>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- MODULE 3: JHS ENROLMENT -->
+        <fieldset class="jhs-fieldset">
+            <legend>JHS Enrolment</legend>
+            <div class="stage-row-grid">
+                <div class="inner-class-card">
+                    <h4>JHS 1</h4>
+                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="jhs1_b" name="jhs1_b"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="jhs1_g" name="jhs1_g"></div>
+                    <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg" id="jhs1_t" readonly value="0"></div>
+                </div>
+                <div class="inner-class-card">
+                    <h4>JHS 2</h4>
+                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="jhs2_b" name="jhs2_b"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="jhs2_g" name="jhs2_g"></div>
+                    <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg" id="jhs2_t" readonly value="0"></div>
+                </div>
+                <div class="inner-class-card">
+                    <h4>JHS 3</h4>
+                    <div class="sub-input-row"><label>BOYS</label><input type="number" min="0" value="0" id="jhs3_b" name="jhs3_b"></div>
+                    <div class="sub-input-row"><label>GIRLS</label><input type="number" min="0" value="0" id="jhs3_g" name="jhs3_g"></div>
+                    <div class="sub-input-row"><label>TOTAL</label><input type="text" class="read-only-bg" id="jhs3_t" readonly value="0"></div>
+                </div>
+            </div>
+

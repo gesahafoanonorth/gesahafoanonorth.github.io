@@ -3,42 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES Ahafo Ano North - Student Registration</title>
-    <!-- Links to your existing responsive style profile -->
+    <title>GES - Student Registration</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CRITICAL COLOR FIX: Forces text labels and legends to be completely visible */
-        .register-container *, 
-        fieldset, 
-        legend, 
-        .field-row label {
-            color: #333333 !important;
-        }
-        
-        legend {
-            font-weight: bold !important;
-        }
-
-        /* Extra custom styling elements for student table grid */
-        .student-table th { background-color: #f2f2f2; font-size: 11px; font-weight: bold; color: #333333 !important; }
-        .student-table td { font-size: 11px; color: #333333 !important; }
-        
-        /* Keep operation buttons legible with white text */
+        .register-container * { color: #333333 !important; }
         .action-buttons button { color: #ffffff !important; }
-        .btn-save-s { background-color: #00a2e8 !important; }
-        .btn-new-s { background-color: #ffffff; color: #333333 !important; }
-        .btn-delete-s { background-color: #ed1c24 !important; }
-        .btn-update-s { background-color: #fff200; color: #333333 !important; }
-        .btn-clear-s { background-color: #ffffff; color: #333333 !important; }
-        .btn-back-s { background-color: #e2a87c; color: #333333 !important; }
+        fieldset { border: 2px solid #00a2e8; border-radius: 6px; padding: 15px; margin-bottom: 20px; }
+        legend { font-weight: bold; color: #00a2e8 !important; padding: 0 6px; }
+        .btn-save-sd { background-color: #00a2e8 !important; }
+        .btn-back-sd { background-color: #777777 !important; }
     </style>
 </head>
 <body>
 
-    <div id="student-mount"></div>
+<div class="register-container">
+    <div class="header-title" style="color: #00a2e8 !important;">Student Registration Compiling</div>
+    
+    <form id="studentForm" onsubmit="event.preventDefault(); alert('Student Record successfully validated!'); window.location.href='dashboard.html';">
+        <div class="top-bar" style="border-color: #00a2e8;">
+            <div class="action-buttons">
+                <button type="submit" class="btn btn-save-sd">SAVE RECORD</button>
+                <button type="button" class="btn btn-back-sd" onclick="window.location.href='dashboard.html'">BACK</button>
+            </div>
+        </div>
 
-    <!-- Links directly to the script containing the student layout framework -->
-    <script src="student-app.js"></script>
+        <div class="form-grid">
+            <!-- Box 1 -->
+            <fieldset style="border-color: #22b14c;">
+                <legend style="color: #22b14c !important;">Student Profile Details</legend>
+                <div class="field-row"><label>Student ID</label><input type="text" placeholder="ID Number" required></div>
+                <div class="field-row"><label>Surname</label><input type="text" required></div>
+                <div class="field-row"><label>Other Name</label><input type="text" required></div>
+                <div class="field-row"><label>Date of Birth</label><input type="date" required></div>
+                <div class="field-row">
+                    <label>Sex</label>
+                    <select required><option value="" disabled selected>-- Select Sex --</option><option>BOY</option><option>GIRL</option></select>
+                </div>
+                <div class="field-row"><label>Hometown</label><input type="text" required></div>
+                <div class="field-row"><label>Current Class</label><input type="text" placeholder="e.g. JHS 3" required></div>
+            </fieldset>
+
+            <!-- Box 2 -->
+            <fieldset style="border-color: #ffc90e;">
+                <legend style="color: #ffc90e !important;">BECE Examination Settings</legend>
+                <div class="field-row"><label>School Number</label><input type="text" required></div>
+                <div class="field-row"><label>Centre Number</label><input type="text" required></div>
+                <div class="field-row"><label>Exam Year</label><input type="text" value="2027" required></div>
+                <div class="field-row"><label>Ghanaian Language Taught</label><input type="text" placeholder="e.g. Asante Twi" required></div>
+            </fieldset>
+
+            <!-- Box 3 -->
+            <fieldset style="border-color: #d9534f;">
+                <legend style="color: #d9534f !important;">Guardian Contact Information</legend>
+                <div class="field-row"><label>Guardian Name</label><input type="text" required></div>
+                <div class="field-row"><label>Relationship</label><input type="text" placeholder="e.g. Father / Mother" required></div>
+                <div class="field-row"><label>Telephone Number</label><input type="tel" maxlength="10" required></div>
+                <div class="field-row"><label>Residential Address</label><input type="text" required></div>
+            </fieldset>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

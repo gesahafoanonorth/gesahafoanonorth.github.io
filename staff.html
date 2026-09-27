@@ -3,16 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES Ahafo Ano North - Staff Register</title>
-    <!-- Look directly inside your repository folder -->
+    <title>GES - Staff Register</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .register-container * { color: #333333 !important; }
+        .action-buttons button { color: #ffffff !important; }
+        fieldset { border: 2px solid #2b579a; border-radius: 6px; padding: 15px; margin-bottom: 20px; }
+        legend { font-weight: bold; color: #d9534f !important; padding: 0 6px; }
+        .btn-save-st { background-color: #2b579a !important; }
+        .btn-back-st { background-color: #777777 !important; }
+    </style>
 </head>
 <body>
 
-    <div id="app-mount"></div>
+<div class="register-container">
+    <div class="header-title" style="color: #2b579a !important;">Staff Register Compiling</div>
+    
+    <form id="staffForm" onsubmit="event.preventDefault(); alert('Staff Record successfully validated!'); window.location.href='dashboard.html';">
+        <div class="top-bar" style="border-color: #2b579a;">
+            <div class="action-buttons">
+                <button type="submit" class="btn btn-save-st">SAVE RECORD</button>
+                <button type="button" class="btn btn-back-st" onclick="window.location.href='dashboard.html'">BACK</button>
+            </div>
+        </div>
 
-    <!-- Look directly inside your repository folder -->
-    <script src="app.js"></script>
+        <div class="form-grid">
+            <!-- Card 1 -->
+            <fieldset>
+                <legend>Personal Information</legend>
+                <div class="field-row"><label>Teacher ID</label><input type="text" required></div>
+                <div class="field-row">
+                    <label>Title</label>
+                    <select required><option value="" disabled selected>-- Select Title --</option><option>Mr.</option><option>Mrs.</option><option>Ms.</option><option>Dr.</option></select>
+                </div>
+                <div class="field-row"><label>Surname</label><input type="text" required></div>
+                <div class="field-row"><label>Other Names</label><input type="text" required></div>
+                <div class="field-row">
+                    <label>Gender</label>
+                    <select required><option value="" disabled selected>-- Select Gender --</option><option>Male</option><option>Female</option></select>
+                </div>
+                <div class="field-row"><label>Date of Birth</label><input type="date" required></div>
+                <div class="field-row">
+                    <label>Religion</label>
+                    <select required><option value="" disabled selected>-- Select Religion --</option><option>Christianity</option><option>Islam</option><option>Traditional</option></select>
+                </div>
+            </fieldset>
+
+            <!-- Card 2 -->
+            <fieldset>
+                <legend>Academic And School Details</legend>
+                <div class="field-row"><label>Circuit</label><input type="text" required></div>
+                <div class="field-row"><label>Name of School</label><input type="text" required></div>
+                <div class="field-row"><label>Position / Rank</label><input type="text" required></div>
+                <div class="field-row"><label>Level / Subject Taught</label><input type="text" required></div>
+            </fieldset>
+
+            <!-- Card 3 -->
+            <fieldset>
+                <legend>Contact And Location</legend>
+                <div class="field-row"><label>Nationality</label><input type="text" value="Ghanaian" required></div>
+                <div class="field-row"><label>GPS Address</label><input type="text" placeholder="e.g. AN-0002-1234" required></div>
+                <div class="field-row"><label>Telephone Number</label><input type="tel" maxlength="10" required></div>
+                <div class="field-row"><label>E-Mail Address</label><input type="email"></div>
+            </fieldset>
+
+            <!-- Card 4 -->
+            <fieldset>
+                <legend>Banking And Finance</legend>
+                <div class="field-row"><label>Bank Name</label><input type="text" required></div>
+                <div class="field-row"><label>Bank Branch</label><input type="text" required></div>
+                <div class="field-row"><label>Accounts Number</label><input type="text" required></div>
+            </fieldset>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

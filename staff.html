@@ -3,121 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES - Comprehensive Staff Register</title>
+    <title>GES Ahafo Ano North - Staff Registry</title>
+    <!-- Loads your unified stylesheet layout -->
     <link rel="stylesheet" href="style.css">
-    <style>
-        .register-container * { color: #333333 !important; }
-        .action-buttons button { color: #ffffff !important; }
-        fieldset { border: 2px solid #2b579a; border-radius: 6px; padding: 15px; margin-bottom: 20px; width: 100%; }
-        legend { font-weight: bold; color: #d9534f !important; padding: 0 6px; font-size: 13px; }
-        .btn-save-st { background-color: #2b579a !important; }
-        .btn-back-st { background-color: #777777 !important; }
-        
-        .progress-container { margin: 15px 0 25px 0; width: 100%; }
-        .progress-bar { background-color: #e0e0e0; border-radius: 10px; height: 8px; width: 100%; overflow: hidden; }
-        .progress-fill { background-color: #d9534f; height: 100%; width: 0%; transition: width 0.3s ease; }
-        .progress-text { display: flex; justify-content: space-between; font-size: 12px; color: #666666 !important; margin-top: 5px; font-weight: 600; }
-        
-        .read-only-bg { background-color: #eef7ed !important; font-weight: bold; border: 1px solid #b2dba1 !important; }
-        .employment-layout { display: flex; flex-direction: column; gap: 10px; }
-    </style>
 </head>
 <body>
 
-<div class="register-container">
-    <div class="header-title" style="color: #2b579a !important;">Staff Register Compiling</div>
-    
-    <!-- Real-time Progress Bar Tracker -->
-    <div class="progress-container">
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="progress-text">
-            <span style="color: #666666 !important;">Form Completion Progress</span>
-            <span id="progressPercent" style="color: #d9534f !important; font-weight: bold;">0% Complete</span>
-        </div>
-    </div>
-    
-    <form id="staffForm">
-        <div class="top-bar" style="border-color: #2b579a;">
-            <div class="action-buttons">
-                <button type="submit" class="btn btn-save-st">SAVE RECORD</button>
-                <button type="button" class="btn btn-back-st" onclick="window.location.href='dashboard.html'">BACK</button>
-            </div>
-        </div>
+    <!-- Main Mounting Node for Widescreen Layout -->
+    <div id="ges-desktop-app"></div>
 
-        <div class="form-grid">
-            
-            <!-- SECTION 1: PERSONAL INFORMATION -->
-            <fieldset>
-                <legend>Personal Information</legend>
-                <div class="field-row"><label>TEACHER ID</label><input type="text" name="teacherId" required class="track-input"></div>
-                <div class="field-row">
-                    <label>TITLE</label>
-                    <select name="title" required class="track-input">
-                        <option value="" disabled selected>-- Select Title --</option><option value="Mr">Mr.</option><option value="Mrs">Mrs.</option><option value="Ms">Ms.</option><option value="Dr">Dr.</option>
-                    </select>
-                </div>
-                <div class="field-row"><label>SURNAME</label><input type="text" name="surname" required class="track-input"></div>
-                <div class="field-row"><label>OTHER NAMES</label><input type="text" name="otherNames" required class="track-input"></div>
-                <div class="field-row">
-                    <label>GENDER</label>
-                    <select name="gender" required class="track-input">
-                        <option value="" disabled selected>-- Select Gender --</option><option value="Male">Male</option><option value="Female">Female</option>
-                    </select>
-                </div>
-                <div class="field-row"><label>DATE OF BIRTH</label><input type="date" name="dob" id="dobField" required class="track-input"></div>
-                <div class="field-row"><label>AGE</label><input type="text" name="age" id="ageField" class="read-only-bg" readonly placeholder="Calculated Auto"></div>
-                <div class="field-row">
-                    <label>RELIGION</label>
-                    <select name="religion" required class="track-input">
-                        <option value="" disabled selected>-- Select Religion --</option><option value="Christianity">Christianity</option><option value="Islam">Islam</option><option value="Traditional">Traditional</option>
-                    </select>
-                </div>
-            </fieldset>
+    <!-- Calls the complete layout engine component locally -->
+    <script src="staff-desktop-engine.js"></script>
 
-            <!-- SECTION 2: ACADEMIC AND SCHOOL DETAILS -->
-            <fieldset>
-                <legend>Academic And School Details</legend>
-                <div class="field-row">
-                    <label>CIRCUIT</label>
-                    <select name="circuit" required class="track-input">
-                        <option value="" disabled selected>-- Select Circuit --</option>
-                        <option value="AKWASIASE">AKWASIASE</option><option value="ANYINASUSO">ANYINASUSO</option><option value="DWAAHO">DWAAHO</option><option value="KOJOBETIAKO">KOJOBETIAKO</option><option value="MANFO">MANFO</option><option value="SUBRISO">SUBRISO</option><option value="SUPONSO">SUPONSO</option><option value="TEPA URBAN A">TEPA URBAN A</option><option value="TEPA URBAN B">TEPA URBAN B</option><option value="TWABIDI">TWABIDI</option>
-                    </select>
-                </div>
-                <div class="field-row"><label>NAME OF SCHOOL</label><input type="text" name="schoolName" placeholder="e.g. ABONSUASO M/A JHS" required class="track-input"></div>
-                <div class="field-row"><label>ASSOCIATION TYPE</label><input type="text" name="associationType" required class="track-input"></div>
-                <div class="field-row"><label>STAFF TYPE</label><input type="text" name="staffType" required class="track-input"></div>
-                <div class="field-row"><label>TRAINING STATUS</label><input type="text" name="trainingStatus" required class="track-input"></div>
-                <div class="field-row"><label>POSITION</label><input type="text" name="position" required class="track-input"></div>
-                <div class="field-row"><label>LEVEL TAUGHT</label><input type="text" name="levelTaught" required class="track-input"></div>
-                <div class="field-row"><label>CLASS TAUGHT</label><input type="text" name="classTaught" required class="track-input"></div>
-                <div class="field-row"><label>SUBJECT TAUGHT</label><input type="text" name="subjectTaught" required class="track-input"></div>
-            </fieldset>
-
-            <!-- SECTION 3: CONTACT AND LOCATION DETAILS -->
-            <fieldset>
-                <legend>Contact And Location Details</legend>
-                <div class="field-row"><label>NATIONALITY</label><input type="text" name="nationality" value="Ghanaian" required class="track-input"></div>
-                <div class="field-row"><label>HOMETOWN</label><input type="text" name="hometown" required class="track-input"></div>
-                <div class="field-row"><label>REGION</label><input type="text" name="region" value="Ashanti" required class="track-input"></div>
-                <div class="field-row"><label>DISTRICT</label><input type="text" name="district" value="Ahafo Ano North" required class="track-input"></div>
-                <div class="field-row"><label>GPS ADDRESS</label><input type="text" name="gpsAddress" placeholder="AN-XXXX-XXXX" required class="track-input"></div>
-                <div class="field-row"><label>E-MAIL</label><input type="email" name="email" placeholder="name@domain.com" class="track-input"></div>
-                <div class="field-row"><label>TELEPHONE NUMBER</label><input type="tel" name="telephone" maxlength="10" placeholder="024XXXXXXX" required class="track-input"></div>
-            </fieldset>
-
-            <!-- SECTION 4: EMPLOYMENT AND QUALIFICATION -->
-            <fieldset class="full-width-section">
-                <legend>Employment and Qualification</legend>
-                <div class="employment-layout">
-                    <div class="field-row"><label>FILE NUMBER</label><input type="text" name="fileNumber" required class="track-input"></div>
-                    <div class="field-row"><label>STAFF ID</label><input type="text" name="staffId" required class="track-input"></div>
-                    <div class="field-row"><label>REGISTERED NO.</label><input type="text" name="registeredNo" required class="track-input"></div>
-                    <div class="field-row"><label>SSNIT NUMBER</label><input type="text" name="ssnitNumber" required class="track-input"></div>
-                    <div class="field-row"><label>TIN NUMBER</label><input type="text" name="tinNumber" required class="track-input"></div>
-                    <div class="field-row"><label>ID TYPE</label><input type="text" name="idType" value="Ghana Card" required class="track-input"></div>
-                    <div class="field-row"><label>ID NUMBER</label><input type="text" name="idNumber" placeholder="GHA-XXXXXXXXX-X" required class="track-input"></div>
-                    <div class="field-row"><label>RETIREMENT STATUS</label><input type="text" name="retirementStatus" id="retireStatusField" class="read-only-bg" readonly placeholder="Auto"></div>
-                    <div class="field-row"><label>DATE OF FIRST APPOINTMENT</label><input type="date" name="dateFirstAppointment" id="apptField" required class="track-input"></div>
-                    <div class="field-row"><label>YEARS IN SERVICE</label><input type="text" name="yearsInService" id="serviceField" class="read-only-bg" readonly placeholder="Auto"></div>
-                    <div class="field-row"><label>ACADEMIC QUALIFICATION</label><input type="text" name="academicQualification" required class="track-input"></div>
+</body>
+</html>

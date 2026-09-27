@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GES - Second Cycle Register</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .register-container * { color: #333333 !important; }
+        .action-buttons button { color: #ffffff !important; }
+        fieldset { border: 2px solid #8b0000; border-radius: 6px; padding: 15px; margin-bottom: 20px; }
+        legend { font-weight: bold; color: #8b0000 !important; padding: 0 6px; }
+        .btn-save-sc { background-color: #8b0000 !important; }
+        .btn-back-sc { background-color: #777777 !important; }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <div class="header-title" style="color: #8b0000 !important;">Second Cycle Master List Compiling</div>
+    
+    <form id="secondCycleForm" onsubmit="event.preventDefault(); alert('Second Cycle School Record successfully validated!'); window.location.href='dashboard.html';">
+        <div class="top-bar" style="border-color: #8b0000;">
+            <div class="action-buttons">
+                <button type="submit" class="btn btn-save-sc">SAVE RECORD</button>
+                <button type="button" class="btn btn-back-sc" onclick="window.location.href='dashboard.html'">BACK</button>
+            </div>
+        </div>
+
+        <div class="form-grid">
+            <fieldset>
+                <legend>School Info & EMIS</legend>
+                <div class="field-row">
+                    <label>1. MMDA Name</label>
+                    <input type="text" value="Ahafo Ano North Municipal" required>
+                </div>
+                <div class="field-row">
+                    <label>2. School Name</label>
+                    <input type="text" placeholder="Official Institution Name" required>
+                </div>
+                <div class="field-row">
+                    <label>3. Circuit</label>
+                    <input type="text" placeholder="As designated" required>
+                </div>
+                <div class="field-row">
+                    <label>4. School EMIS Code</label>
+                    <input type="text" pattern="[0-9]*" inputmode="numeric" placeholder="Numbers only" required>
+                </div>
+                <div class="field-row">
+                    <label>5. School Email</label>
+                    <input type="email" placeholder="e.g. school@ges.gov.gh">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Model & Operational Level</legend>
+                <div class="field-row">
+                    <label>6. School Model</label>
+                    <select id="scModel" required>
+                        <option value="" disabled selected>-- Select Model --</option>
+                        <option value="Mainstream">Mainstream</option>
+                        <option value="Integrated">Integrated</option>
+                        <option value="Special">Special</option>
+                        <option value="STEM ONLY">STEM ONLY</option>
+                    </select>
+                </div>
+                <div class="field-row">
+                    <label>7. Level</label>
+                    <select id="scLevel" required>
+                        <option value="" disabled selected>-- Select Level --</option>
+                        <option value="SHS (General)">SHS (General)</option>
+                        <option value="SHTS">SHTS</option>
+                        <option value="TVET">TVET</option>
+                        <option value="STEM">STEM</option>
+                    </select>
+                </div>
+                <div class="field-row">
+                    <label>8. Affiliation Type</label>
+                    <select id="scAffiliation" required>
+                        <option value="" disabled selected>-- Select Affiliation --</option>
+                        <option value="Public/Non-Religious (Government)">Public/Non-Religious (Government)</option>
+                        <option value="Religious (Mission/Faith-Based)">Religious (Mission/Faith-Based)</option>
+                        <option value="Private (Non-Religious)">Private (Non-Religious)</option>
+                    </select>
+                </div>
+                <div class="field-row">
+                    <label>9. Ownership Type</label>
+                    <select id="scOwnership" required>
+                        <option value="" disabled selected>-- Select Ownership --</option>
+                        <option value="Government/Public">Government/Public</option>
+                        <option value="Private">Private</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Head of Institution</legend>
+                <div class="field-row">
+                    <label>10. HeadMaster/Mistress</label>
+                    <input type="text" placeholder="Full Official Name" required>
+                </div>
+                <div class="field-row">
+                    <label>11. Head Staff ID</label>
+                    <input type="text" placeholder="Staff ID number" required>
+                </div>
+                <div class="field-row">
+                    <label>12. Head Telephone</label>
+                    <input type="tel" maxlength="10" placeholder="Contact number" required>
+                </div>
+                <div class="field-row">
+                    <label>13. Head Email</label>
+                    <input type="email" placeholder="Official/Personal email">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Assigned Data Officer</legend>
+                <div class="field-row">
+                    <label>14. Name of Data Officer</label>
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="field-row">
+                    <label>15. Data Officer Email</label>
+                    <input type="email" placeholder="Officer Email" required>
+                </div>
+                <div class="field-row">
+                    <label>16. Data Officer Tel</label>
+                    <input type="tel" maxlength="10" placeholder="Officer Phone" required>
+                </div>
+                <div class="field-row">
+                    <label>17. Data Officer Staff ID</label>
+                    <input type="text" placeholder="Officer Staff ID" required>
+                </div>
+            </fieldset>
+
+            <fieldset style="grid-column: span 1;">
+                <legend>Location Parameters</legend>
+                <div class="field-row">
+                    <label>18. Area Type</label>
+                    <select id="scArea" required>
+                        <option value="" disabled selected>-- Select Area Type --</option>
+                        <option value="Urban">Urban</option>
+                        <option value="Rural">Rural</option>
+                        <option value="Peri-Urban">Peri-Urban</option>
+                    </select>
+                </div>
+                <div class="field-row">
+                    <label>19. School Location</label>
+                    <input type="text" placeholder="Precise School Town Location" required>
+                </div>
+            </fieldset>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

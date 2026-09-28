@@ -2,18 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Mandatory viewport configurations preventing automatic zoom locks on smartphones -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES Ahafo Ano North - Basic Enrolment Entry</title>
-    <!-- Relative path to your repository CSS file -->
+    <title>GES Ahafo Ano North - Basic School Enrolment Registry</title>
+    
+    <!-- Link to your centralized responsive stylesheet asset -->
     <link rel="stylesheet" href="./style.css">
+    
+    <style>
+        /* Supplementary responsive table alignment metrics overrides */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input {
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            padding: 6px;
+            outline: none;
+            transition: border-color 0.15s ease-in-out;
+        }
+        input:focus {
+            border-color: #2b579a;
+        }
+        table {
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 8px !important;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- 🚨 THE CRITICAL ELEMENT THAT CANNOT BE REMOVED OR MISSPELLED. 
-         Your enrolment-app.js injects the entire form into this specific div hook. -->
+    <!-- 🚨 THE MANDATORY HOOK CONTAINER
+         Your enrolment-app.js calculation file injects the entire gender-segregated 
+         form layout grid here. Do not alter or misspell this ID parameter! -->
     <div id="enrolment-mount"></div>
 
-    <!-- 🚨 SCRIPT LINKAGE: Must match the exact filename in your repository list -->
+    <!-- 🚨 BACKEND ROUTING AND CORE ENGINE ASSETS 
+         Linked at the base of the layout body layer to confirm components have loaded -->
     <script src="./enrolment-app.js"></script>
 
 </body>

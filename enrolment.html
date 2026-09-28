@@ -3,168 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES Ahafo Ano North - Enrolment Data Entry</title>
-    <link rel="stylesheet" href="style.css">
+    <title>GES Ahafo Ano North - Basic Enrolment Entry</title>
+    <!-- Relative path to your repository CSS file -->
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>GES AHAFO ANO NORTH - MASTER ENROLMENT FORM</h2>
-        
-        <form id="enrolmentForm">
-            <!-- Top Metadata Section -->
-            <div class="form-group metadata-section">
-                <div>
-                    <label>ACADEMIC YEAR</label>
-                    <select name="Academic Year" required>
-                        <option value="2026/27" selected>2026/27</option>
-                        <option value="2027/28">2027/28</option>
-                    </select>
-                </div>
-                <div>
-                    <label>ACADEMIC TERM</label>
-                    <select name="Academic Term" required>
-                        <option value="FIRST TERM" selected>FIRST TERM</option>
-                        <option value="SECOND TERM">SECOND TERM</option>
-                        <option value="THIRD TERM">THIRD TERM</option>
-                    </select>
-                </div>
-                <div>
-                    <label style="color: red; font-weight: bold;">Select LEVEL</label>
-                    <select name="School Level" required>
-                        <option value="KG, PRIMARY AND JHS" selected>KG, PRIMARY AND JHS</option>
-                        <option value="KG ONLY">KG ONLY</option>
-                        <option value="PRIMARY ONLY">PRIMARY ONLY</option>
-                        <option value="JHS ONLY">JHS ONLY</option>
-                    </select>
-                </div>
-                <div>
-                    <label>EMIS CODE</label>
-                    <input type="text" name="EMIS Code" value="1066340072" required>
-                </div>
-                <div>
-                    <label>CIRCUIT</label>
-                    <input type="text" name="Circuit" value="KOJOBETIAKO" required>
-                </div>
-                <div>
-                    <label>NAME OF SCHOOL</label>
-                    <input type="text" name="Name of School" value="ABONSUASO M/A JHS" required style="width: 250px;">
-                </div>
-            </div>
+    <!-- 🚨 THE CRITICAL ELEMENT THAT CANNOT BE REMOVED OR MISSPELLED. 
+         Your enrolment-app.js injects the entire form into this specific div hook. -->
+    <div id="enrolment-mount"></div>
 
-            <!-- ==========================================
-                 KG ENROLMENT SECTION (Green Grid Layout)
-                 ========================================== -->
-            <fieldset class="kg-section">
-                <legend>KG ENROLMENT</legend>
-                <div class="grid-container">
-                    <!-- KG 1 Block -->
-                    <div class="class-block">
-                        <h4>KG 1</h4>
-                        <label>BOYS <input type="number" name="KG1_Boys" min="0" value="0" class="calc-input KG-B"></label>
-                        <label>GIRLS <input type="number" name="KG1_Girls" min="0" value="0" class="calc-input KG-G"></label>
-                        <div class="sub-total">TOTAL: <span id="kg1_total">0</span></div>
-                    </div>
-                    <!-- KG 2 Block -->
-                    <div class="class-block">
-                        <h4>KG 2</h4>
-                        <label>BOYS <input type="number" name="KG2_Boys" min="0" value="0" class="calc-input KG-B"></label>
-                        <label>GIRLS <input type="number" name="KG2_Girls" min="0" value="0" class="calc-input KG-G"></label>
-                        <div class="sub-total">TOTAL: <span id="kg2_total">0</span></div>
-                    </div>
-                    <!-- KG Summary Grandtotal Column -->
-                    <div class="class-block grand-total-block">
-                        <h4>GRANDTOTAL</h4>
-                        <div>BOYS: <span id="kg_grand_boys">0</span></div>
-                        <div>GIRLS: <span id="kg_grand_girls">0</span></div>
-                        <div class="final-total">TOTAL: <span id="kg_grand_total">0</span></div>
-                    </div>
-                </div>
-            </fieldset>
+    <!-- 🚨 SCRIPT LINKAGE: Must match the exact filename in your repository list -->
+    <script src="./enrolment-app.js"></script>
 
-            <!-- ==========================================
-                 PRIMARY ENROLMENT SECTION (Brown Grid Layout)
-                 ========================================== -->
-            <fieldset class="primary-section">
-                <legend>PRIMARY ENROLMENT</legend>
-                <div class="grid-container grid-3-col">
-                    <!-- Primary 1 to 3 left column -->
-                    <div class="col-stack">
-                        <div class="class-block">
-                            <h4>PRIMARY 1</h4>
-                            <label>BOYS <input type="number" name="P1_Boys" min="0" value="0" class="calc-input P-B"></label>
-                            <label>GIRLS <input type="number" name="P1_Girls" min="0" value="0" class="calc-input P-G"></label>
-                            <div class="sub-total">TOTAL: <span id="p1_total">0</span></div>
-                        </div>
-                        <div class="class-block">
-                            <h4>PRIMARY 2</h4>
-                            <label>BOYS <input type="number" name="P2_Boys" min="0" value="0" class="calc-input P-B"></label>
-                            <label>GIRLS <input type="number" name="P2_Girls" min="0" value="0" class="calc-input P-G"></label>
-                            <div class="sub-total">TOTAL: <span id="p2_total">0</span></div>
-                        </div>
-                        <div class="class-block">
-                            <h4>PRIMARY 3</h4>
-                            <label>BOYS <input type="number" name="P3_Boys" min="0" value="0" class="calc-input P-B"></label>
-                            <label>GIRLS <input type="number" name="P3_Girls" min="0" value="0" class="calc-input P-G"></label>
-                            <div class="sub-total">TOTAL: <span id="p3_total">0</span></div>
-                        </div>
-                    </div>
-
-                    <!-- Primary 4 to 6 center column -->
-                    <div class="col-stack">
-                        <div class="class-block">
-                            <h4>PRIMARY 4</h4>
-                            <label>BOYS <input type="number" name="P4_Boys" min="0" value="0" class="calc-input P-B"></label>
-                            <label>GIRLS <input type="number" name="P4_Girls" min="0" value="0" class="calc-input P-G"></label>
-                            <div class="sub-total">TOTAL: <span id="p4_total">0</span></div>
-                        </div>
-                        <div class="class-block">
-                            <h4>PRIMARY 5</h4>
-                            <label>BOYS <input type="number" name="P5_Boys" min="0" value="0" class="calc-input P-B"></label>
-                            <label>GIRLS <input type="number" name="P5_Girls" min="0" value="0" class="calc-input P-G"></label>
-                            <div class="sub-total">TOTAL: <span id="p5_total">0</span></div>
-                        </div>
-                        <div class="class-block">
-                            <h4>PRIMARY 6</h4>
-                            <label>BOYS <input type="number" name="P6_Boys" min="0" value="0" class="calc-input P-B"></label>
-                            <label>GIRLS <input type="number" name="P6_Girls" min="0" value="0" class="calc-input P-G"></label>
-                            <div class="sub-total">TOTAL: <span id="p6_total">0</span></div>
-                        </div>
-                    </div>
-
-                    <!-- Primary Summary Grandtotal Column -->
-                    <div class="class-block grand-total-block center-vertical">
-                        <h4>GRANDTOTAL</h4>
-                        <div>BOYS: <span id="p_grand_boys">0</span></div>
-                        <div>GIRLS: <span id="p_grand_girls">0</span></div>
-                        <div class="final-total">TOTAL: <span id="p_grand_total">0</span></div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- ==========================================
-                 JHS ENROLMENT SECTION (Black Grid Layout)
-                 ========================================== -->
-            <fieldset class="jhs-section">
-                <legend style="color: red; font-weight: bold;">JHS ENROLMENT</legend>
-                <div class="grid-container grid-4-col">
-                    <div class="class-block">
-                        <h4>JHS 1</h4>
-                        <label>BOYS <input type="number" name="JHS1_Boys" min="0" value="0" class="calc-input JHS-B"></label>
-                        <label>GIRLS <input type="number" name="JHS1_Girls" min="0" value="0" class="calc-input JHS-G"></label>
-                        <div class="sub-total">TOTAL: <span id="jhs1_total">0</span></div>
-                    </div>
-                    <div class="class-block">
-                        <h4>JHS 2</h4>
-                        <label>BOYS <input type="number" name="JHS2_Boys" min="0" value="0" class="calc-input JHS-B"></label>
-                        <label>GIRLS <input type="number" name="JHS2_Girls" min="0" value="0" class="calc-input JHS-G"></label>
-                        <div class="sub-total">TOTAL: <span id="jhs2_total">0</span></div>
-                    </div>
-                    <div class="class-block">
-                        <h4>JHS 3</h4>
-                        <label>BOYS <input type="number" name="JHS3_Boys" min="0" value="0" class="calc-input JHS-B"></label>
-                        <label>GIRLS <input type="number" name="JHS3_Girls" min="0" value="0" class="calc-input JHS-G"></label>
-                        <div class="sub-total">TOTAL: <span id="jhs3_total">0</span></div>
-                    </div>
-                    <!-- JHS Summary Grandtotal Column -->
-                    <div class="class-block grand-total-block">
+</body>
+</html>

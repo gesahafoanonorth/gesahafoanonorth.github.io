@@ -1,228 +1,175 @@
-// =========================================================================
-// 1. ANCHOR HOOK: Wait safely for DOM elements before loading templates
-// =========================================================================
 document.addEventListener("DOMContentLoaded", () => {
     const mountNode = document.getElementById('enrolment-mount');
     
     if (!mountNode) {
-        console.warn("Mount point '#enrolment-mount' not present on this page view layout context.");
-        return; // Exits safely without throwing an exception or breaking the dashboard render
+        console.warn("Mount point '#enrolment-mount' not found.");
+        return;
     }
 
     // =========================================================================
-    // 2. TEMPLATE INJECTION: Render the exact visual layout with data parameters
+    // 1. UPDATED TEMPLATE INJECTION: Full Gender Segregation (KG1 to JHS3)
     // =========================================================================
     mountNode.innerHTML = `
-    <div class="register-container" style="max-width: 1100px; margin: 0 auto; font-family: Arial, sans-serif;">
-        <div class="header-title" style="color: #2b579a; font-size: 20px; font-weight: bold; text-align: center; margin-bottom: 20px;">
-            GES AHAFO ANO NORTH - MASTER ENROLMENT FORM
+    <div class="register-container" style="max-width: 1200px; margin: 0 auto; font-family: Arial, sans-serif;">
+        <div class="header-title" style="color: #2b579a; font-size: 22px; font-weight: bold; text-align: center; margin-bottom: 20px; text-transform: uppercase;">
+            Basic School Enrolment Log (Gender Segregated)
         </div>
         
         <form id="enrolmentForm">
             <!-- Top Operations Bar -->
-            <div class="top-bar" style="border-bottom: 2px solid #2b579a; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-                <div class="action-buttons">
-                    <button type="button" class="btn" id="btnNew" style="padding: 6px 15px; margin-right: 5px;">NEW</button>
-                    <button type="submit" class="btn" id="btnSave" style="padding: 6px 15px; margin-right: 5px; background-color: #2b579a; color: white; border: none; cursor: pointer; font-weight: bold;">SAVE</button>
-                    <button type="button" class="btn" id="btnClear" style="padding: 6px 15px; margin-right: 5px;">CLEAR</button>
-                    <button type="button" class="btn" onclick="window.location.href='dashboard.html'" style="padding: 6px 15px;">BACK</button>
-                </div>
+            <div class="top-bar" style="border-bottom: 2px solid #2b579a; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: flex-end; gap: 10px;">
+                <button type="button" class="btn" id="btnNew" style="padding: 6px 15px; cursor: pointer;">NEW</button>
+                <button type="submit" class="btn" id="btnSave" style="padding: 6px 15px; background-color: #2b579a; color: white; border: none; cursor: pointer; font-weight: bold;">SAVE</button>
+                <button type="button" class="btn" id="btnClear" style="padding: 6px 15px; cursor: pointer;">CLEAR</button>
+                <button type="button" class="btn" onclick="window.location.href='dashboard.html'" style="padding: 6px 15px;">BACK</button>
             </div>
 
-            <!-- Academic Headers Box -->
-            <fieldset style="border: 1px solid #ccc; margin-bottom: 20px; padding: 15px; border-radius: 4px;">
+            <!-- Metadata Panel -->
+            <fieldset style="border: 1px solid #ccc; margin-bottom: 20px; padding: 15px; border-radius: 4px; background: #fafafa;">
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 15px;">
-                    <div>
-                        <label style="display:block; font-size:12px; font-weight:bold; margin-bottom:4px;">Academic Year</label>
-                        <select name="Academic_Year" style="width:100%; padding:5px;"><option value="2026/2027" selected>2026/2027</option></select>
-                    </div>
-                    <div>
-                        <label style="display:block; font-size:12px; font-weight:bold; margin-bottom:4px;">Academic Term</label>
-                        <select name="Academic_Term" style="width:100%; padding:5px;"><option value="Term 1" selected>Term 1</option><option value="Term 2">Term 2</option><option value="Term 3">Term 3</option></select>
-                    </div>
-                    <div>
-                        <label style="display:block; font-size:12px; font-weight:bold; color:red; margin-bottom:4px;">Select Level</label>
-                        <select name="Selected_Level" style="width:100%; padding:5px;"><option value="KG ONLY">KG ONLY</option><option value="PRIMARY ONLY">PRIMARY ONLY</option><option value="JHS ONLY">JHS ONLY</option><option value="ALL BASIC" selected>ALL BASIC</option></select>
-                    </div>
+                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">ACADEMIC YEAR</label><select name="Academic_Year" style="width:100%; padding:5px;"><option value="2026/2027">2026/2027</option></select></div>
+                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">ACADEMIC TERM</label><select name="Academic_Term" style="width:100%; padding:5px;"><option value="Term 1">Term 1</option><option value="Term 2">Term 2</option><option value="Term 3">Term 3</option></select></div>
+                    <div><label style="display:block; font-size:11px; font-weight:bold; color:red; margin-bottom:4px;">SELECT LEVEL</label><select name="Selected_Level" style="width:100%; padding:5px;"><option value="ALL BASIC" selected>ALL BASIC</option></select></div>
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
-                    <div>
-                        <label style="display:block; font-size:12px; font-weight:bold; margin-bottom:4px;">EMIS Code</label>
-                        <input type="text" name="EMIS_Code" value="1066340072" style="width:100%; padding:5px;" required>
-                    </div>
-                    <div>
-                        <label style="display:block; font-size:12px; font-weight:bold; margin-bottom:4px;">Circuit</label>
-                        <input type="text" name="Circuit" value="KOJOBETIAKO" style="width:100%; padding:5px;" required>
-                    </div>
-                    <div>
-                        <label style="display:block; font-size:12px; font-weight:bold; margin-bottom:4px;">Name of School</label>
-                        <input type="text" name="School_Name" value="ABONSUASO M/A JHS" style="width:100%; padding:5px;" required>
-                    </div>
+                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">EMIS CODE</label><input type="text" name="EMIS_Code" value="1066340072" style="width:100%; padding:5px;" required></div>
+                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">CIRCUIT</label><input type="text" name="Circuit" value="KOJOBETIAKO" style="width:100%; padding:5px;" required></div>
+                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">NAME OF SCHOOL</label><input type="text" name="School_Name" value="ABONSUASO M/A JHS" style="width:100%; padding:5px;" required></div>
                 </div>
             </fieldset>
 
-            <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <!-- Box 1: KG Enrolment -->
+            <!-- Data Sections -->
+            <div class="form-grid" style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                
+                <!-- SECTION 1: KG ENROLMENT PANEL -->
                 <fieldset style="border: 2px solid #b5e61d; padding: 15px; border-radius: 4px;">
                     <legend style="color: #22b14c; font-weight: bold; padding: 0 5px;">KG ENROLMENT</legend>
-                    
-                    <div style="margin-bottom: 15px;">
-                        <label style="font-weight: bold; font-size: 13px; display: block; margin-bottom: 5px;">KG 1 Boys / Girls</label>
-                        <div style="display: flex; gap: 10px; align-items: center;">
-                            <input type="number" name="KG1_Boys" id="kg1_b" value="0" min="0" style="width: 70px; text-align: center; padding:4px;">
-                            <input type="number" name="KG1_Girls" id="kg1_g" value="0" min="0" style="width: 70px; text-align: center; padding:4px;">
-                            <span style="font-size:12px; font-weight:bold;">Total:</span>
-                            <input type="text" id="kg1_t" value="0" readonly style="width: 70px; text-align: center; background: #eee; border: 1px solid #ccc; padding:4px;">
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px;">
-                        <label style="font-weight: bold; font-size: 13px; display: block; margin-bottom: 5px;">KG 2 Boys / Girls</label>
-                        <div style="display: flex; gap: 10px; align-items: center;">
-                            <input type="number" name="KG2_Boys" id="kg2_b" value="0" min="0" style="width: 70px; text-align: center; padding:4px;">
-                            <input type="number" name="KG2_Girls" id="kg2_g" value="0" min="0" style="width: 70px; text-align: center; padding:4px;">
-                            <span style="font-size:12px; font-weight:bold;">Total:</span>
-                            <input type="text" id="kg2_t" value="0" readonly style="width: 70px; text-align: center; background: #eee; border: 1px solid #ccc; padding:4px;">
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 10px;">
-                        <label style="font-weight: bold; font-size: 13px; display: block; margin-bottom: 5px; color: #22b14c;">KG GRAND TOTAL</label>
-                        <div style="display: flex; gap: 10px; align-items: center;">
-                            <input type="text" name="KG_Total_Boys" id="kg_gt_b" value="0" readonly style="width: 70px; text-align: center; background: #eee; border: 1px solid #ccc; padding:4px;">
-                            <input type="text" name="KG_Total_Girls" id="kg_gt_g" value="0" readonly style="width: 70px; text-align: center; background: #eee; border: 1px solid #ccc; padding:4px;">
-                            <input type="text" name="KG_Grand_Total" id="kg_gt" value="0" readonly style="width: 80px; text-align: center; background-color: #fff3cd !important; border: 1px solid #ccc; font-weight: bold; padding:4px;">
-                        </div>
-                    </div>
+                    <table style="width:100%; border-collapse:collapse; text-align:center; font-size:12px;">
+                        <tr style="background:#f0f0f0;"><th>LEVEL</th><th style="width:25%;">BOYS</th><th style="width:25%;">GIRLS</th><th style="width:25%;">TOTAL</th></tr>
+                        <tr><td><b>KG 1</b></td><td><input type="number" name="KG1_Boys" id="kg1_b" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="number" name="KG1_Girls" id="kg1_g" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="text" id="kg1_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        <tr><td><b>KG 2</b></td><td><input type="number" name="KG2_Boys" id="kg2_b" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="number" name="KG2_Girls" id="kg2_g" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="text" id="kg2_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        <tr style="background:#eaf8dd; font-weight:bold; border-top:2px solid #b5e61d;"><td>KG GRAND TOTAL</td><td><input type="text" name="KG_Total_Boys" id="kg_gt_b" value="0" readonly style="width:80px; text-align:center; background:#eee;"></td><td><input type="text" name="KG_Total_Girls" id="kg_gt_g" value="0" readonly style="width:80px; text-align:center; background:#eee;"></td><td><input type="text" name="KG_Grand_Total" id="kg_gt" value="0" readonly style="width:80px; text-align:center; background:#fff3cd; font-weight:bold;"></td></tr>
+                    </table>
                 </fieldset>
 
-                <!-- Box 2: Primary Enrolment -->
+                <!-- SECTION 2: PRIMARY ENROLMENT PANEL -->
                 <fieldset style="border: 2px solid #ffc90e; padding: 15px; border-radius: 4px;">
                     <legend style="color: #ffc90e; font-weight: bold; padding: 0 5px;">PRIMARY ENROLMENT</legend>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div><label style="font-size:12px;">Primary 1 Total</label> <input type="number" name="P1_Total" id="p1" value="0" min="0" style="width:80px; display:block; margin-top:3px; padding:4px;"></div>
-                        <div><label style="font-size:12px;">Primary 2 Total</label> <input type="number" name="P2_Total" id="p2" value="0" min="0" style="width:80px; display:block; margin-top:3px; padding:4px;"></div>
-                        <div><label style="font-size:12px;">Primary 3 Total</label> <input type="number" name="P3_Total" id="p3" value="0" min="0" style="width:80px; display:block; margin-top:3px; padding:4px;"></div>
-                        <div><label style="font-size:12px;">Primary 4 Total</label> <input type="number" name="P4_Total" id="p4" value="0" min="0" style="width:80px; display:block; margin-top:3px; padding:4px;"></div>
-                        <div><label style="font-size:12px;">Primary 5 Total</label> <input type="number" name="P5_Total" id="p5" value="0" min="0" style="width:80px; display:block; margin-top:3px; padding:4px;"></div>
-                        <div><label style="font-size:12px;">Primary 6 Total</label> <input type="number" name="P6_Total" id="p6" value="0" min="0" style="width:80px; display:block; margin-top:3px; padding:4px;"></div>
-                    </div>
-                    <div style="margin-top: 25px; border-top: 1px dashed #ccc; padding-top: 10px; display: flex; justify-content: space-between; align-items: center;">
-                        <label style="font-weight: bold; font-size: 13px; color: #ffc90e;">PRIMARY GRAND TOTAL</label>
-                        <input type="text" name="Primary_Grand_Total" id="primary_gt" value="0" readonly style="width: 100px; background-color: #fff3cd !important; text-align: center; font-weight: bold; border: 1px solid #ccc; padding:4px;">
-                    </div>
+                    <table style="width:100%; border-collapse:collapse; text-align:center; font-size:12px;">
+                        <tr style="background:#f0f0f0;"><th>LEVEL</th><th style="width:25%;">BOYS</th><th style="width:25%;">GIRLS</th><th style="width:25%;">TOTAL</th></tr>
+                        
+                        <tr><td><b>PRIMARY 1</b></td><td><input type="number" name="P1_Boys" id="p1_b" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P1_Girls" id="p1_g" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p1_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        <tr><td><b>PRIMARY 2</b></td><td><input type="number" name="P2_Boys" id="p2_b" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P2_Girls" id="p2_g" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p2_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        <tr><td><b>PRIMARY 3</b></td><td><input type="number" name="P3_Boys" id="p3_b" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P3_Girls" id="p3_g" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p3_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        <tr><td><b>PRIMARY 4</b></td><td><input type="number" name="P4_Boys" id="p4_b" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P4_Girls" id="p4_g" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p4_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        <tr><td><b>PRIMARY 5</b></td><td><input type="number" name="P5_Boys" id="p5_b" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P5_Girls" id="p5_g" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p5_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        <tr><td><b>PRIMARY 6</b></td><td><input type="number" name="P6_Boys" id="p6_b" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P6_Girls" id="p6_g" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p6_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        
+                        <tr style="background:#fff9e6; font-weight:bold; border-top:2px solid #ffc90e;"><td>PRIMARY GRAND TOTAL</td><td><input type="text" name="Primary_Total_Boys" id="primary_gt_b" value="0" readonly style="width:80px; text-align:center; background:#eee;"></td><td><input type="text" name="Primary_Total_Girls" id="primary_gt_g" value="0" readonly style="width:80px; text-align:center; background:#eee;"></td><td><input type="text" name="Primary_Grand_Total" id="primary_gt" value="0" readonly style="width:80px; text-align:center; background:#fff3cd; font-weight:bold;"></td></tr>
+                    </table>
                 </fieldset>
 
-                <fieldset style="border: 2px solid #000000; grid-column: span 2; padding: 15px; border-radius: 4px;">
-                    <legend style="color: #333333; font-weight: bold; padding: 0 5px;">JHS ENROLMENT</legend>
-                    <div style="display: flex; gap: 30px; margin-bottom: 10px;">
-                        <div><label style="font-size:12px; margin-right:5px;">JHS 1 Total</label><input type="number" name="JHS1_Total" id="jhs1" value="0" min="0" style="width:80px; padding:4px;"></div>
-                        <div><label style="font-size:12px; margin-right:5px;">JHS 2 Total</label><input type="number" name="JHS2_Total" id="jhs2" value="0" min="0" style="width:80px; padding:4px;"></div>
-                        <div><label style="font-size:12px; margin-right:5px;">JHS 3 Total</label><input type="number" name="JHS3_Total" id="jhs3" value="0" min="0" style="width:80px; padding:4px;"></div>
-                    </div>
-                    <div style="border-top: 1px dashed #ccc; padding-top: 10px; display: flex; justify-content: space-between; align-items: center;">
-                        <label style="font-weight: bold; font-size: 13px;">JHS GRAND TOTAL</label>
-                        <input type="text" name="JHS_Grand_Total" id="jhs_gt" value="0" readonly style="width: 100px; background-color: #fff3cd !important; text-align: center; font-weight: bold; border: 1px solid #ccc; padding:4px;">
-                    </div>
+                <!-- SECTION 3: JHS ENROLMENT PANEL -->
+                <fieldset style="border: 2px solid #000000; padding: 15px; border-radius: 4px;">
+                    <legend style="color: #333; font-weight: bold; padding: 0 5px;">JHS ENROLMENT</legend>
+                    <table style="width:100%; border-collapse:collapse; text-align:center; font-size:12px;">
+                        <tr style="background:#f0f0f0;"><th>LEVEL</th><th style="width:25%;">BOYS</th><th style="width:25%;">GIRLS</th><th style="width:25%;">TOTAL</th></tr>
+                        
+                        <tr><td><b>JHS 1</b></td><td><input type="number" name="JHS1_Boys" id="jhs1_b" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="number" name="JHS1_Girls" id="jhs1_g" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="text" id="jhs1_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        <tr><td><b>JHS 2</b></td><td><input type="number" name="JHS2_Boys" id="jhs2_b" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="number" name="JHS2_Girls" id="jhs2_g" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="text" id="jhs2_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        <tr><td><b>JHS 3</b></td><td><input type="number" name="JHS3_Boys" id="jhs3_b" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="number" name="JHS3_Girls" id="jhs3_g" value="0" min="0" style="width:80px; text-align:center;"></td><td><input type="text" id="jhs3_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        
+                        <tr style="background:#f2f2f2; font-weight:bold; border-top:2px solid #000;"><td>JHS GRAND TOTAL</td><td><input type="text" name="JHS_Total_Boys" id="jhs_gt_b" value="0" readonly style="width:80px; text-align:center; background:#eee;"></td><td><input type="text" name="JHS_Total_Girls" id="jhs_gt_g" value="0" readonly style="width:80px; text-align:center; background:#eee;"></td><td><input type="text" name="JHS_Grand_Total" id="jhs_gt" value="0" readonly style="width:80px; text-align:center; background:#fff3cd; font-weight:bold;"></td></tr>
+                    </table>
                 </fieldset>
-            </div>
-            
-            <div class="search-container" style="margin-top:20px; background:#f9f9f9; padding:10px; border:1px solid #ddd;">
-                <div class="search-bar" style="display:flex; align-items:center; gap:10px;">
-                    <label style="font-size: 12px; font-weight: bold; color: #333;">Search Database Log by EMIS CODE:</label>
-                    <input type="text" placeholder="Type EMIS code to query log records..." style="padding:4px; flex-grow:1;">
-                    <button type="button" style="cursor:pointer; padding:4px 10px;">🔍 Run Search</button>
-                </div>
             </div>
         </form>
     </div>
     `;
 
     // =========================================================================
-    // 3. COMPUTATION ENGINE: Listen to values in real-time
+    // 2. LIVE SEGREGATED CALCULATION ENGINE
     // =========================================================================
     const form = document.getElementById("enrolmentForm");
     
     const calculateLiveTotals = () => {
         const getNum = (id) => parseInt(document.getElementById(id).value, 10) || 0;
         
-        // 1. Calculate Single KG Levels and Grand Totals
+        // 1. KG Calculation
         const k1b = getNum("kg1_b"), k1g = getNum("kg1_g");
         const k2b = getNum("kg2_b"), k2g = getNum("kg2_g");
-        
         document.getElementById("kg1_t").value = k1b + k1g;
         document.getElementById("kg2_t").value = k2b + k2g;
         
-        const totalKGBoys = k1b + k2b;
-        const totalKGGirls = k1g + k2g;
-        document.getElementById("kg_gt_b").value = totalKGBoys;
-        document.getElementById("kg_gt_g").value = totalKGGirls;
-        document.getElementById("kg_gt").value = totalKGBoys + totalKGGirls;
+        const kgBoys = k1b + k2b;
+        const kgGirls = k1g + k2g;
+        document.getElementById("kg_gt_b").value = kgBoys;
+        document.getElementById("kg_gt_g").value = kgGirls;
+        document.getElementById("kg_gt").value = kgBoys + kgGirls;
 
-        // 2. Calculate Primary Level Rows and Grand Totals
-        let primTotal = 0;
+        // 2. Primary Calculation Loop
+        let primBoys = 0, primGirls = 0;
         for (let i = 1; i <= 6; i++) {
-            primTotal += getNum(`p${i}`);
+            const pb = getNum(`p${i}_b`), pg = getNum(`p${i}_g`);
+            document.getElementById(`p${i}_t`).value = pb + pg;
+            primBoys += pb;
+            primGirls += pg;
         }
-        document.getElementById("primary_gt").value = primTotal;
+        document.getElementById("primary_gt_b").value = primBoys;
+        document.getElementById("primary_gt_g").value = primGirls;
+        document.getElementById("primary_gt").value = primBoys + primGirls;
 
-        // 3. Calculate JHS Levels and Grand Totals
-        const j1 = getNum("jhs1"), j2 = getNum("jhs2"), j3 = getNum("jhs3");
-        document.getElementById("jhs_gt").value = j1 + j2 + j3;
+        // 3. JHS Calculation Loop
+        let jhsBoys = 0, jhsGirls = 0;
+        for (let i = 1; i <= 3; i++) {
+            const jb = getNum(`jhs${i}_b`), jg = getNum(`jhs${i}_g`);
+            document.getElementById(`jhs${i}_t`).value = jb + jg;
+            jhsBoys += jb;
+            jhsGirls += jg;
+        }
+        document.getElementById("jhs_gt_b").value = jhsBoys;
+        document.getElementById("jhs_gt_g").value = jhsGirls;
+        document.getElementById("jhs_grand_total").value = jhsBoys + jhsGirls; // Fixed matching naming check helper
     };
 
-    // Attach real-time structural calculator event pipeline
     form.addEventListener("input", calculateLiveTotals);
-
-    // Operational Clear Action listeners
-    const clearFormAndResetTotals = () => {
-        form.reset();
-        calculateLiveTotals();
-    };
-    document.getElementById("btnClear").addEventListener("click", clearFormAndResetTotals);
-    document.getElementById("btnNew").addEventListener("click", clearFormAndResetTotals);
+    
+    // Clear and New handlers
+    const clearForm = () => { form.reset(); calculateLiveTotals(); };
+    document.getElementById("btnClear").addEventListener("click", clearForm);
+    document.getElementById("btnNew").addEventListener("click", clearForm);
 
     // =========================================================================
-    // 4. DATABASE TRANSMISSION: Intercept submission and forward to Google Sheet
+    // 3. DATABASE TRANSMISSION (POST)
     // =========================================================================
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
-
         const APP_SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYED_MACRO_ID_HERE/exec";
         const saveButton = document.getElementById("btnSave");
+        
         saveButton.disabled = true;
-        saveButton.innerText = "UPLOADING...";
+        saveButton.innerText = "SAVING...";
 
         const rawData = new FormData(form);
         const payloadData = {};
-        rawData.forEach((value, key) => {
-            payloadData[key] = value;
-        });
-
-        const payload = {
-            formType: "Enrolment",
-            data: payloadData
-        };
+        rawData.forEach((value, key) => { payloadData[key] = value; });
 
         try {
             const response = await fetch(APP_SCRIPT_URL, {
                 method: "POST",
                 mode: "cors",
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({ formType: "Enrolment", data: payloadData })
             });
-
             const result = await response.json();
-
             if (result.result === "success") {
-                alert("Data package written into GES Master Spreadsheet successfully!");
-                clearFormAndResetTotals();
+                alert("Segregated enrolment logged successfully!");
+                clearForm();
             } else {
-                alert("Spreadsheet error: " + result.message);
+                alert("Error: " + result.message);
             }
         } catch (err) {
-            console.error("Network Error: ", err);
-            alert("Network Error: Could not post to Google Web App deployment API endpoint. Verify your macro link URL status.");
+            alert("Network Error: Could not verify connection to the macro.");
         } finally {
             saveButton.disabled = false;
             saveButton.innerText = "SAVE";

@@ -17,12 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
         
         <form id="enrolmentForm">
             <!-- Top Operations Bar -->
-            <div class="top-bar" style="border-bottom: 2px solid #2b579a; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: flex-end; gap: 10px;">
-                <button type="button" class="btn" id="btnNew" style="padding: 6px 15px; cursor: pointer;">NEW</button>
-                <button type="submit" class="btn" id="btnSave" style="padding: 6px 15px; background-color: #2b579a; color: white; border: none; cursor: pointer; font-weight: bold;">SAVE</button>
-                <button type="button" class="btn" id="btnClear" style="padding: 6px 15px; cursor: pointer;">CLEAR</button>
-                <button type="button" class="btn" onclick="window.location.href='dashboard.html'" style="padding: 6px 15px;">BACK</button>
-            </div>
+<div class="top-bar" style="border-bottom: 2px solid #2b579a; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: flex-end; gap: 10px;">
+    <button type="button" class="btn" id="btnNew" style="padding: 6px 15px; cursor: pointer; background-color: #f0f4f8; color: #2b579a; border: 1px solid #2b579a; font-weight: bold; border-radius: 4px;">NEW</button>
+    <button type="submit" class="btn" id="btnSave" style="padding: 6px 15px; background-color: #2b579a; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 4px;">SAVE</button>
+    <button type="button" class="btn" id="btnClear" style="padding: 6px 15px; cursor: pointer; background-color: #fff0f0; color: #d9534f; border: 1px solid #d9534f; font-weight: bold; border-radius: 4px;">CLEAR</button>
+    <button type="button" class="btn" onclick="window.location.href='dashboard.html'" style="padding: 6px 15px; background-color: #6c757d; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 4px;">BACK</button>
+</div>
+
 
             <!-- Metadata Panel -->
             <fieldset style="border: 1px solid #ccc; margin-bottom: 20px; padding: 15px; border-radius: 4px; background: #fafafa;">

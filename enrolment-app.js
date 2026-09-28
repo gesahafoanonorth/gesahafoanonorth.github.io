@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7Xp37BHPyI3oF-ZJRlyFRkmE489Q0akDwAuRyslgD5Gayn3_16QdaBnlAhJLGv8rt/exec";
+        const APP_SCRIPT_URL = "https://script.google.com/macros/library/d/1zdsNU_n1STrWGKR5juFQ1QfpFqDRv3FFlEyHbQ7W4456qOpp744EqTvT/9";
         const saveButton = document.getElementById("btnSave");
         
         saveButton.disabled = true;

@@ -152,3 +152,39 @@ legend {
     background-color: #fafafa;
     font-weight: bold;
 }
+/* Base Button Styling Class Layout */
+.btn {
+    padding: 6px 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+/* Specific Action Color Assignments */
+#btnSave {
+    background-color: #2b579a !important; /* Deep Blue */
+    color: white !important;
+    border: none;
+}
+#btnSave:hover {
+    background-color: #1e3d6b !important;
+}
+
+#btnNew {
+    background-color: #e6f0fa !important; /* Light Blue Accent */
+    color: #2b579a !important;
+    border: 1px solid #2b579a !important;
+}
+
+#btnClear {
+    background-color: #fff0f0 !important; /* Soft Warning Red */
+    color: #c9302c !important;
+    border: 1px solid #c9302c !important;
+}
+
+#btnSearch, .search-bar button {
+    background-color: #22b14c !important; /* Green matching KG Enrolment theme */
+    color: white !important;
+    border: none;
+}

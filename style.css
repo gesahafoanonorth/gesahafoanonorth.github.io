@@ -1,3 +1,6 @@
+/* =========================================================================
+   1. GLOBAL RESET ENGINE & RESETS
+   ========================================================================= */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -14,6 +17,9 @@ body {
     min-height: 100vh;
 }
 
+/* =========================================================================
+   2. CONTAINERS & LAYOUT HEADERS
+   ========================================================================= */
 .register-container {
     background: #ffffff;
     width: 100%;
@@ -44,6 +50,9 @@ body {
     background-color: #fafafa;
 }
 
+/* =========================================================================
+   3. UNIFIED BUTTON ARCHITECTURE & COLOR THEMES
+   ========================================================================= */
 .btn {
     padding: 10px 24px;
     font-size: 13px;
@@ -53,17 +62,61 @@ body {
     cursor: pointer;
     border-radius: 4px;
     text-transform: uppercase;
+    transition: background 0.2s ease, transform 0.1s ease;
 }
 
-/* WIDESCREEN DUAL-COLUMN GRID ENGINE */
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Specific Action Color Assignments */
+#btnSave {
+    background-color: #2b579a !important; /* Deep Blue */
+    color: white !important;
+    border: none;
+}
+#btnSave:hover {
+    background-color: #1e3d6b !important;
+}
+
+#btnNew {
+    background-color: #e6f0fa !important; /* Light Blue Accent */
+    color: #2b579a !important;
+    border: 1px solid #2b579a !important;
+}
+#btnNew:hover {
+    background-color: #d2e4f7 !important;
+}
+
+#btnClear {
+    background-color: #fff0f0 !important; /* Soft Warning Red */
+    color: #c9302c !important;
+    border: 1px solid #c9302c !important;
+}
+#btnClear:hover {
+    background-color: #ffd9d9 !important;
+}
+
+#btnSearch, .search-bar button {
+    background-color: #22b14c !important; /* Green matching KG Enrolment theme */
+    color: white !important;
+    border: none;
+}
+#btnSearch:hover, .search-bar button:hover {
+    background-color: #1b8a3b !important;
+}
+
+/* =========================================================================
+   4. FORM ELEMENTS, FIELDS & FIELDSET LAYOUTS
+   ========================================================================= */
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Splits screen into 2 columns */
+    grid-template-columns: 1fr 1fr; /* Splits desktop view screens into 2 equal columns */
     gap: 25px;
 }
 
 .full-width-section {
-    grid-column: span 2; /* Forces block across both columns */
+    grid-column: span 2; /* Forces block across both widescreen columns */
 }
 
 fieldset {
@@ -71,6 +124,7 @@ fieldset {
     border-radius: 6px;
     padding: 20px;
     background-color: #ffffff;
+    margin-bottom: 10px;
 }
 
 legend {
@@ -89,32 +143,43 @@ legend {
 }
 
 .field-row label {
-    width: 180px; /* Aligns text inputs precisely */
+    width: 180px; /* Aligns textual elements precisely in a line on desktop layout profiles */
     font-size: 12px;
     font-weight: bold;
     color: #444444;
     text-transform: uppercase;
+    flex-shrink: 0; /* Prevents text elements from squishing or breaking into wraps */
 }
 
-.field-row input, .field-row select {
+.field-row input, .field-row select, .field-row textarea {
     flex: 1;
     padding: 8px 10px;
     border: 1px solid #cccccc;
     border-radius: 4px;
     font-size: 14px;
     outline: none;
+    width: 100%;
+}
+
+.field-row input:focus, .field-row select:focus {
+    border-color: #2b579a;
+    box-shadow: 0 0 4px rgba(43, 87, 154, 0.2);
 }
 
 .read-only-bg {
     background-color: #fff3cd !important;
 }
 
+/* Inner block multi-column layout panels */
 .employment-grid, .banking-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 sub-columns inside wide cards */
+    grid-template-columns: repeat(3, 1fr); /* 3 sub-columns inside wide container layout slots */
     gap: 15px;
 }
 
+/* =========================================================================
+   5. HISTORY DATA TABLES & SEARCH ELEMENTS
+   ========================================================================= */
 .search-container {
     margin-top: 35px;
     border-top: 2px solid #cccccc;
@@ -135,10 +200,17 @@ legend {
     border-radius: 4px;
 }
 
+/* Core Responsive Metrics Tables */
+.data-table-wrapper {
+    width: 100%;
+    overflow-x: auto; /* Adds clean horizontal swipes for data logs viewed on a smartphone */
+    margin-top: 15px;
+    -webkit-overflow-scrolling: touch;
+}
+
 .data-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
 }
 
 .data-table th, .data-table td {
@@ -151,40 +223,81 @@ legend {
 .data-table th {
     background-color: #fafafa;
     font-weight: bold;
-}
-/* Base Button Styling Class Layout */
-.btn {
-    padding: 6px 15px;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.2s ease;
+    text-transform: uppercase;
 }
 
-/* Specific Action Color Assignments */
-#btnSave {
-    background-color: #2b579a !important; /* Deep Blue */
-    color: white !important;
-    border: none;
-}
-#btnSave:hover {
-    background-color: #1e3d6b !important;
-}
+/* =========================================================================
+   6. CORE MEDIA QUERY CONFIGURATIONS: SMARTPHONE CORRECTION PATCH
+   ========================================================================= */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px; /* Drops outer margins to maximize functional mobile screen real estate */
+    }
 
-#btnNew {
-    background-color: #e6f0fa !important; /* Light Blue Accent */
-    color: #2b579a !important;
-    border: 1px solid #2b579a !important;
-}
+    .register-container {
+        padding: 15px;
+    }
 
-#btnClear {
-    background-color: #fff0f0 !important; /* Soft Warning Red */
-    color: #c9302c !important;
-    border: 1px solid #c9302c !important;
-}
+    .header-title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
 
-#btnSearch, .search-bar button {
-    background-color: #22b14c !important; /* Green matching KG Enrolment theme */
-    color: white !important;
-    border: none;
+    /* Stacks top panel actions vertically if needed or center tracks them */
+    .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .top-bar .btn {
+        width: 100%; /* Stacks operational utility buttons vertically for large phone finger targets */
+        text-align: center;
+        padding: 12px; /* Amplifies tap targets */
+    }
+
+    /* Converts widescreen grids directly into vertical rows */
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .full-width-section {
+        grid-column: span 1;
+    }
+
+    /* Stacks subgrids inside cards safely */
+    .employment-grid, .banking-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    /* Converts row alignment metrics safely from side flex fields into vertical alignments */
+    .field-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .field-row label {
+        width: 100%; /* Spans full space right above the text input fields */
+        margin-bottom: 2px;
+    }
+
+    .field-row input, .field-row select, .field-row textarea {
+        width: 100%;
+        font-size: 16px !important; /* Mandatory: Stops mobile safari browsers from auto-zooming fields out of view on click selection */
+    }
+
+    /* Adjusts lookup search element bars */
+    .search-bar {
+        max-width: 100%;
+        flex-direction: column;
+    }
+    
+    .search-bar button {
+        width: 100%;
+        padding: 12px;
+    }
 }

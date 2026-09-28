@@ -146,6 +146,39 @@ document.addEventListener("DOMContentLoaded", () => {
         rawData.forEach((value, key) => {
             payloadData[key] = value;
         });
+        // 1. Pack securely matching your Apps Script doPost engine specification
+const payload = {
+    formType: "Enrolment", // 🚨 Crucial: Tells the script which sheet tab to open
+    data: payloadData
+};
+
+try {
+    // 2. Execute cross-origin submission to Google Apps Script API endpoint
+    const response = await fetch(APP_SCRIPT_URL, {
+        method: "POST",
+        mode: "cors",
+        headers: { 
+            "Content-Type": "text/plain;charset=utf-8" 
+        },
+        body: JSON.stringify(payload) // 🚨 Transmit the wrapped payload object
+    });
+
+    const result = await response.json();
+
+    if (result.result === "success") {
+        alert("Data package written into GES Master Spreadsheet successfully!");
+        form.reset();
+        if (typeof calculateLiveTotals === "function") calculateLiveTotals(); // Clear numbers
+    } else {
+        alert("Spreadsheet error: " + result.message);
+    }
+} catch (err) {
+    console.error("Network write exception: ", err);
+    alert("Network Error: Could not post data package. Ensure web access permissions.");
+} finally {
+    saveButton.disabled = false;
+    saveButton.innerText = "SAVE";
+}
 
         // Add calculated sub-totals into payload
         payloadData["KG_Total_Boys"] = document.getElementById("kg_gt_b").value;

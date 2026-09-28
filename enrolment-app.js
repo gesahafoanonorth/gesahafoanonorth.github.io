@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="top-bar" style="border-bottom: 2px solid #2b579a; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
                 <div class="action-buttons">
                     <button type="button" class="btn" id="btnNew" style="padding: 6px 15px; margin-right: 5px;">NEW</button>
-                    <button type="submit" class="btn" id="btnSave" style="padding: 6px 15px; margin-right: 5px; background-color: #2b579a; color: white; border: none; cursor: pointer; font-weight: bold;">SAVE TO DATABASE</button>
+                    <button type="submit" class="btn" id="btnSave" style="padding: 6px 15px; margin-right: 5px; background-color: #2b579a; color: white; border: none; cursor: pointer; font-weight: bold;">SAVE</button>
                     <button type="button" class="btn" id="btnClear" style="padding: 6px 15px; margin-right: 5px;">CLEAR</button>
                     <button type="button" class="btn" onclick="window.location.href='dashboard.html'" style="padding: 6px 15px;">BACK</button>
                 </div>
@@ -109,3 +109,123 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                     <div style="margin-top: 25px; border-top: 1px dashed #ccc; padding-top: 10px; display: flex; justify-content: space-between; align-items: center;">
                         <label style="font-weight: bold; font-size: 13px; color: #ffc90e;">PRIMARY GRAND TOTAL</label>
+                        <input type="text" name="Primary_Grand_Total" id="primary_gt" value="0" readonly style="width: 100px; background-color: #fff3cd !important; text-align: center; font-weight: bold; border: 1px solid #ccc; padding:4px;">
+                    </div>
+                </fieldset>
+
+                <fieldset style="border: 2px solid #000000; grid-column: span 2; padding: 15px; border-radius: 4px;">
+                    <legend style="color: #333333; font-weight: bold; padding: 0 5px;">JHS ENROLMENT</legend>
+                    <div style="display: flex; gap: 30px; margin-bottom: 10px;">
+                        <div><label style="font-size:12px; margin-right:5px;">JHS 1 Total</label><input type="number" name="JHS1_Total" id="jhs1" value="0" min="0" style="width:80px; padding:4px;"></div>
+                        <div><label style="font-size:12px; margin-right:5px;">JHS 2 Total</label><input type="number" name="JHS2_Total" id="jhs2" value="0" min="0" style="width:80px; padding:4px;"></div>
+                        <div><label style="font-size:12px; margin-right:5px;">JHS 3 Total</label><input type="number" name="JHS3_Total" id="jhs3" value="0" min="0" style="width:80px; padding:4px;"></div>
+                    </div>
+                    <div style="border-top: 1px dashed #ccc; padding-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <label style="font-weight: bold; font-size: 13px;">JHS GRAND TOTAL</label>
+                        <input type="text" name="JHS_Grand_Total" id="jhs_gt" value="0" readonly style="width: 100px; background-color: #fff3cd !important; text-align: center; font-weight: bold; border: 1px solid #ccc; padding:4px;">
+                    </div>
+                </fieldset>
+            </div>
+            
+            <div class="search-container" style="margin-top:20px; background:#f9f9f9; padding:10px; border:1px solid #ddd;">
+                <div class="search-bar" style="display:flex; align-items:center; gap:10px;">
+                    <label style="font-size: 12px; font-weight: bold; color: #333;">Search Database Log by EMIS CODE:</label>
+                    <input type="text" placeholder="Type EMIS code to query log records..." style="padding:4px; flex-grow:1;">
+                    <button type="button" style="cursor:pointer; padding:4px 10px;">🔍 Run Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    `;
+
+    // =========================================================================
+    // 3. COMPUTATION ENGINE: Listen to values in real-time
+    // =========================================================================
+    const form = document.getElementById("enrolmentForm");
+    
+    const calculateLiveTotals = () => {
+        const getNum = (id) => parseInt(document.getElementById(id).value, 10) || 0;
+        
+        // 1. Calculate Single KG Levels and Grand Totals
+        const k1b = getNum("kg1_b"), k1g = getNum("kg1_g");
+        const k2b = getNum("kg2_b"), k2g = getNum("kg2_g");
+        
+        document.getElementById("kg1_t").value = k1b + k1g;
+        document.getElementById("kg2_t").value = k2b + k2g;
+        
+        const totalKGBoys = k1b + k2b;
+        const totalKGGirls = k1g + k2g;
+        document.getElementById("kg_gt_b").value = totalKGBoys;
+        document.getElementById("kg_gt_g").value = totalKGGirls;
+        document.getElementById("kg_gt").value = totalKGBoys + totalKGGirls;
+
+        // 2. Calculate Primary Level Rows and Grand Totals
+        let primTotal = 0;
+        for (let i = 1; i <= 6; i++) {
+            primTotal += getNum(`p${i}`);
+        }
+        document.getElementById("primary_gt").value = primTotal;
+
+        // 3. Calculate JHS Levels and Grand Totals
+        const j1 = getNum("jhs1"), j2 = getNum("jhs2"), j3 = getNum("jhs3");
+        document.getElementById("jhs_gt").value = j1 + j2 + j3;
+    };
+
+    // Attach real-time structural calculator event pipeline
+    form.addEventListener("input", calculateLiveTotals);
+
+    // Operational Clear Action listeners
+    const clearFormAndResetTotals = () => {
+        form.reset();
+        calculateLiveTotals();
+    };
+    document.getElementById("btnClear").addEventListener("click", clearFormAndResetTotals);
+    document.getElementById("btnNew").addEventListener("click", clearFormAndResetTotals);
+
+    // =========================================================================
+    // 4. DATABASE TRANSMISSION: Intercept submission and forward to Google Sheet
+    // =========================================================================
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const APP_SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYED_MACRO_ID_HERE/exec";
+        const saveButton = document.getElementById("btnSave");
+        saveButton.disabled = true;
+        saveButton.innerText = "UPLOADING...";
+
+        const rawData = new FormData(form);
+        const payloadData = {};
+        rawData.forEach((value, key) => {
+            payloadData[key] = value;
+        });
+
+        const payload = {
+            formType: "Enrolment",
+            data: payloadData
+        };
+
+        try {
+            const response = await fetch(APP_SCRIPT_URL, {
+                method: "POST",
+                mode: "cors",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+
+            if (result.result === "success") {
+                alert("Data package written into GES Master Spreadsheet successfully!");
+                clearFormAndResetTotals();
+            } else {
+                alert("Spreadsheet error: " + result.message);
+            }
+        } catch (err) {
+            console.error("Network Error: ", err);
+            alert("Network Error: Could not post to Google Web App deployment API endpoint. Verify your macro link URL status.");
+        } finally {
+            saveButton.disabled = false;
+            saveButton.innerText = "SAVE";
+        }
+    });
+});

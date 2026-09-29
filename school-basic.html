@@ -7,12 +7,12 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://jsdelivr.net"></script>
   <style>
-    /* Exact UI color matching definitions */
+    /* Exact UI administrative color tokens */
     :root {
-      --ges-red: #8B0000;      /* Deep primary administrative red */
-      --ges-dark-red: #700000; /* Hover state red */
-      --ges-gray: #6B7280;     /* Border gray */
-      --ges-charcoal: #5A5A5A; /* Back button color */
+      --ges-red: #8B0000;
+      --ges-dark-red: #700000;
+      --ges-charcoal: #5A5A5A;
+      --ges-dark-charcoal: #4A4A4A;
     }
   </style>
 </head>
@@ -20,8 +20,8 @@
 
   <div class="max-w-md mx-auto bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
     
-    <!-- Action Control Headers -->
-    <div class="p-4 space-y-2 bg-[#FAF8F5] border-b border-gray-200">
+    <!-- TOP FIXED ACTION CONTROL HEADERS -->
+    <div class="p-4 space-y-2 bg-[#FAF8F5] border-b border-gray-200 sticky top-0 z-50">
       <button type="button" onclick="saveRecord()" class="w-full text-center bg-[#8B0000] hover:bg-[#700000] text-white font-bold py-3 px-4 rounded shadow-sm tracking-wide uppercase text-sm transition-colors cursor-pointer">
         Save Record
       </button>
@@ -30,41 +30,31 @@
       </button>
     </div>
 
-    <!-- Master Form Entry -->
+    <!-- MASTER ENTRY FORM CONTAINER -->
     <form id="schoolBasicForm" class="p-4 space-y-6">
 
-      <!-- SECTION 1: SCHOOL INFO & EMIS -->
+      <!-- BLOCK 1: SCHOOL INFO & EMIS -->
       <fieldset class="border border-[#8B0000] rounded-md p-4 pt-2 relative">
         <legend class="text-xs font-bold tracking-wider text-[#8B0000] px-2 uppercase bg-white ml-2">
           School Info & EMIS
         </legend>
-        
         <div class="space-y-4 mt-2">
-          <!-- 1. MMDA Name -->
           <div class="flex flex-col">
             <label class="text-xs font-bold text-gray-700 uppercase mb-1">1. MMDA Name</label>
             <input type="text" id="mmdaName" value="Ahafo Ano North Municipal" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]" required>
           </div>
-
-          <!-- 2. School Name -->
           <div class="flex flex-col">
             <label class="text-xs font-bold text-gray-700 uppercase mb-1">2. School Name</label>
             <input type="text" id="schoolName" placeholder="Official Institution Name" class="w-full border border-gray-300 rounded px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:border-[#8B0000]" required>
           </div>
-
-          <!-- 3. Circuit -->
           <div class="flex flex-col">
             <label class="text-xs font-bold text-gray-700 uppercase mb-1">3. Circuit</label>
             <input type="text" id="circuit" placeholder="As designated" class="w-full border border-gray-300 rounded px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:border-[#8B0000]" required>
           </div>
-
-          <!-- 4. School EMIS Code -->
           <div class="flex flex-col">
             <label class="text-xs font-bold text-gray-700 uppercase mb-1">4. School EMIS Code</label>
             <input type="text" id="emisCode" pattern="[0-9]+" placeholder="Numbers only" class="w-full border border-gray-300 rounded px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:border-[#8B0000]" required>
           </div>
-
-          <!-- 5. School Email -->
           <div class="flex flex-col">
             <label class="text-xs font-bold text-gray-700 uppercase mb-1">5. School Email</label>
             <input type="email" id="schoolEmail" placeholder="e.g. school@ges.gov.gh" class="w-full border border-gray-300 rounded px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:border-[#8B0000]">
@@ -72,15 +62,12 @@
         </div>
       </fieldset>
 
-
-      <!-- SECTION 2: MODEL & OPERATIONAL LEVEL -->
+      <!-- BLOCK 2: MODEL & OPERATIONAL LEVEL -->
       <fieldset class="border border-[#8B0000] rounded-md p-4 pt-2 relative">
         <legend class="text-xs font-bold tracking-wider text-[#8B0000] px-2 uppercase bg-white ml-2">
           Model & Operational Level
         </legend>
-        
         <div class="space-y-4 mt-2">
-          <!-- 6. School Model -->
           <div class="flex flex-col">
             <label class="text-xs font-bold text-gray-700 uppercase mb-1">6. School Model</label>
             <select id="schoolModel" class="w-full border border-gray-300 bg-[#F3F4F6] rounded px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#8B0000]" required>
@@ -91,8 +78,6 @@
               <option value="STEM Only">STEM Only</option>
             </select>
           </div>
-
-          <!-- 7. Level -->
           <div class="flex flex-col">
             <label class="text-xs font-bold text-gray-700 uppercase mb-1">7. Level</label>
             <select id="schoolLevel" class="w-full border border-gray-300 bg-[#F3F4F6] rounded px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#8B0000]" required>
@@ -106,8 +91,6 @@
               <option value="Basic (KG, Primary & JHS)">Basic (KG, Primary & JHS)</option>
             </select>
           </div>
-
-          <!-- 8. Affiliation Type -->
           <div class="flex flex-col">
             <label class="text-xs font-bold text-gray-700 uppercase mb-1">8. Affiliation Type</label>
             <select id="affiliationType" class="w-full border border-gray-300 bg-[#F3F4F6] rounded px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#8B0000]" required>
@@ -117,38 +100,60 @@
               <option value="Private">Private (Non-Religious)</option>
             </select>
           </div>
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">9. Ownership Type</label>
+            <select id="ownershipType" class="w-full border border-gray-300 bg-[#F3F4F6] rounded px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#8B0000]" required>
+              <option value="" disabled selected>-- Select Ownership --</option>
+              <option value="Government/Public">Government/Public</option>
+              <option value="Private">Private</option>
+            </select>
+          </div>
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">10. School Religion</label>
+            <select id="schoolReligion" class="w-full border border-gray-300 bg-[#F3F4F6] rounded px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#8B0000]" required>
+              <option value="" disabled selected>-- Select Religion --</option>
+              <option value="Christianity">Christianity</option>
+              <option value="Islam">Islam</option>
+              <option value="Traditional/African">Traditional/African Indigenous</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
         </div>
       </fieldset>
 
-    </form>
-  </div>
+      <!-- BLOCK 3: HEADTEACHER DETAILS -->
+      <fieldset class="border border-[#8B0000] rounded-md p-4 pt-2 relative">
+        <legend class="text-xs font-bold tracking-wider text-[#8B0000] px-2 uppercase bg-white ml-2">
+          11. Headteacher Details
+        </legend>
+        <div class="space-y-4 mt-2">
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">11a. Headteacher Name</label>
+            <input type="text" id="headteacherName" placeholder="Full Name" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]" required>
+          </div>
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">11b. Headteacher Staff ID</label>
+            <input type="text" id="headteacherStaffId" pattern="[0-9]{5,7}" placeholder="5-7 digits" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]" required>
+          </div>
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">11c. Headteacher Phone Number</label>
+            <input type="tel" id="headteacherPhone" pattern="^0[0-9]{9}$" placeholder="e.g. 0241234567" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]" required>
+          </div>
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">11d. Headteacher Email</label>
+            <input type="email" id="headteacherEmail" placeholder="e.g. name@example.com" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]">
+          </div>
+        </div>
+      </fieldset>
 
-  <script>
-    function saveRecord() {
-      const form = document.getElementById('schoolBasicForm');
-      
-      // Perform structural HTML5 validation checks
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      // Consolidate UI elements into data payloads
-      const recordData = {
-        mmdaName: document.getElementById('mmdaName').value,
-        schoolName: document.getElementById('schoolName').value,
-        circuit: document.getElementById('circuit').value,
-        emisCode: document.getElementById('emisCode').value,
-        schoolEmail: document.getElementById('schoolEmail').value,
-        schoolModel: document.getElementById('schoolModel').value,
-        schoolLevel: document.getElementById('schoolLevel').value,
-        affiliationType: document.getElementById('affiliationType').value,
-        timestamp: new Date().toISOString()
-      };
-
-      console.log('Saving Record to System Repository:', recordData);
-      alert('Record data captured successfully! Ready for verification sync.');
-    }
-  </script>
-</body>
-</html>
+      <!-- BLOCK 4: ASSISTANT HEADTEACHERS (CONDITIONAL SECTIONS) -->
+      <fieldset class="border border-[#8B0000] rounded-md p-4 pt-2 relative">
+        <legend class="text-xs font-bold tracking-wider text-[#8B0000] px-2 uppercase bg-white ml-2">
+          Assistant Headteacher Profiles
+        </legend>
+        <div class="space-y-6 mt-2">
+          
+          <!-- KG Section -->
+          <div class="border-b border-gray-200 pb-4">
+            <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">12. Headteacher (KG) Details</h4>
+            <div class="space-y-3">

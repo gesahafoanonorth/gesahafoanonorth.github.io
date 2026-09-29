@@ -1,136 +1,154 @@
-function createBasicSchoolDataForm() {
-  // Create a new Google Form
-  var form = FormApp.create('BASIC SCHOOLS DATA COLLECTION FORM (KG, Primary & JHS)');
-  form.setDescription('Official institutional profile collection template for EMIS database optimization.');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic School Master Records</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://jsdelivr.net"></script>
+  <style>
+    /* Exact UI color matching definitions */
+    :root {
+      --ges-red: #8B0000;      /* Deep primary administrative red */
+      --ges-dark-red: #700000; /* Hover state red */
+      --ges-gray: #6B7280;     /* Border gray */
+      --ges-charcoal: #5A5A5A; /* Back button color */
+    }
+  </style>
+</head>
+<body class="bg-[#FAF8F5] min-h-screen p-4 font-sans text-gray-800">
 
-  // Regex Text Validations
-  var phoneValidation = FormApp.createTextValidation()
-    .setHelpText('Enter a valid 10-digit phone number starting with 0 (e.g., 0241234567).')
-    .requireTextMatchesPattern('^0[0-9]{9}$')
-    .build();
+  <div class="max-w-md mx-auto bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+    
+    <!-- Action Control Headers -->
+    <div class="p-4 space-y-2 bg-[#FAF8F5] border-b border-gray-200">
+      <button type="button" onclick="saveRecord()" class="w-full text-center bg-[#8B0000] hover:bg-[#700000] text-white font-bold py-3 px-4 rounded shadow-sm tracking-wide uppercase text-sm transition-colors cursor-pointer">
+        Save Record
+      </button>
+      <button type="button" onclick="window.location.href='dashboard.html'" class="w-full text-center bg-[#5A5A5A] hover:bg-[#4A4A4A] text-white font-bold py-3 px-4 rounded shadow-sm tracking-wide uppercase text-sm transition-colors cursor-pointer">
+        Back
+      </button>
+    </div>
 
-  var staffidValidation = FormApp.createTextValidation()
-    .setHelpText('Staff ID must be between 5 and 7 digits long (e.g., 123456).')
-    .requireTextMatchesPattern('^[0-9]{5,7}$')
-    .build();
+    <!-- Master Form Entry -->
+    <form id="schoolBasicForm" class="p-4 space-y-6">
 
-  var emailValidation = FormApp.createTextValidation()
-    .setHelpText('Please enter a valid email address.')
-    .requireTextIsEmail()
-    .build();
+      <!-- SECTION 1: SCHOOL INFO & EMIS -->
+      <fieldset class="border border-[#8B0000] rounded-md p-4 pt-2 relative">
+        <legend class="text-xs font-bold tracking-wider text-[#8B0000] px-2 uppercase bg-white ml-2">
+          School Info & EMIS
+        </legend>
+        
+        <div class="space-y-4 mt-2">
+          <!-- 1. MMDA Name -->
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">1. MMDA Name</label>
+            <input type="text" id="mmdaName" value="Ahafo Ano North Municipal" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]" required>
+          </div>
 
-  var emisValidation = FormApp.createGridValidation() // If needed, or use text validation for digits
-  var wholeNumberValidation = FormApp.createTextValidation()
-    .setHelpText('School EMIS Code must contain numbers only.')
-    .requireTextMatchesPattern('^[0-9]+$')
-    .build();
+          <!-- 2. School Name -->
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">2. School Name</label>
+            <input type="text" id="schoolName" placeholder="Official Institution Name" class="w-full border border-gray-300 rounded px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:border-[#8B0000]" required>
+          </div>
 
-  // Strict validation pattern for Ghana Post GPS (e.g., AK-123-4567 or AK-1234-5678)
-  var gpsValidation = FormApp.createTextValidation()
-    .setHelpText('Please enter a valid Ghana Post GPS address including dashes (e.g., AK-123-4567 or AK-1234-5678).')
-    .requireTextMatchesPattern('^[A-Z]{2}-[0-9]{3,4}-[0-9]{4}$')
-    .build();
+          <!-- 3. Circuit -->
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">3. Circuit</label>
+            <input type="text" id="circuit" placeholder="As designated" class="w-full border border-gray-300 rounded px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:border-[#8B0000]" required>
+          </div>
 
-  // 1. MMDA Name
-  form.addTextItem().setTitle('1. MMDA Name').setRequired(true);
+          <!-- 4. School EMIS Code -->
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">4. School EMIS Code</label>
+            <input type="text" id="emisCode" pattern="[0-9]+" placeholder="Numbers only" class="w-full border border-gray-300 rounded px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:border-[#8B0000]" required>
+          </div>
 
-  // 2. School Name
-  form.addTextItem().setTitle('2. School Name').setRequired(true);
+          <!-- 5. School Email -->
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">5. School Email</label>
+            <input type="email" id="schoolEmail" placeholder="e.g. school@ges.gov.gh" class="w-full border border-gray-300 rounded px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:border-[#8B0000]">
+          </div>
+        </div>
+      </fieldset>
 
-  // 3. Circuit
-  form.addTextItem().setTitle('3. Circuit').setRequired(true);
 
-  // 4. School EMIS Code
-  form.addTextItem().setTitle('4. School EMIS Code')
-    .setValidation(wholeNumberValidation)
-    .setRequired(true);
+      <!-- SECTION 2: MODEL & OPERATIONAL LEVEL -->
+      <fieldset class="border border-[#8B0000] rounded-md p-4 pt-2 relative">
+        <legend class="text-xs font-bold tracking-wider text-[#8B0000] px-2 uppercase bg-white ml-2">
+          Model & Operational Level
+        </legend>
+        
+        <div class="space-y-4 mt-2">
+          <!-- 6. School Model -->
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">6. School Model</label>
+            <select id="schoolModel" class="w-full border border-gray-300 bg-[#F3F4F6] rounded px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#8B0000]" required>
+              <option value="" disabled selected>-- Select Model --</option>
+              <option value="Mainstream">Mainstream</option>
+              <option value="Integrated">Integrated</option>
+              <option value="Special">Special</option>
+              <option value="STEM Only">STEM Only</option>
+            </select>
+          </div>
 
-  // 5. School Email
-  form.addTextItem().setTitle('5. School Email')
-    .setValidation(emailValidation)
-    .setRequired(true);
+          <!-- 7. Level -->
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">7. Level</label>
+            <select id="schoolLevel" class="w-full border border-gray-300 bg-[#F3F4F6] rounded px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#8B0000]" required>
+              <option value="" disabled selected>-- Select Level --</option>
+              <option value="KG Only">KG Only</option>
+              <option value="Primary Only">Primary Only</option>
+              <option value="JHS Only">JHS Only</option>
+              <option value="KG & Primary">KG & Primary</option>
+              <option value="KG & JHS">KG & JHS</option>
+              <option value="Primary & JHS">Primary & JHS</option>
+              <option value="Basic (KG, Primary & JHS)">Basic (KG, Primary & JHS)</option>
+            </select>
+          </div>
 
-  // 6. School Model
-  form.addListItem().setTitle('6. School Model')
-    .setChoiceValues(['Mainstream', 'Integrated', 'Special', 'STEM Only'])
-    .setRequired(true);
+          <!-- 8. Affiliation Type -->
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">8. Affiliation Type</label>
+            <select id="affiliationType" class="w-full border border-gray-300 bg-[#F3F4F6] rounded px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#8B0000]" required>
+              <option value="" disabled selected>-- Select Affiliation --</option>
+              <option value="Public/Non-Religious">Public/Non-Religious (Government)</option>
+              <option value="Religious">Religious (Mission/Faith-Based)</option>
+              <option value="Private">Private (Non-Religious)</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
 
-  // 7. Level
-  form.addListItem().setTitle('7. Level')
-    .setChoiceValues(['KG Only', 'Primary Only', 'JHS Only', 'KG & Primary', 'KG & JHS', 'Primary & JHS', 'Basic (KG, Primary & JHS)'])
-    .setRequired(true);
+    </form>
+  </div>
 
-  // 8. Affiliation Type
-  form.addListItem().setTitle('8. Affiliation Type')
-    .setChoiceValues(['Public/Non-Religious (Government)', 'Religious (Mission/Faith-Based)', 'Private (Non-Religious)'])
-    .setRequired(true);
+  <script>
+    function saveRecord() {
+      const form = document.getElementById('schoolBasicForm');
+      
+      // Perform structural HTML5 validation checks
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
 
-  // 9. Ownership Type
-  form.addListItem().setTitle('9. Ownership Type')
-    .setChoiceValues(['Government/Public', 'Private'])
-    .setRequired(true);
+      // Consolidate UI elements into data payloads
+      const recordData = {
+        mmdaName: document.getElementById('mmdaName').value,
+        schoolName: document.getElementById('schoolName').value,
+        circuit: document.getElementById('circuit').value,
+        emisCode: document.getElementById('emisCode').value,
+        schoolEmail: document.getElementById('schoolEmail').value,
+        schoolModel: document.getElementById('schoolModel').value,
+        schoolLevel: document.getElementById('schoolLevel').value,
+        affiliationType: document.getElementById('affiliationType').value,
+        timestamp: new Date().toISOString()
+      };
 
-  // 10. School Religion
-  form.addListItem().setTitle('10. School Religion')
-    .setChoiceValues(['Christianity', 'Islam', 'Traditional/African Indigenous Religion', 'Other'])
-    .setRequired(true);
-
-  // 11. Headteacher Information
-  form.addPageBreakItem().setTitle('Headteacher Details');
-  form.addTextItem().setTitle('11a. Headteacher Name').setRequired(true);
-  form.addTextItem().setTitle('11b. Headteacher Staff ID')
-    .setValidation(staffidValidation)
-    .setRequired(true);
-  form.addTextItem().setTitle('11c. Headteacher Phone Number')
-    .setValidation(phoneValidation)
-    .setRequired(true);
-  form.addTextItem().setTitle('11d. Headteacher Email')
-    .setValidation(emailValidation)
-    .setRequired(false);
-
-  // 12. Asst Head KG Form
-  form.addPageBreakItem().setTitle('Assistant Head KG Details');
-  form.addTextItem().setTitle('12a. Assistant Head KG Name').setRequired(false);
-  form.addTextItem().setTitle('12b. Assistant Head KG Staff ID')
-    .setValidation(staffidValidation)
-    .setRequired(false);
-  form.addTextItem().setTitle('12c. Assistant Head KG Phone Number')
-    .setValidation(phoneValidation)
-    .setRequired(false);
-
-  // 13. Asst Head Primary Form
-  form.addPageBreakItem().setTitle('Assistant Head Headteacher (Primary) Details');
-  form.addTextItem().setTitle('13a. Assistant Head Primary Name').setRequired(false);
-  form.addTextItem().setTitle('13b. Assistant Head Primary Staff ID')
-    .setValidation(staffidValidation)
-    .setRequired(false);
-  form.addTextItem().setTitle('13c. Assistant Head Primary Phone Number')
-    .setValidation(phoneValidation)
-    .setRequired(false);
-
-  // 14. Asst Head JHS Form
-  form.addPageBreakItem().setTitle('Assistant Headteacher (JHS) Details');
-  form.addTextItem().setTitle('14a. Assistant Head JHS Name').setRequired(false);
-  form.addTextItem().setTitle('14b. Assistant Head JHS Staff ID')
-    .setValidation(staffidValidation)
-    .setRequired(false);
-  form.addTextItem().setTitle('14c. Assistant Head JHS Phone Number')
-    .setValidation(phoneValidation)
-    .setRequired(false);
-
-  // 15, 16, 17. School Logistics
-  form.addPageBreakItem().setTitle('School Location & Logistics');
-  form.addListItem().setTitle('15. Area Type')
-    .setChoiceValues(['Urban', 'Rural', 'Peri-Urban'])
-    .setRequired(true);
-  form.addTextItem().setTitle('16. School Location')
-    .setDescription('Town / Community / Landmark')
-    .setRequired(true);
-  form.addTextItem().setTitle('17. GPS Address')
-    .setDescription('Must include dashes and regional identifier in capital letters (e.g., AK-123-4567 or AS-1234-5678).')
-    .setValidation(gpsValidation)
-    .setRequired(true);
-
-  // Log the URL of the newly created form
-  Logger.log('Form created successfully! Link to edit: ' + form.getEditUrl());
-}
+      console.log('Saving Record to System Repository:', recordData);
+      alert('Record data captured successfully! Ready for verification sync.');
+    }
+  </script>
+</body>
+</html>

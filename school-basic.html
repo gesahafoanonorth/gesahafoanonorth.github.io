@@ -2,104 +2,134 @@ function createBasicSchoolDataForm() {
   // Create a new Google Form
   var form = FormApp.create('BASIC SCHOOLS DATA COLLECTION FORM (KG, Primary & JHS)');
   form.setDescription('Official institutional profile collection template for EMIS database optimization.');
-  
+
   // Regex Text Validations
   var phoneValidation = FormApp.createTextValidation()
-      .setHelpText('Enter a valid 10-digit phone number starting with 0 (e.g., 0241234567).')
-      .requireTextMatchesPattern('^0[0-9]{9}$')
-      .build();
+    .setHelpText('Enter a valid 10-digit phone number starting with 0 (e.g., 0241234567).')
+    .requireTextMatchesPattern('^0[0-9]{9}$')
+    .build();
 
-  var staffIdValidation = FormApp.createTextValidation()
-      .setHelpText('Staff ID must be between 5 and 7 digits long (e.g., 123456).')
-      .requireTextMatchesPattern('^[0-9]{5,7}$')
-      .build();
+  var staffidValidation = FormApp.createTextValidation()
+    .setHelpText('Staff ID must be between 5 and 7 digits long (e.g., 123456).')
+    .requireTextMatchesPattern('^[0-9]{5,7}$')
+    .build();
 
   var emailValidation = FormApp.createTextValidation()
-      .setHelpText('Please enter a valid email address.')
-      .requireTextIsEmail()
-      .build();
+    .setHelpText('Please enter a valid email address.')
+    .requireTextIsEmail()
+    .build();
 
-  var emisValidation = FormApp.createTextValidation()
-      .setHelpText('School EMIS Code must contain numbers only.')
-      .requireWholeNumber()
-      .build();
+  var emisValidation = FormApp.createGridValidation() // If needed, or use text validation for digits
+  var wholeNumberValidation = FormApp.createTextValidation()
+    .setHelpText('School EMIS Code must contain numbers only.')
+    .requireTextMatchesPattern('^[0-9]+$')
+    .build();
 
   // Strict validation pattern for Ghana Post GPS (e.g., AK-123-4567 or AK-1234-5678)
   var gpsValidation = FormApp.createTextValidation()
-      .setHelpText('Please enter a valid Ghana Post GPS address including dashes (e.g., AK-123-4567 or AK-1234-5678).')
-      .requireTextMatchesPattern('^[A-Z]{2}-[0-9]{3,4}-[0-9]{4}$')
-      .build();
-      
+    .setHelpText('Please enter a valid Ghana Post GPS address including dashes (e.g., AK-123-4567 or AK-1234-5678).')
+    .requireTextMatchesPattern('^[A-Z]{2}-[0-9]{3,4}-[0-9]{4}$')
+    .build();
+
   // 1. MMDA Name
   form.addTextItem().setTitle('1. MMDA Name').setRequired(true);
-      
+
   // 2. School Name
   form.addTextItem().setTitle('2. School Name').setRequired(true);
-      
+
   // 3. Circuit
   form.addTextItem().setTitle('3. Circuit').setRequired(true);
-      
+
   // 4. School EMIS Code
-  form.addTextItem().setTitle('4. School EMIS Code').setValidation(emisValidation).setRequired(true);
-      
+  form.addTextItem().setTitle('4. School EMIS Code')
+    .setValidation(wholeNumberValidation)
+    .setRequired(true);
+
   // 5. School Email
-  form.addTextItem().setTitle('5. School Email').setValidation(emailValidation).setRequired(false);
-      
+  form.addTextItem().setTitle('5. School Email')
+    .setValidation(emailValidation)
+    .setRequired(true);
+
   // 6. School Model
-  form.addListItem().setTitle('6. School Model').setChoiceValues(['Mainstream', 'Integrated', 'Special', 'STEM ONLY']).setRequired(true);
-      
+  form.addListItem().setTitle('6. School Model')
+    .setChoiceValues(['Mainstream', 'Integrated', 'Special', 'STEM Only'])
+    .setRequired(true);
+
   // 7. Level
-  form.addListItem().setTitle('7. Level').setChoiceValues([
-        'KG Only', 'Primary Only', 'JHS Only', 'KG & Primary', 'KG & JHS', 'Primary & JHS', 'Basic (KG, Primary & JHS)'
-      ]).setRequired(true);
-      
+  form.addListItem().setTitle('7. Level')
+    .setChoiceValues(['KG Only', 'Primary Only', 'JHS Only', 'KG & Primary', 'KG & JHS', 'Primary & JHS', 'Basic (KG, Primary & JHS)'])
+    .setRequired(true);
+
   // 8. Affiliation Type
-  form.addListItem().setTitle('8. Affiliation Type').setChoiceValues([
-        'Public/Non-Religious (Government)', 'Religious (Mission/Faith-Based)', 'Private (Non-Religious)'
-      ]).setRequired(true);
-      
+  form.addListItem().setTitle('8. Affiliation Type')
+    .setChoiceValues(['Public/Non-Religious (Government)', 'Religious (Mission/Faith-Based)', 'Private (Non-Religious)'])
+    .setRequired(true);
+
   // 9. Ownership Type
-  form.addListItem().setTitle('9. Ownership Type').setChoiceValues(['Government/Public', 'Private']).setRequired(true);
-      
+  form.addListItem().setTitle('9. Ownership Type')
+    .setChoiceValues(['Government/Public', 'Private'])
+    .setRequired(true);
+
   // 10. School Religion
-  form.addListItem().setTitle('10. School Religion').setChoiceValues(['Christianity', 'Islam', 'Traditional/African Indigenous Religion', 'Other']).setRequired(true);
-      
+  form.addListItem().setTitle('10. School Religion')
+    .setChoiceValues(['Christianity', 'Islam', 'Traditional/African Indigenous Religion', 'Other'])
+    .setRequired(true);
+
   // 11. Headteacher Information
   form.addPageBreakItem().setTitle('Headteacher Details');
   form.addTextItem().setTitle('11a. Headteacher Name').setRequired(true);
-  form.addTextItem().setTitle('11b. Headteacher Staff ID').setValidation(staffIdValidation).setRequired(true);
-  form.addTextItem().setTitle('11c. Headteacher Phone Number').setValidation(phoneValidation).setRequired(true);
-  form.addTextItem().setTitle('11d. Headteacher Email').setValidation(emailValidation).setRequired(false);
-      
-  // 12. Asst Head KG
-  form.addPageBreakItem().setTitle('Assistant Headteacher (KG) Details');
+  form.addTextItem().setTitle('11b. Headteacher Staff ID')
+    .setValidation(staffidValidation)
+    .setRequired(true);
+  form.addTextItem().setTitle('11c. Headteacher Phone Number')
+    .setValidation(phoneValidation)
+    .setRequired(true);
+  form.addTextItem().setTitle('11d. Headteacher Email')
+    .setValidation(emailValidation)
+    .setRequired(false);
+
+  // 12. Asst Head KG Form
+  form.addPageBreakItem().setTitle('Assistant Head KG Details');
   form.addTextItem().setTitle('12a. Assistant Head KG Name').setRequired(false);
-  form.addTextItem().setTitle('12b. Assistant Head KG Staff ID').setValidation(staffIdValidation).setRequired(false);
-  form.addTextItem().setTitle('12c. Assistant Head KG Phone Number').setValidation(phoneValidation).setRequired(false);
-      
-  // 13. Asst Head Primary
-  form.addPageBreakItem().setTitle('Assistant Headteacher (Primary) Details');
+  form.addTextItem().setTitle('12b. Assistant Head KG Staff ID')
+    .setValidation(staffidValidation)
+    .setRequired(false);
+  form.addTextItem().setTitle('12c. Assistant Head KG Phone Number')
+    .setValidation(phoneValidation)
+    .setRequired(false);
+
+  // 13. Asst Head Primary Form
+  form.addPageBreakItem().setTitle('Assistant Head Headteacher (Primary) Details');
   form.addTextItem().setTitle('13a. Assistant Head Primary Name').setRequired(false);
-  form.addTextItem().setTitle('13b. Assistant Head Primary Staff ID').setValidation(staffIdValidation).setRequired(false);
-  form.addTextItem().setTitle('13c. Assistant Head Primary Phone Number').setValidation(phoneValidation).setRequired(false);
-      
-  // 14. Asst Head JHS
+  form.addTextItem().setTitle('13b. Assistant Head Primary Staff ID')
+    .setValidation(staffidValidation)
+    .setRequired(false);
+  form.addTextItem().setTitle('13c. Assistant Head Primary Phone Number')
+    .setValidation(phoneValidation)
+    .setRequired(false);
+
+  // 14. Asst Head JHS Form
   form.addPageBreakItem().setTitle('Assistant Headteacher (JHS) Details');
   form.addTextItem().setTitle('14a. Assistant Head JHS Name').setRequired(false);
-  form.addTextItem().setTitle('14b. Assistant Head JHS Staff ID').setValidation(staffIdValidation).setRequired(false);
-  form.addTextItem().setTitle('14c. Assistant Head JHS Phone Number').setValidation(phoneValidation).setRequired(false);
-      
+  form.addTextItem().setTitle('14b. Assistant Head JHS Staff ID')
+    .setValidation(staffidValidation)
+    .setRequired(false);
+  form.addTextItem().setTitle('14c. Assistant Head JHS Phone Number')
+    .setValidation(phoneValidation)
+    .setRequired(false);
+
   // 15, 16, 17. School Logistics
   form.addPageBreakItem().setTitle('School Location & Logistics');
-  form.addListItem().setTitle('15. Area Type').setChoiceValues(['Urban', 'Rural', 'Peri-Urban']).setRequired(true);
-  form.addTextItem().setTitle('16. School Location').setDescription('Town / Community / Landmark').setRequired(true);
-  
-  // 17. GPS Address with Regex Pattern Validation
-  form.addTextItem()
-      .setTitle('17. GPS Address')
-      .setDescription('Must include dashes and regional identifier in capital letters (e.g., AK-123-4567 or AS-1234-5678)')
-      .setValidation(gpsValidation)
-      .setRequired(true);
+  form.addListItem().setTitle('15. Area Type')
+    .setChoiceValues(['Urban', 'Rural', 'Peri-Urban'])
+    .setRequired(true);
+  form.addTextItem().setTitle('16. School Location')
+    .setDescription('Town / Community / Landmark')
+    .setRequired(true);
+  form.addTextItem().setTitle('17. GPS Address')
+    .setDescription('Must include dashes and regional identifier in capital letters (e.g., AK-123-4567 or AS-1234-5678).')
+    .setValidation(gpsValidation)
+    .setRequired(true);
 
   // Log the URL of the newly created form
   Logger.log('Form created successfully! Link to edit: ' + form.getEditUrl());

@@ -2,20 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Crucial viewport parameters preventing layout constraints or forced zooming on mobile devices -->
+    <!-- Mandatory viewport settings preventing structural compression on smartphones -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GES Ahafo Ano North - Basic Schools Register</title>
-    <!-- Relative path linking your master stylesheet to inherit shared visual styles -->
+    <!-- Relative path linking your master mobile-responsive stylesheet asset -->
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-    <!-- Centralized JavaScript Anchor Hook Mounting Node -->
+    <!-- 🚨 THE MANDATORY HOOK CONTAINER
+         Your school-basic-app.js calculation file injects the entire form profile layout here. 
+         Do not alter or misspell this ID parameter, or the page will display completely BLANK! -->
     <div id="school-basic-mount"></div>
 
-    <!-- Core application script routing and processing fields layout logs -->
+    <!-- 🚨 CORE APPLICATION UTILITY ENGINE ASSETS -->
     <script src="./school-basic-app.js"></script>
-    <!-- shared cascading script managing structural region/district dropdown dependencies -->
     <script src="./location-cascading.js"></script>
 
 </body>

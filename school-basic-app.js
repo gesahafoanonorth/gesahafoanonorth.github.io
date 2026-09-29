@@ -133,3 +133,45 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     document.getElementById("btnClear").addEventListener("click", clearFormAndResetView);
+document.getElementById("btnNew").addEventListener("click", clearFormAndResetView);
+// =========================================================================
+// 3. DATABASE TRANSMISSION: Post clean data payloads to Google Sheet
+// =========================================================================
+form.addEventListener("submit", async (event) => {
+event.preventDefault();
+const BACKEND_API_URL = "google.com";
+const saveBtn = document.getElementById("btnSave");
+saveBtn.disabled = true;
+saveBtn.innerText = "UPLOADING TO REGISTRY...";
+const rawFormData = new FormData(form);
+const dataPayload = {};
+rawFormData.forEach((value, key) => {
+dataPayload[key] = value;
+});
+const wrappedPackage = {
+formType: "BasicSchools", // Direct reference matching your spreadsheet tab name
+data: dataPayload
+};
+try {
+const response = await fetch(BACKEND_API_URL, {
+method: "POST",
+mode: "cors",
+headers: { "Content-Type": "text/plain;charset=utf-8" },
+body: JSON.stringify(wrappedPackage)
+});
+const apiResponse = await response.json();
+if (apiResponse.result === "success") {
+alert(School profile registry for "${dataPayload.School_Name}" logged inside BasicSchools spreadsheet database smoothly!);
+clearFormAndResetView();
+} else {
+alert("Spreadsheet Processing Refusal: " + apiResponse.message);
+}
+} catch (netException) {
+console.error("Transmission exception:", netException);
+alert("Network Error: Could not post school profile. Check network access configurations.");
+} finally {
+saveBtn.disabled = false;
+saveBtn.innerText = "💾 SAVE PROFILE";
+}
+});
+});

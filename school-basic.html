@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basic School Master Records</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://jsdelivr.net"></script>
+  <!-- Fixed Tailwind CSS v4 CDN Engine Import -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
     /* Exact UI administrative color tokens */
     :root {
@@ -146,7 +146,7 @@
         </div>
       </fieldset>
 
-      <!-- BLOCK 4: ASSISTANT HEADTEACHERS (CONDITIONAL SECTIONS) -->
+      <!-- BLOCK 4: ASSISTANT HEADTEACHER PROFILES -->
       <fieldset class="border border-[#8B0000] rounded-md p-4 pt-2 relative">
         <legend class="text-xs font-bold tracking-wider text-[#8B0000] px-2 uppercase bg-white ml-2">
           Assistant Headteacher Profiles
@@ -157,3 +157,118 @@
           <div class="border-b border-gray-200 pb-4">
             <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">12. Headteacher (KG) Details</h4>
             <div class="space-y-3">
+              <input type="text" id="asstKgName" placeholder="12a. Assistant Head KG Name" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]">
+              <input type="text" id="asstKgStaffId" pattern="[0-9]{5,7}" placeholder="12b. Assistant Head KG Staff ID" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]">
+              <input type="tel" id="asstKgPhone" pattern="^0[0-9]{9}$" placeholder="12c. Assistant Head KG Phone" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+          </div>
+
+          <div class="border-b border-gray-200 pb-4">
+            <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">13. Assistant Headteacher (Primary) Details</h4>
+            <div class="space-y-3">
+              <input type="text" id="asstPriName" placeholder="13a. Assistant Head Primary Name" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]">
+              <input type="text" id="asstPriStaffId" pattern="[0-9]{5,7}" placeholder="13b. Assistant Head Primary Staff ID" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]">
+              <input type="tel" id="asstPriPhone" pattern="^0[0-9]{9}$" placeholder="13c. Assistant Head Primary Phone" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">14. Assistant Headteacher (JHS) Details</h4>
+            <div class="space-y-3">
+              <input type="text" id="asstJhsName" placeholder="14a. Assistant Head JHS Name" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]">
+              <input type="text" id="asstJhsStaffId" pattern="[0-9]{5,7}" placeholder="14b. Assistant Head JHS Staff ID" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]">
+              <input type="tel" id="asstJhsPhone" pattern="^0[0-9]{9}$" placeholder="14c. Assistant Head JHS Phone" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <!-- BLOCK 5: LOCATION & LOGISTICS -->
+      <fieldset class="border border-[#8B0000] rounded-md p-4 pt-2 relative">
+        <legend class="text-xs font-bold tracking-wider text-[#8B0000] px-2 uppercase bg-white ml-2">
+          School Location & Logistics
+        </legend>
+        <div class="space-y-4 mt-2">
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">15. Area Type</label>
+            <select id="areaType" class="w-full border border-gray-300 bg-[#F3F4F6] rounded px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#8B0000]" required>
+              <option value="" disabled selected>-- Select Area Type --</option>
+              <option value="Urban">Urban</option>
+              <option value="Rural">Rural</option>
+              <option value="Peri-Urban">Peri-Urban</option>
+            </select>
+          </div>
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">16. School Location</label>
+            <input type="text" id="schoolLocation" placeholder="Town / Community / Landmark" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]" required>
+          </div>
+          <div class="flex flex-col">
+            <label class="text-xs font-bold text-gray-700 uppercase mb-1">17. GPS Address</label>
+            <input type="text" id="gpsAddress" pattern="^[A-Z]{2}-[0-9]{3,4}-[0-9]{4}$" placeholder="e.g. AK-123-4567" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]" required>
+            <span class="text-[10px] text-gray-400 mt-1">Must include region initials, dashes, and correct grouping digits.</span>
+          </div>
+        </div>
+      </fieldset>
+
+    </form>
+  </div>
+
+  <script>
+    function saveRecord() {
+      const form = document.getElementById('schoolBasicForm');
+      
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Format clean JSON object payload for the backend processing runtime
+      const payload = {
+        mmdaName: document.getElementById('mmdaName').value,
+        schoolName: document.getElementById('schoolName').value,
+        circuit: document.getElementById('circuit').value,
+        emisCode: document.getElementById('emisCode').value,
+        schoolEmail: document.getElementById('schoolEmail').value,
+        schoolModel: document.getElementById('schoolModel').value,
+        schoolLevel: document.getElementById('schoolLevel').value,
+        affiliationType: document.getElementById('affiliationType').value,
+        ownershipType: document.getElementById('ownershipType').value,
+        schoolReligion: document.getElementById('schoolReligion').value,
+        headteacher: {
+          name: document.getElementById('headteacherName').value,
+          staffId: document.getElementById('headteacherStaffId').value,
+          phone: document.getElementById('headteacherPhone').value,
+          email: document.getElementById('headteacherEmail').value
+        },
+        assistants: {
+          kg: {
+            name: document.getElementById('asstKgName').value,
+            staffId: document.getElementById('asstKgStaffId').value,
+            phone: document.getElementById('asstKgPhone').value
+          },
+          primary: {
+            name: document.getElementById('asstPriName').value,
+            staffId: document.getElementById('asstPriStaffId').value,
+            phone: document.getElementById('asstPriPhone').value
+          },
+          jhs: {
+            name: document.getElementById('asstJhsName').value,
+            staffId: document.getElementById('asstJhsStaffId').value,
+            phone: document.getElementById('asstJhsPhone').value
+          }
+        },
+        location: {
+          areaType: document.getElementById('areaType').value,
+          details: document.getElementById('schoolLocation').value,
+          gps: document.getElementById('gpsAddress').value
+        },
+        timestamp: new Date().toISOString()
+      };
+
+      console.log('Record consolidated successfully:', payload);
+      alert('Data package parsed successfully! Form fields are valid.');
+    }
+  </script>
+</body>
+</html>

@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const BACKEND_API_URL = "https://google.com";
+        const BACKEND_API_URL = "https://script.google.com/macros/library/d/1zdsNU_n1STrWGKR5juFQ1QfpFqDRv3FFlEyHbQ7W4456qOpp744EqTvT/9";
         const saveBtn = document.getElementById("btnSave");
 
         saveBtn.disabled = true;

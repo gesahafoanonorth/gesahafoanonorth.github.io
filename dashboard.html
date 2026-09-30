@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES Ahafo Ano North - Dashboard</title>
+    <title>GES Ahafo Ano North - Main Control Panel</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,141 +13,179 @@
         }
 
         body {
-            background-color: #f9f6f0;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            background-color: #f7f9fc;
+            padding: 40px 20px;
         }
 
         .dashboard-container {
             background: #ffffff;
             width: 100%;
-            max-width: 700px; /* Expanded slightly to account for dual columns */
-            padding: 25px 20px;
+            max-width: 1200px; /* Wider container to accommodate horizontal buttons */
+            margin: 0 auto;
+            padding: 35px;
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(139, 0, 0, 0.1);
+            border: 1px solid #eaeaea;
         }
 
+        /* Top Header Styling */
         .header {
             text-align: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 15px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 30px;
         }
 
-        .district-badge {
-            display: inline-block;
-            background-color: rgba(139, 0, 0, 0.08);
-            color: #8b0000;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
+        .hub-badge {
+            display: block;
+            color: #888888;
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
         }
 
         .header h1 {
-            font-size: 18px;
-            color: #8b0000;
+            font-size: 22px;
+            color: #A31D1D; 
             font-weight: 700;
-            margin-bottom: 5px;
+            letter-spacing: 0.3px;
             line-height: 1.3;
         }
 
-        .header h2 {
+        .header p {
             font-size: 15px;
             color: #333333;
             font-weight: 600;
+            margin-top: 6px;
         }
 
-        .section-divider {
+        /* Main Menu Container: Aligns both sections horizontally */
+        .menu-sections-wrapper {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap; /* Wraps onto a new row on tablets/mobile */
+        }
+
+        /* Section Layout adjustments for horizontal button display */
+        .section-group {
+            flex: 1;
+            min-width: 300px; /* Prevents columns from shrinking too small */
+        }
+
+        .section-title {
             font-size: 12px;
             font-weight: 700;
             color: #666666;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin: 20px 0 10px 5px;
-            padding-bottom: 4px;
-            border-bottom: 1px dashed #e0e0e0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 5px;
         }
 
-        /* Responsive Grid: Stacks vertically on tiny screens, splits horizontally on wider devices */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        /* Interactive Action Buttons */
-        .menu-card {
-            background-color: #fafafa;
-            border: 1px solid #e0e0e0;
-            padding: 15px 18px;
-            border-radius: 12px;
+        /* Horizontal Menu Row Setup */
+        .menu-list {
             display: flex;
-            flex-direction: row;
-            align-items: center;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .menu-card {
+            display: flex;
             justify-content: space-between;
-            cursor: pointer;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px 20px;
+            text-decoration: none;
             transition: all 0.2s ease;
-            text-align: left;
-            width: 100%;
-            height: 100%; /* Ensures equal heights in rows */
         }
 
         .menu-card:hover {
-            border-color: #8b0000;
-            background-color: rgba(139, 0, 0, 0.02);
+            border-color: #A31D1D;
+            box-shadow: 0 4px 12px rgba(163, 29, 29, 0.08);
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.04);
         }
 
-        .menu-info h3 {
-            font-size: 14px;
-            color: #8b0000;
-            font-weight: 600;
-            margin-bottom: 3px;
+        .card-content {
+            padding-right: 15px;
         }
 
-        .menu-info p {
-            font-size: 11px;
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #A31D1D;
+            margin-bottom: 4px;
+        }
+
+        .card-description {
+            font-size: 12px;
             color: #666666;
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
-        .arrow-icon {
-            color: #8b0000;
+        .card-arrow {
+            color: #A31D1D;
+            font-size: 18px;
             font-weight: bold;
-            font-size: 16px;
-            margin-left: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .menu-card:hover .card-arrow {
+            transform: translateX(3px);
+        }
+
+        /* Action Footer */
+        .footer-action {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed #cccccc;
         }
 
         .btn-logout {
-            width: 100%;
-            padding: 14px;
-            font-size: 15px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            border: none;
-            background-color: #e0e0e0;
+            display: inline-block;
             color: #333333;
-            transition: background-color 0.2s ease;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 8px 24px;
+            transition: color 0.2s ease;
         }
 
         .btn-logout:hover {
-            background-color: #d0d0d0;
+            color: #A31D1D;
+            text-decoration: underline;
         }
 
-        /* Desktop & Tablet Optimization Breakpoint: Aligns modules side-by-side */
-        @media (min-width: 480px) {
-            .menu-grid {
-                grid-template-columns: repeat(2, 1fr); /* Creates 2 columns on top rows */
+        /* Responsive Grid Mode for Desktop */
+        @media (min-width: 768px) {
+            .menu-list {
+                display: flex;
+                flex-direction: row; /* Arranges the buttons horizontally */
+                gap: 15px;
+            }
+
+            .menu-card {
+                flex: 1; /* Assigns equal width to all buttons in the row */
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: space-between;
+                min-height: 120px;
+                padding: 18px;
+            }
+
+            .card-arrow {
+                align-self: flex-end;
+                margin-top: 10px;
+            }
+
+            .menu-sections-wrapper {
+                flex-direction: column; /* Stacks the two distinct tables/sections vertically */
+                gap: 30px;
             }
         }
     </style>
@@ -155,76 +193,75 @@
 <body>
 
     <div class="dashboard-container">
+        <!-- Main Panel Header -->
         <div class="header">
-            <span class="district-badge">GES Management Hub</span>
+            <span class="hub-badge">GES Management Hub</span>
             <h1>AHAFO ANO NORTH EDUCATION DIRECTORATE</h1>
-            <h2>Main Control Panel</h2>
+            <p>Main Control Panel</p>
         </div>
 
-        <!-- SECTION A: SCHOOL MASTER LISTS -->
-        <div class="section-divider">School Master Records</div>
-        <div class="menu-grid">
-            <!-- Basic Schools Button -->
-            <button class="menu-card" onclick="window.location.href='school-basic.html';">
-                <div class="menu-info">
-                    <h3>Basic Schools Register</h3>
-                    <p>Compile official profiles for KG, Primary, and JHS institutions</p>
+        <div class="menu-sections-wrapper">
+            <!-- Section 1: School Master Records (Horizontal Layout) -->
+            <div class="section-group">
+                <h2 class="section-title">School Master Records</h2>
+                <div class="menu-list">
+                    <a href="school-basic.html" class="menu-card">
+                        <div class="card-content">
+                            <div class="card-title">Basic Schools Register</div>
+                            <div class="card-description">Compile official profiles for KG, Primary, and JHS institutions</div>
+                        </div>
+                        <div class="card-arrow">&rarr;</div>
+                    </a>
+                    <a href="school-second-cycle.html" class="menu-card">
+                        <div class="card-content">
+                            <div class="card-title">Second Cycle Register</div>
+                            <div class="card-description">Track profiles for SHS, SHTS, TVET, and STEM institutions</div>
+                        </div>
+                        <div class="card-arrow">&rarr;</div>
+                    </a>
+                    <a href="school-infrastructure.html" class="menu-card">
+                        <div class="card-content">
+                            <div class="card-title">School Infrastructure</div>
+                            <div class="card-description">Log inventory, desk counts, laboratory status, and utilities</div>
+                        </div>
+                        <div class="card-arrow">&rarr;</div>
+                    </a>
                 </div>
-                <div class="arrow-icon">➔</div>
-            </button>
+            </div>
 
-            <!-- Second Cycle Schools Button -->
-            <button class="menu-card" onclick="window.location.href='school-second-cycle.html';">
-                <div class="menu-info">
-                    <h3>Second Cycle Register</h3>
-                    <p>Track profiles for SHS, SHTS, TVET, and STEM institutions</p>
+            <!-- Section 2: Data Log Modules (Horizontal Layout) -->
+            <div class="section-group">
+                <h2 class="section-title">Data Log Modules</h2>
+                <div class="menu-list">
+                    <a href="enrolment.html" class="menu-card">
+                        <div class="card-content">
+                            <div class="card-title">Basic Enrolment Log</div>
+                            <div class="card-description">Submit class population statistics for active terms</div>
+                        </div>
+                        <div class="card-arrow">&rarr;</div>
+                    </a>
+                    <a href="staff.html" class="menu-card">
+                        <div class="card-content">
+                            <div class="card-title">Manage Staff</div>
+                            <div class="card-description">Track teachers, professional ranks, IDs, and positions</div>
+                        </div>
+                        <div class="card-arrow">&rarr;</div>
+                    </a>
+                    <a href="#" class="menu-card">
+                        <div class="card-content">
+                            <div class="card-title">Manage Student</div>
+                            <div class="card-description">Update enrollment data, attendance, and BECE registries</div>
+                        </div>
+                        <div class="card-arrow">&rarr;</div>
+                    </a>
                 </div>
-                <div class="arrow-icon">➔</div>
-            </button>
-
-            <!-- School Infrastructure Button -->
-            <button class="menu-card" onclick="window.location.href='school-infrastructure.html';">
-                <div class="menu-info">
-                    <h3>School Infrastructure</h3>
-                    <p>Log inventory, desk counts, laboratory status, and utilities</p>
-                </div>
-                <div class="arrow-icon">➔</div>
-            </button>
+            </div>
         </div>
 
-        <!-- SECTION B: OPERATIONAL METRICS -->
-        <div class="section-divider">Data Log Modules</div>
-        <div class="menu-grid">
-            <!-- Basic Enrolment -->
-            <button class="menu-card" onclick="window.location.href='enrolment.html';">
-                <div class="menu-info">
-                    <h3>Basic Enrolment Log</h3>
-                    <p>Submit class population statistics for active terms</p>
-                </div>
-                <div class="arrow-icon">➔</div>
-            </button>
-
-            <!-- Manage Staff -->
-            <button class="menu-card" onclick="window.location.href='staff.html';">
-                <div class="menu-info">
-                    <h3>Manage Staff</h3>
-                    <p>Track teachers, professional ranks, IDs, and positions</p>
-                </div>
-                <div class="arrow-icon">➔</div>
-            </button>
-
-            <!-- Manage Student -->
-            <button class="menu-card" onclick="window.location.href='student.html';">
-                <div class="menu-info">
-                    <h3>Manage Student</h3>
-                    <p>Update enrollment data, attendance, and BECE registries</p>
-                </div>
-                <div class="arrow-icon">➔</div>
-            </button>
+        <!-- Logout Action Button -->
+        <div class="footer-action">
+            <a href="index.html" class="btn-logout">Logout</a>
         </div>
-
-        <!-- Back/Logout Action -->
-        <button type="button" class="btn-logout" onclick="window.location.href='index.html'">Logout</button>
     </div>
 
 </body>

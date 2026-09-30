@@ -1,68 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES - Student Registration</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .register-container * { color: #333333 !important; }
-        .action-buttons button { color: #ffffff !important; }
-        fieldset { border: 2px solid #00a2e8; border-radius: 6px; padding: 15px; margin-bottom: 20px; }
-        legend { font-weight: bold; color: #00a2e8 !important; padding: 0 6px; }
-        .btn-save-sd { background-color: #00a2e8 !important; }
-        .btn-back-sd { background-color: #777777 !important; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GES - Student Registration</title>
+  <!-- Tailwind CSS v4 CDN Engine Import -->
+  <script src="https://jsdelivr.net"></script>
 </head>
-<body>
+<body class="bg-[#FAF6F0] min-h-screen p-4 md:p-8 font-sans text-gray-800 flex justify-center items-start">
 
-<div class="register-container">
-    <div class="header-title" style="color: #00a2e8 !important;">Student Registration Compiling</div>
+  <!-- MASTER ENTRY FORM CONTAINER -->
+  <div class="w-full max-w-7xl bg-white p-4 md:p-8 rounded-md shadow-sm border border-gray-300">
+    
+    <!-- CENTER MAIN HEADER BANNER -->
+    <div class="text-center text-[#00a2e8] text-xl md:text-2xl font-bold tracking-wide uppercase mb-6">
+      Student Registration Compiling
+    </div>
     
     <form id="studentForm" onsubmit="event.preventDefault(); alert('Student Record successfully validated!'); window.location.href='dashboard.html';">
-        <div class="top-bar" style="border-color: #00a2e8;">
-            <div class="action-buttons">
-                <button type="submit" class="btn btn-save-sd">SAVE RECORD</button>
-                <button type="button" class="btn btn-back-sd" onclick="window.location.href='dashboard.html'">BACK</button>
+      
+      <!-- TOP FIXED ACTION CONTROL BAR -->
+      <div class="border border-[#00a2e8] p-4 rounded-md flex flex-col sm:flex-row sm:justify-end gap-3 mb-8 bg-transparent">
+        <button type="submit" class="w-full sm:w-auto bg-[#00a2e8] hover:bg-[#008bc4] text-white font-bold py-2 px-8 rounded tracking-wide uppercase text-xs transition-colors cursor-pointer">
+          Save Record
+        </button>
+        <button type="button" onclick="window.location.href='dashboard.html'" class="w-full sm:w-auto bg-[#777777] hover:bg-[#555555] text-white font-bold py-2 px-8 rounded tracking-wide uppercase text-xs transition-colors cursor-pointer">
+          Back
+        </button>
+      </div>
+
+      <!-- MAIN LAYOUT GRID (Splits into columns on large screens) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Box 1: Student Profile Details (Green Theme) -->
+        <fieldset class="border-2 border-[#22b14c] rounded-md p-5 pt-3 bg-white">
+          <legend class="text-xs font-bold tracking-wider text-[#22b14c] px-2 uppercase bg-white ml-2">
+            Student Profile Details
+          </legend>
+          <div class="space-y-3 mt-2">
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Student ID</label>
+              <input type="text" placeholder="ID Number" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
             </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Surname</label>
+              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Other Name</label>
+              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Date of Birth</label>
+              <input type="date" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Sex</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#22b14c]" required>
+                <option value="" disabled selected>-- Select Sex --</option>
+                <option value="BOY">BOY</option>
+                <option value="GIRL">GIRL</option>
+              </select>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Hometown</label>
+              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Current Class</label>
+              <input type="text" placeholder="e.g. JHS 3" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Right Grid Column Wrap (Stacks Box 2 and Box 3) -->
+        <div class="space-y-6">
+          
+          <!-- Box 2: BECE Examination Settings (Yellow Theme) -->
+          <fieldset class="border-2 border-[#ffc90e] rounded-md p-5 pt-3 bg-white">
+            <legend class="text-xs font-bold tracking-wider text-[#ffc90e] px-2 uppercase bg-white ml-2">
+              BECE Examination Settings
+            </legend>
+            <div class="space-y-3 mt-2">
+              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">School Number</label>
+                <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#ffc90e]" required>
+              </div>
+              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Centre Number</label>
+                <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#ffc90e]" required>
+              </div>
+              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Exam Year</label>
+                <input type="text" value="2027" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#ffc90e]" required>
+              </div>
+              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Ghanaian Language Taught</label>
+                <input type="text" placeholder="e.g. Asante Twi" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#ffc90e]" required>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Box 3: Guardian Contact Information (Red Theme) -->
+          <fieldset class="border-2 border-[#d9534f] rounded-md p-5 pt-3 bg-white">
+            <legend class="text-xs font-bold tracking-wider text-[#d9534f] px-2 uppercase bg-white ml-2">
+              Guardian Contact Information
+            </legend>
+            <div class="space-y-3 mt-2">
+              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Guardian Name</label>
+                <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#d9534f]" required>
+              </div>
+              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Relationship</label>
+                <input type="text" placeholder="e.g. Father / Mother" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#d9534f]" required>
+              </div>
+              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Telephone Number</label>
+                <input type="tel" maxlength="10" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#d9534f]" required>
+              </div>
+              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Residential Address</label>
+                <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#d9534f]" required>
+              </div>
+            </div>
+          </fieldset>
+
         </div>
 
-        <div class="form-grid">
-            <!-- Box 1 -->
-            <fieldset style="border-color: #22b14c;">
-                <legend style="color: #22b14c !important;">Student Profile Details</legend>
-                <div class="field-row"><label>Student ID</label><input type="text" placeholder="ID Number" required></div>
-                <div class="field-row"><label>Surname</label><input type="text" required></div>
-                <div class="field-row"><label>Other Name</label><input type="text" required></div>
-                <div class="field-row"><label>Date of Birth</label><input type="date" required></div>
-                <div class="field-row">
-                    <label>Sex</label>
-                    <select required><option value="" disabled selected>-- Select Sex --</option><option>BOY</option><option>GIRL</option></select>
-                </div>
-                <div class="field-row"><label>Hometown</label><input type="text" required></div>
-                <div class="field-row"><label>Current Class</label><input type="text" placeholder="e.g. JHS 3" required></div>
-            </fieldset>
-
-            <!-- Box 2 -->
-            <fieldset style="border-color: #ffc90e;">
-                <legend style="color: #ffc90e !important;">BECE Examination Settings</legend>
-                <div class="field-row"><label>School Number</label><input type="text" required></div>
-                <div class="field-row"><label>Centre Number</label><input type="text" required></div>
-                <div class="field-row"><label>Exam Year</label><input type="text" value="2027" required></div>
-                <div class="field-row"><label>Ghanaian Language Taught</label><input type="text" placeholder="e.g. Asante Twi" required></div>
-            </fieldset>
-
-            <!-- Box 3 -->
-            <fieldset style="border-color: #d9534f;">
-                <legend style="color: #d9534f !important;">Guardian Contact Information</legend>
-                <div class="field-row"><label>Guardian Name</label><input type="text" required></div>
-                <div class="field-row"><label>Relationship</label><input type="text" placeholder="e.g. Father / Mother" required></div>
-                <div class="field-row"><label>Telephone Number</label><input type="tel" maxlength="10" required></div>
-                <div class="field-row"><label>Residential Address</label><input type="text" required></div>
-            </fieldset>
-        </div>
+      </div>
     </form>
-</div>
+  </div>
 
 </body>
 </html>

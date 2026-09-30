@@ -147,7 +147,7 @@
         /* Desktop & Tablet Optimization Breakpoint: Aligns modules side-by-side */
         @media (min-width: 480px) {
             .menu-grid {
-                grid-template-columns: 1fr 1fr; /* Creates 2 columns on top rows */
+                grid-template-columns: repeat(2, 1fr); /* Creates 2 columns on top rows */
             }
         }
     </style>
@@ -178,6 +178,15 @@
                 <div class="menu-info">
                     <h3>Second Cycle Register</h3>
                     <p>Track profiles for SHS, SHTS, TVET, and STEM institutions</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </button>
+
+            <!-- School Infrastructure Button -->
+            <button class="menu-card" onclick="window.location.href='school-infrastructure.html';">
+                <div class="menu-info">
+                    <h3>School Infrastructure</h3>
+                    <p>Log inventory, desk counts, laboratory status, and utilities</p>
                 </div>
                 <div class="arrow-icon">➔</div>
             </button>

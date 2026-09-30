@@ -3,134 +3,349 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GES - Student Registration</title>
-  <!-- Tailwind CSS v4 CDN Engine Import -->
-  <script src="https://jsdelivr.net"></script>
+  <title>GES - Student Registration Dashboard</title>
+  <style>
+    /* Global Resets & Theme Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #FAF8F5;
+      padding: 20px;
+      color: #333333;
+    }
+
+    .register-container {
+      background: #ffffff;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 25px;
+      border: 1px solid #dcdad4;
+      border-radius: 4px;
+    }
+
+    .header-title {
+      color: #00a2e8;
+      font-size: 24px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* Top Control Bar */
+    .top-bar {
+      border: 1px solid #00a2e8;
+      padding: 12px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      padding: 8px 24px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .btn-save { background-color: #00a2e8; }
+    .btn-save:hover { background-color: #0089c4; }
+    .btn-back { background-color: #777777; }
+    .btn-back:hover { background-color: #555555; }
+
+    /* 3-Column Responsive Grid Architecture */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    fieldset {
+      border-radius: 4px;
+      padding: 20px 15px;
+      background-color: #ffffff;
+      height: 100%;
+    }
+
+    legend {
+      font-size: 13px;
+      font-weight: bold;
+      padding: 0 6px;
+      text-transform: uppercase;
+    }
+
+    /* Field Alignment Form Rows */
+    .field-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
+    .field-row label {
+      width: 160px;
+      font-size: 11px;
+      font-weight: bold;
+      color: #555555;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .field-row input, .field-row select, .field-row textarea {
+      flex: 1;
+      padding: 6px 8px;
+      border: 1px solid #cccccc;
+      border-radius: 2px;
+      font-size: 13px;
+      outline: none;
+      width: 100%;
+      background-color: #ffffff;
+    }
+
+    .field-row input:focus, .field-row select:focus, .field-row textarea:focus {
+      border-color: #00a2e8;
+    }
+
+    /* Grayed-out Read Only System Fields */
+    .readonly-field {
+      background-color: #f0f0f0 !important;
+      color: #666666;
+    }
+
+    /* Footer Search Module */
+    .search-footer {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px solid #cccccc;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #d9534f;
+      text-transform: uppercase;
+    }
+
+    .search-input {
+      width: 300px;
+      padding: 6px 10px;
+      border: 1px solid #cccccc;
+      border-radius: 2px;
+      font-size: 13px;
+    }
+
+    /* Responsive Mobile Overrides */
+    @media screen and (max-width: 1024px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .top-bar {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
-<body class="bg-[#FAF6F0] min-h-screen p-4 md:p-8 font-sans text-gray-800 flex justify-center items-start">
+<body>
 
-  <!-- MASTER ENTRY FORM CONTAINER -->
-  <div class="w-full max-w-7xl bg-white p-4 md:p-8 rounded-md shadow-sm border border-gray-300">
+<div class="register-container">
+  <div class="header-title">Student Registration Compiling</div>
+  
+  <form id="studentRegistrationForm" onsubmit="event.preventDefault(); alert('Student Profile Compiled successfully!');">
     
-    <!-- CENTER MAIN HEADER BANNER -->
-    <div class="text-center text-[#00a2e8] text-xl md:text-2xl font-bold tracking-wide uppercase mb-6">
-      Student Registration Compiling
+    <!-- Top Actions panel Layout -->
+    <div class="top-bar">
+      <button type="submit" class="btn btn-save">Save Record</button>
+      <button type="button" class="btn btn-back" onclick="window.location.href='dashboard.html'">Back</button>
     </div>
-    
-    <form id="studentForm" onsubmit="event.preventDefault(); alert('Student Record successfully validated!'); window.location.href='dashboard.html';">
-      
-      <!-- TOP FIXED ACTION CONTROL BAR -->
-      <div class="border border-[#00a2e8] p-4 rounded-md flex flex-col sm:flex-row sm:justify-end gap-3 mb-8 bg-transparent">
-        <button type="submit" class="w-full sm:w-auto bg-[#00a2e8] hover:bg-[#008bc4] text-white font-bold py-2 px-8 rounded tracking-wide uppercase text-xs transition-colors cursor-pointer">
-          Save Record
-        </button>
-        <button type="button" onclick="window.location.href='dashboard.html'" class="w-full sm:w-auto bg-[#777777] hover:bg-[#555555] text-white font-bold py-2 px-8 rounded tracking-wide uppercase text-xs transition-colors cursor-pointer">
-          Back
-        </button>
-      </div>
 
-      <!-- MAIN LAYOUT GRID (Splits into columns on large screens) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Main Entry Structure Box Blocks -->
+    <div class="form-grid">
 
-        <!-- Box 1: Student Profile Details (Green Theme) -->
-        <fieldset class="border-2 border-[#22b14c] rounded-md p-5 pt-3 bg-white">
-          <legend class="text-xs font-bold tracking-wider text-[#22b14c] px-2 uppercase bg-white ml-2">
-            Student Profile Details
-          </legend>
-          <div class="space-y-3 mt-2">
-            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Student ID</label>
-              <input type="text" placeholder="ID Number" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
-            </div>
-            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Surname</label>
-              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
-            </div>
-            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Other Name</label>
-              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
-            </div>
-            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Date of Birth</label>
-              <input type="date" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
-            </div>
-            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Sex</label>
-              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#22b14c]" required>
-                <option value="" disabled selected>-- Select Sex --</option>
-                <option value="BOY">BOY</option>
-                <option value="GIRL">GIRL</option>
-              </select>
-            </div>
-            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Hometown</label>
-              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
-            </div>
-            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Current Class</label>
-              <input type="text" placeholder="e.g. JHS 3" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#22b14c]" required>
-            </div>
-          </div>
-        </fieldset>
-
-        <!-- Right Grid Column Wrap (Stacks Box 2 and Box 3) -->
-        <div class="space-y-6">
-          
-          <!-- Box 2: BECE Examination Settings (Yellow Theme) -->
-          <fieldset class="border-2 border-[#ffc90e] rounded-md p-5 pt-3 bg-white">
-            <legend class="text-xs font-bold tracking-wider text-[#ffc90e] px-2 uppercase bg-white ml-2">
-              BECE Examination Settings
-            </legend>
-            <div class="space-y-3 mt-2">
-              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">School Number</label>
-                <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#ffc90e]" required>
-              </div>
-              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Centre Number</label>
-                <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#ffc90e]" required>
-              </div>
-              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Exam Year</label>
-                <input type="text" value="2027" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#ffc90e]" required>
-              </div>
-              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Ghanaian Language Taught</label>
-                <input type="text" placeholder="e.g. Asante Twi" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#ffc90e]" required>
-              </div>
-            </div>
-          </fieldset>
-
-          <!-- Box 3: Guardian Contact Information (Red Theme) -->
-          <fieldset class="border-2 border-[#d9534f] rounded-md p-5 pt-3 bg-white">
-            <legend class="text-xs font-bold tracking-wider text-[#d9534f] px-2 uppercase bg-white ml-2">
-              Guardian Contact Information
-            </legend>
-            <div class="space-y-3 mt-2">
-              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Guardian Name</label>
-                <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#d9534f]" required>
-              </div>
-              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Relationship</label>
-                <input type="text" placeholder="e.g. Father / Mother" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#d9534f]" required>
-              </div>
-              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Telephone Number</label>
-                <input type="tel" maxlength="10" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#d9534f]" required>
-              </div>
-              <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-                <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Residential Address</label>
-                <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#d9534f]" required>
-              </div>
-            </div>
-          </fieldset>
-
+      <!-- COLUMN 1: STUDENT DETAILS (Green Container) -->
+      <fieldset style="border: 2px solid #22b14c;">
+        <legend style="color: #22b14c;">STUDENT DETAILS</legend>
+        
+        <div class="field-row">
+          <label>STUDENTID</label>
+          <input type="text" placeholder="System Generated" class="readonly-field" readonly>
         </div>
+        <div class="field-row">
+          <label>SURNAME</label>
+          <input type="text" required>
+        </div>
+        <div class="field-row">
+          <label>OTHER NAME</label>
+          <input type="text" required>
+        </div>
+        <div class="field-row">
+          <label>DATE OF BIRTH</label>
+          <input type="date" required>
+        </div>
+        <div class="field-row">
+          <label>AGE</label>
+          <input type="text" style="max-width: 80px;">
+        </div>
+        <div class="field-row">
+          <label>SEX</label>
+          <select required>
+            <option value="" disabled selected>-- Select --</option>
+            <option value="BOY">BOY</option>
+            <option value="GIRL">GIRL</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <label>HOMETOWN</label>
+          <input type="text" required>
+        </div>
+        <div class="field-row">
+          <label>CLASS</label>
+          <select required>
+            <option value="" disabled selected>-- Select --</option>
+            <option value="JHS1">JHS 1</option>
+            <option value="JHS2">JHS 2</option>
+            <option value="JHS3">JHS 3</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <label>STUDENT STATUS</label>
+          <select>
+            <option>Active</option>
+            <option>Transferred</option>
+            <option>Suspended</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <label>SCHOOL POSITION</label>
+          <input type="text" placeholder="e.g. Senior Prefect">
+        </div>
+      </fieldset>
 
-      </div>
-    </form>
-  </div>
+      <!-- COLUMN 2: BECE REGISTRATION (Blue Container) -->
+      <fieldset style="border: 2px solid #0022b8;">
+        <legend style="color: #0022b8;">BECE REGISTRATION</legend>
+        
+        <div class="field-row">
+          <label>EMIS CODE</label>
+          <input type="text" value="1066340072" class="readonly-field" readonly>
+        </div>
+        <div class="field-row">
+          <label>SCHOOL NAME</label>
+          <input type="text" value="ABONSUASO M/A JHS" class="readonly-field" readonly>
+        </div>
+        <div class="field-row">
+          <label>WAEC SCHOOL NUMBER</label>
+          <input type="text" placeholder="Enter school index number">
+        </div>
+        <div class="field-row">
+          <label>CENTRE NUMBER</label>
+          <input type="text">
+        </div>
+        <div class="field-row">
+          <label>EXAM YEAR</label>
+          <input type="text" value="2027">
+        </div>
+        <div class="field-row">
+          <label>OPTIONAL SUBJECT 1</label>
+          <select>
+            <option value="">-- None --</option>
+            <option value="French">French</option>
+            <option value="Arabic">Arabic</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <label>OPTIONAL SUBJECT 2</label>
+          <select>
+            <option value="">-- None --</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <label>GHANAIAN LANGUAGE</label>
+          <select>
+            <option value="Asante_Twi">Asante Twi</option>
+            <option value="Akuapem_Twi">Akuapem Twi</option>
+            <option value="Fante">Fante</option>
+            <option value="Ga">Ga</option>
+            <option value="Ewe">Ewe</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <!-- COLUMN 3: GUARDIAN INFORMATION (Yellow Container) -->
+      <fieldset style="border: 2px solid #ffc90e;">
+        <legend style="color: #ffc90e;">GUARDIAN INFORMATION</legend>
+        
+        <div class="field-row">
+          <label>GUARDIAN NAME</label>
+          <input type="text" required>
+        </div>
+        <div class="field-row">
+          <label>RELATIONSHIP</label>
+          <input type="text" placeholder="e.g. Father / Mother" required>
+        </div>
+        <div class="field-row">
+          <label>OCCUPATION</label>
+          <input type="text">
+        </div>
+        <div class="field-row">
+          <label>TELEPHON NUMBER</label>
+          <input type="tel" maxlength="10" required>
+        </div>
+        <div class="field-row">
+          <label>CITY/TOWN</label>
+          <input type="text" required>
+        </div>
+        <div class="field-row">
+          <label>REGION</label>
+          <select required>
+            <option value="">-- Select --</option>
+            <option value="Ashanti">Ashanti</option>
+            <option value="Ahafo">Ahafo</option>
+            <option value="Greater Accra">Greater Accra</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <label>DISTRICT</label>
+          <select required>
+            <option value="">-- Select --</option>
+            <option value="Ahafo Ano North">Ahafo Ano North</option>
+          </select>
+        </div>
+        <div class="field-row" style="align-items: flex-start;">
+          <label>ADDRESS</label>
+          <textarea rows="3" required></textarea>
+        </div>
+      </fieldset>
+
+    </div>
+
+    <!-- Bottom Filter Search Panel -->
+    <div class="search-footer">
+      <span class="search-label">Search by SURNAME</span>
+      <input type="text" class="search-input" placeholder="Type surname to search...">
+    </div>
+
+  </form>
+</div>
 
 </body>
 </html>

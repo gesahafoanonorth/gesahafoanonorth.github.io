@@ -31,7 +31,6 @@
             border: 1px solid rgba(10, 60, 155, 0.1); 
         }
 
-        /* Centered logo container - Fixed casing to lowercase */
         .logo-wrapper {
             text-align: center;
             margin-bottom: 20px;
@@ -89,10 +88,40 @@
             transition: all 0.2s ease;
         }
 
+        /* Added padding on the right to make room for the toggle button */
+        .password-input-wrapper input {
+            padding-right: 45px;
+        }
+
         .form-group input:focus {
             border-color: #0A3C9B; 
             background-color: #ffffff;
             box-shadow: 0 0 0 3px rgba(10, 60, 155, 0.15);
+        }
+
+        /* Styling for the wrapper and toggle visibility button */
+        .password-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            background: none;
+            border: none;
+            color: #666666;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px;
+            user-select: none;
+            text-transform: uppercase;
+        }
+
+        .toggle-password:hover {
+            color: #0A3C9B;
         }
 
         .btn-submit {
@@ -147,7 +176,6 @@
 
     <div class="login-container">
         <div class="logo-wrapper">
-            <!-- Fixed: Changed target source link to exact capital letters Logo.PNG -->
             <img src="Logo.png" alt="Ahafo Ano North Municipal Education Directorate Logo">
         </div>
 
@@ -174,7 +202,11 @@
 
             <div class="form-group">
                 <label for="password">Password <span>*</span></label>
-                <input type="password" id="password" placeholder="••••••••" required>
+                <!-- Updated: Wrapped input in a container and added a toggle button -->
+                <div class="password-input-wrapper">
+                    <input type="password" id="password" placeholder="••••••••" required>
+                    <button type="button" id="togglePasswordBtn" class="toggle-password">Show</button>
+                </div>
             </div>
 
             <button type="submit" class="btn-submit">Sign In</button>
@@ -185,6 +217,23 @@
             <p style="margin-top: 10px; color: #888888; font-size: 11px;">Official Ghana Education Service Gateway</p>
         </div>
     </div>
+
+    <!-- Script to toggle the password field type -->
+    <script>
+        const passwordInput = document.getElementById('password');
+        const toggleBtn = document.getElementById('togglePasswordBtn');
+
+        toggleBtn.addEventListener('click', function() {
+            // Check current input type
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = 'Show';
+            }
+        });
+    </script>
 
 </body>
 </html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GES - School Infrastructure Registry</title>
+  <!-- Tailwind CSS v4 CDN Engine Import -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-[#FAF6F0] min-h-screen p-4 md:p-8 font-sans text-gray-800 flex justify-center items-start">
+
+  <!-- MASTER ENTRY FORM CONTAINER -->
+  <div class="w-full max-w-7xl bg-white p-4 md:p-8 rounded-md shadow-sm border border-gray-300">
+    
+    <!-- CENTER MAIN HEADER BANNER -->
+    <div class="text-center text-[#8B0000] text-xl md:text-2xl font-bold tracking-wide uppercase mb-6">
+      School Infrastructure & Logistics Profiling
+    </div>
+    
+    <form id="infrastructureForm" onsubmit="event.preventDefault(); alert('Infrastructure profile saved successfully!');">
+      
+      <!-- TOP CONTROL ACTION BAR -->
+      <div class="border border-[#8B0000] p-4 rounded-md flex flex-col sm:flex-row sm:justify-end gap-3 mb-8 bg-transparent">
+        <button type="submit" class="w-full sm:w-auto bg-[#8B0000] hover:bg-[#700000] text-white font-bold py-2 px-8 rounded tracking-wide uppercase text-xs transition-colors cursor-pointer">
+          Save Record
+        </button>
+        <button type="button" onclick="window.location.href='dashboard.html'" class="w-full sm:w-auto bg-[#5A5C5E] hover:bg-[#454749] text-white font-bold py-2 px-8 rounded tracking-wide uppercase text-xs transition-colors cursor-pointer">
+          Back
+        </button>
+      </div>
+
+      <!-- MAIN MULTI-COLUMN LAYOUT GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- BLOCK 1: GENERAL SCHOOL PROFILE -->
+        <fieldset class="border border-[#8B0000] rounded-md p-5 pt-3 bg-white">
+          <legend class="text-xs font-bold tracking-wider text-[#8B0000] px-2 uppercase bg-white ml-2">
+            General School Profile
+          </legend>
+          <div class="space-y-3 mt-2">
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">INFRAID</label>
+              <input type="text" value="(New)" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm bg-gray-100 text-gray-600 focus:outline-none" readonly>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">EMIS Code</label>
+              <input type="text" value="1066340072" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm bg-gray-100 text-gray-600 focus:outline-none" readonly>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Circuit</label>
+              <input type="text" value="KOJOBETIAKO" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm bg-gray-100 text-gray-600 focus:outline-none" readonly>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Name of Institution</label>
+              <input type="text" value="ABONSUASO M/A JHS" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm bg-gray-100 text-gray-600 focus:outline-none" readonly>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">School Status</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select Status --</option>
+                <option value="Active">Active / Functional</option>
+                <option value="Closed">Closed</option>
+              </select>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">School Levels</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select Levels --</option>
+                <option value="JHS">JHS Only</option>
+                <option value="Primary-JHS">Primary & JHS</option>
+              </select>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">WAEC Code</label>
+              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Year Established</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select Year --</option>
+                <option value="2027">2027</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2010">2010</option>
+                <option value="2000">2000</option>
+                <option value="1990">1990</option>
+                <option value="1980">1980</option>
+              </select>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">School Category</label>
+              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">School Reemeals Availability</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select --</option>
+                <option value="Yes">Available</option>
+                <option value="No">Not Available</option>
+              </select>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">GALOP</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select --</option>
+                <option value="Beneficiary">Beneficiary</option>
+                <option value="Non-Beneficiary">Non-Beneficiary</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- BLOCK 2: MANAGEMENT & LOCALITY DETAILS -->
+        <fieldset class="border border-[#8B0000] rounded-md p-5 pt-3 bg-white">
+          <legend class="text-xs font-bold tracking-wider text-[#8B0000] px-2 uppercase bg-white ml-2">
+            Management & Locality Details
+          </legend>
+          <div class="space-y-3 mt-2">
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Name of Headteacher</label>
+              <input type="text" value="JAGUAR GANYO MENSAH" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Headteacher Contact</label>
+              <input type="text" value="111111" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Education Management</label>
+              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Locality</label>
+              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Type of Locality</label>
+              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">School Address</label>
+              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">School E-Mail</label>
+              <input type="email" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">GPS Address</label>
+              <input type="text" class="flex-1 border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-[#8B0000]">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="border border-[#8B0000] rounded-md p-5 pt-3 bg-white">
+          <legend class="text-xs font-bold tracking-wider text-[#8B0000] px-2 uppercase bg-white ml-2">
+            Utilities & Environmental Access
+          </legend>
+          <div class="space-y-3 mt-2">
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Vehicle Accessibility</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select --</option><option value="Yes">Yes</option><option value="No">No</option>
+              </select>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Type of Road</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select --</option><option value="Tarred">Tarred</option><option value="Murt">Murt / Earth Road</option>
+              </select>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Wired for Electricity</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select --</option><option value="Yes">Yes</option><option value="No">No</option>
+              </select>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Electricity Functional</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select --</option><option value="Yes">Yes</option><option value="No">No</option>
+              </select>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Main Source of Water</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select --</option><option value="Borehole">Borehole</option><option value="Pipe-borne">Pipe-borne</option>
+              </select>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Water Storage Facility</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select --</option><option value="Yes">Yes</option><option value="No">No</option>
+              </select>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+              <label class="w-full md:w-44 text-xs font-bold text-gray-700 uppercase flex-shrink-0">Main Toilet Facility</label>
+              <select class="flex-1 border border-gray-300 bg-white rounded px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#8B0000]">
+                <option value="">-- Select --</option><option value="KVIP">KVIP</option><option value="Water Closet">Water Closet</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- (Rest of fields matching standard implementation...) -->
+      </div>
+    </form>
+  </div>
+</body>
+</html>

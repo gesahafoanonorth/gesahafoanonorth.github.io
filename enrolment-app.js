@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <table style="width:100%; text-align:center; font-size:12px; border-collapse: collapse;">
                         <tr style="background:#f0f0f0; height:30px;"><th>LEVEL</th><th>BOYS</th><th>GIRLS</th><th>TOTAL</th></tr>
                         <tr><td><b>PRIMARY 1</b></td><td><input type="number" name="P1_Boys" id="p1_b" value="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P1_Girls" id="p1_g" value="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p1_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
-                        <tr><td><b>PRIMARY 2</b></td><td><input type="number" name="P2_Boys" id="p2_b" value="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P2_Girls" id="p2_g" value="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p2_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
+                        <tr><td><b>PRIMARY 2</b></td><td><input type="number" name="P2_Boys" id="p2_b" value="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P2_Girls" id="p2_g" value="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p1_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
                         <tr><td><b>PRIMARY 3</b></td><td><input type="number" name="P3_Boys" id="p3_b" value="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P3_Girls" id="p3_g" value="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p3_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
                         <tr><td><b>PRIMARY 4</b></td><td><input type="number" name="P4_Boys" id="p4_b" value="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P4_Girls" id="p4_g" value="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p4_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
                         <tr><td><b>PRIMARY 5</b></td><td><input type="number" name="P5_Boys" id="p5_b" value="0" style="width:80px; text-align:center;"></td><td><input type="number" name="P5_Girls" id="p5_g" value="0" style="width:80px; text-align:center;"></td><td><input type="text" id="p5_t" value="0" readonly style="width:80px; text-align:center; background:#eee; border:1px solid #ccc;"></td></tr>
@@ -120,6 +120,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("jhs_gt").value = jhsTotalBoys + jhsTotalGirls;
     };
 
+    // Run baseline initialization calculation
+    calculateLiveTotals();
+
     form.addEventListener("input", calculateLiveTotals);
 
     const clearFormAndResetTotals = () => {
@@ -146,41 +149,8 @@ document.addEventListener("DOMContentLoaded", () => {
         rawData.forEach((value, key) => {
             payloadData[key] = value;
         });
-        // 1. Pack securely matching your Apps Script doPost engine specification
-const payload = {
-    formType: "Enrolment", // 🚨 Crucial: Tells the script which sheet tab to open
-    data: payloadData
-};
 
-try {
-    // 2. Execute cross-origin submission to Google Apps Script API endpoint
-    const response = await fetch(APP_SCRIPT_URL, {
-        method: "POST",
-        mode: "cors",
-        headers: { 
-            "Content-Type": "text/plain;charset=utf-8" 
-        },
-        body: JSON.stringify(payload) // 🚨 Transmit the wrapped payload object
-    });
-
-    const result = await response.json();
-
-    if (result.result === "success") {
-        alert("Data package written into GES Master Spreadsheet successfully!");
-        form.reset();
-        if (typeof calculateLiveTotals === "function") calculateLiveTotals(); // Clear numbers
-    } else {
-        alert("Spreadsheet error: " + result.message);
-    }
-} catch (err) {
-    console.error("Network write exception: ", err);
-    alert("Network Error: Could not post data package. Ensure web access permissions.");
-} finally {
-    saveButton.disabled = false;
-    saveButton.innerText = "SAVE";
-}
-
-        // Add calculated sub-totals into payload
+        // Pack calculated sub-totals into the payload properties BEFORE creating payload mapping
         payloadData["KG_Total_Boys"] = document.getElementById("kg_gt_b").value;
         payloadData["KG_Total_Girls"] = document.getElementById("kg_gt_g").value;
         payloadData["KG_Grand_Total"] = document.getElementById("kg_gt").value;
@@ -191,24 +161,41 @@ try {
         payloadData["JHS_Total_Girls"] = document.getElementById("jhs_gt_g").value;
         payloadData["JHS_Grand_Total"] = document.getElementById("jhs_gt").value;
 
+        // Calculate total added enrollment metrics for local tracking updates
+        const freshStudentsSubmitted = (parseInt(payloadData["KG_Grand_Total"]) || 0) + 
+                                       (parseInt(payloadData["Primary_Grand_Total"]) || 0) + 
+                                       (parseInt(payloadData["JHS_Grand_Total"]) || 0);
+
+        const payload = {
+            formType: "Enrolment",
+            data: payloadData
+        };
+
         try {
             const response = await fetch(APP_SCRIPT_URL, {
                 method: "POST",
                 mode: "cors",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({ formType: "Enrolment", data: payloadData })
+                headers: { 
+                    "Content-Type": "text/plain;charset=utf-8" 
+                },
+                body: JSON.stringify(payload)
             });
 
             const result = await response.json();
+
             if (result.result === "success") {
-                alert("Data parameters logged successfully!");
+                let stats = JSON.parse(localStorage.getItem('ges_stats')) || { totalSchools: 114, activeStaff: 1420, totalEnrolment: 34180 };
+                stats.totalEnrolment += freshStudentsSubmitted;
+                localStorage.setItem('ges_stats', JSON.stringify(stats));
+
+                alert("Data package written into GES Master Spreadsheet successfully!\nLive dashboard counters updated.");
                 clearFormAndResetTotals();
             } else {
-                alert("Spreadsheet error: " + result.message);
+                alert("Spreadsheet entry error: " + result.message);
             }
         } catch (err) {
-            console.error(err);
-            alert("Network Error: Verification handshake failed.");
+            console.error("Network write exception: ", err);
+            alert("Network Error: Could not post data package. Ensure web access permissions or check Web App URL deployment setup.");
         } finally {
             saveButton.disabled = false;
             saveButton.innerText = "SAVE";

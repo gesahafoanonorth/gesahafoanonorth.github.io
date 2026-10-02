@@ -2,160 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES Ahafo Ano North - Staff Register</title>
-    <link rel="stylesheet" href="style.css">
+    <title>GES - Manage Staff Registry</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #fff8f8; margin: 0; padding: 20px; }
+        .hub-nav-bar { display: flex; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255,255,255,0.15); color: white; border-radius: 4px; font-size: 12px; font-weight: bold; }
+        .hub-nav-btn.active { background-color: white; color: #800000; }
+        .form-container { background: white; padding: 20px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; }
+        label { font-size: 12px; font-weight: bold; color: #333; }
+        input, select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px; background-color: #800000; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; }
+    </style>
 </head>
 <body>
 
-<div class="register-container">
-    <div class="header-title">Staff Register</div>
-
-    <form id="staffForm">
-        <!-- Top Toolbar Control Row -->
-        <div class="top-bar">
-            <div class="action-buttons">
-                <button type="submit" class="btn" style="background-color: #5cb85c;">SUBMIT</button>
-                <button type="button" class="btn" style="background-color: #777777;" onclick="window.location.href='dashboard.html'">BACK</button>
-            </div>
-        </div>
-
-        <div class="form-grid">
-            
-            <!-- CARD 1: PERSONAL INFORMATION -->
-            <fieldset>
-                <legend>Personal Information</legend>
-                <div class="field-row"><label>Teacher ID</label><input type="text" id="teacherId" required></div>
-                <div class="field-row">
-                    <label>Title</label>
-                    <select id="title" required>
-                        <option value=""></option><option value="Mr.">Mr.</option><option value="Mrs.">Mrs.</option><option value="Ms.">Ms.</option><option value="Dr.">Dr.</option>
-                    </select>
-                </div>
-                <div class="field-row"><label>Surname</label><input type="text" id="surname" required></div>
-                <div class="field-row"><label>Other Names</label><input type="text" id="otherNames" required></div>
-                <div class="field-row">
-                    <label>Gender</label>
-                    <select id="gender" required>
-                        <option value=""></option><option value="Male">Male</option><option value="Female">Female</option>
-                    </select>
-                </div>
-                <div class="field-row"><label>Date of Birth</label><input type="date" id="dob" required></div>
-                <div class="field-row"><label>Age</label><input type="text" id="age" class="read-only-bg" readonly placeholder="Auto-calculated"></div>
-                <div class="field-row">
-                    <label>Religion</label>
-                    <select id="religion" required>
-                        <option value=""></option><option value="Christianity">Christianity</option><option value="Islam">Islam</option><option value="Traditional">Traditional</option>
-                    </select>
-                </div>
-            </fieldset>
-
-            <!-- CARD 2: ACADEMIC AND SCHOOL DETAILS -->
-            <fieldset>
-                <legend>Academic And School Details</legend>
-                <div class="field-row">
-                    <label>Circuit</label>
-                    <select id="circuit" required>
-                        <option value=""></option>
-                        <option value="AKWASIASE">AKWASIASE</option><option value="ANYINASUSO">ANYINASUSO</option><option value="DWAAHO">DWAAHO</option><option value="KOJOBETIAKO">KOJOBETIAKO</option><option value="MANFO">MANFO</option><option value="SUBRISO">SUBRISO</option><option value="SUPONSO">SUPONSO</option><option value="TEPA URBAN A">TEPA URBAN A</option><option value="TEPA URBAN B">TEPA URBAN B</option><option value="TWABIDI">TWABIDI</option>
-                    </select>
-                </div>
-                <div class="field-row"><label>Name of School</label><input type="text" id="schoolName" value="ABONSUASO M/A JHS" required></div>
-                <div class="field-row"><label>Association Type</label><input type="text" id="associationType" required></div>
-                <div class="field-row"><label>Staff Type</label><input type="text" id="staffType" required></div>
-                <div class="field-row"><label>Training Status</label><input type="text" id="trainingStatus" required></div>
-                <div class="field-row"><label>Position</label><input type="text" id="position" required></div>
-                <div class="field-row"><label>Level Taught</label><input type="text" id="levelTaught" required></div>
-                <div class="field-row"><label>Class Taught</label><input type="text" id="classTaught" required></div>
-                <div class="field-row"><label>Subject Taught</label><input type="text" id="subjectTaught" required></div>
-            </fieldset>
-
-            <!-- CARD 3: CONTACT AND LOCATION DETAILS -->
-            <fieldset class="full-width-section">
-                <legend>Contact And Location Details</legend>
-                <div class="employment-grid">
-                    <div>
-                        <div class="field-row"><label>Nationality</label><input type="text" id="nationality" value="Ghanaian" required></div>
-                        <div class="field-row"><label>Hometown</label><input type="text" id="hometown" required></div>
-                    </div>
-                    <div>
-                        <div class="field-row"><label>Region</label><input type="text" id="region" value="Ashanti" required></div>
-                        <div class="field-row"><label>District</label><input type="text" id="district" value="Ahafo Ano North" required></div>
-                    </div>
-                    <div>
-                        <div class="field-row"><label>GPS Address</label><input type="text" id="gpsAddress" required></div>
-                        <div class="field-row"><label>E-Mail</label><input type="email" id="email"></div>
-                        <div class="field-row"><label>Telephone</label><input type="tel" id="telephone" maxlength="10" required></div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- CARD 4: EMPLOYMENT AND QUALIFICATION -->
-            <fieldset class="full-width-section">
-                <legend>Employment and Qualification</legend>
-                <div class="employment-grid">
-                    <div>
-                        <div class="field-row"><label>File Number</label><input type="text" id="fileNumber" required></div>
-                        <div class="field-row"><label>Staff ID</label><input type="text" id="staffId" required></div>
-                        <div class="field-row"><label>Registered No.</label><input type="text" id="registeredNo" required></div>
-                        <div class="field-row"><label>SSNIT Number</label><input type="text" id="ssnitNumber" required></div>
-                        <div class="field-row"><label>TIN Number</label><input type="text" id="tinNumber" required></div>
-                        <div class="field-row"><label>ID Type</label><input type="text" id="idType" value="Ghana Card" required></div>
-                    </div>
-                    <div>
-                        <div class="field-row"><label>ID Number</label><input type="text" id="idNumber" required></div>
-                        <div class="field-row"><label>Retirement Status</label><input type="text" id="retirementStatus" class="read-only-bg" readonly placeholder="Auto"></div>
-                        <div class="field-row"><label>Date of First Appointment</label><input type="date" id="dateFirstAppointment" required></div>
-                        <div class="field-row"><label>Years in Service</label><input type="text" id="yearsInService" class="read-only-bg" readonly placeholder="Auto"></div>
-                        <div class="field-row"><label>Academic Qualification</label><input type="text" id="academicQualification" required></div>
-                        <div class="field-row"><label>Professional Qualification</label><input type="text" id="professionalQualification" required></div>
-                    </div>
-                    <div>
-                        <div class="field-row"><label>Years to Retire</label><input type="text" id="yearsToRetire" class="read-only-bg" readonly placeholder="Auto"></div>
-                        <div class="field-row"><label>Date Confirmed</label><input type="date" id="dateConfirmed"></div>
-                        <div class="field-row"><label>Last Promotion Date</label><input type="date" id="lastPromotionDate"></div>
-                        <div class="field-row"><label>Current Rank</label><input type="text" id="currentRank" required></div>
-                        <div class="field-row"><label>Specialisation</label><input type="text" id="specialisation"></div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- CARD 5: BANKING AND FINANCE -->
-            <fieldset class="full-width-section">
-                <legend>Banking And Finance</legend>
-                <div class="banking-grid">
-                    <div class="field-row"><label>Bank Name</label><input type="text" id="bankName" required></div>
-                    <div class="field-row"><label>Bank Branch</label><input type="text" id="bankBranch" required></div>
-                    <div class="field-row"><label>Accounts Number</label><input type="text" id="accountNumber" required></div>
-                </div>
-            </fieldset>
-            
-        </div>
-    </form>
-
-    <!-- CARD 6: REGISTRY LOG DATA LOOKUP TABLE -->
-    <div class="search-container">
-        <div class="search-bar">
-            <input type="text" id="tableSearchInput" onkeyup="searchTable()" placeholder="Search registry log data history...">
-            <button type="button">🔍</button>
-        </div>
-        <table class="data-table" id="registryTable">
-            <thead>
-                <tr>
-                    <th>STAFFID</th>
-                    <th>SURNAME</th>
-                    <th>PHONENO</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="hub-nav-bar">
+        <a href="school-basic.html" class="hub-nav-btn">Basic Schools</a>
+        <a href="school-second-cycle.html" class="hub-nav-btn">Second Cycle</a>
+        <a href="school-infrastructure.html" class="hub-nav-btn">Infrastructure</a>
+        <a href="dashboard.html" class="hub-nav-btn">Overview Dashboard</a>
+        <a href="enrolment.html" class="hub-nav-btn">Enrolment Log</a>
+        <a href="staff.html" class="hub-nav-btn active">Manage Staff</a>
+        <a href="student.html" class="hub-nav-btn">Manage Student</a>
+        <a href="index.html" class="hub-nav-btn">Logout</a>
     </div>
-</div>
 
-<script>
+    <div class="form-container">
+        <h2>Personnel & Staff Registration Form</h2>
+        <form id="staffForm">
+            <div class="form-group"><label>EMIS CODE</label><input type="text" name="EMIS_Code" value="1066340072" readonly></div>
+            <div class="form-group"><label>CIRCUIT</label><input type="text" name="Circuit" value="KOJOBETIAKO" readonly></div>
+            <div class="form-group"><label>NAME OF SCHOOL</label><input type="text" name="School_Name" value="ABONSUASO M/A JHS" readonly></div>
+            <div class="form-group"><label>STAFF ID</label><input type="text" name="Staff_ID" required placeholder="e.g. TS-12345"></div>
+            <div class="form-group"><label>FIRST NAME</label><input type="text" name="First_Name" required></div>
+            <div class="form-group"><label>LAST NAME</label><input type="text" name="Last_Name" required></div>
+            <div class="form-group">
+                <label>GENDER</label>
+                <select name="Gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group"><label>PROFESSIONAL RANK</label><input type="text" name="Professional_Rank" placeholder="e.g. Senior Superintendent"></div>
+            <div class="form-group"><label>POSITION HELD</label><input type="text" name="Position_Held" placeholder="e.g. Class Teacher / Headteacher"></div>
+            <button type="submit" id="btnSave">SAVE STAFF MEMBER</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("staffForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("btnSave");
+            btn.disabled = true; btn.innerText = "SAVING...";
+            
+            const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_WEB_APP_URL_HERE";
+            const formData = new FormData(e.target);
+            const payloadData = {};
+            formData.forEach((val, key) => payloadData[key] = val);
+
+            const payload = { formType: "Staff", data: payloadData };
+
+            try {
+                const res = await fetch(APP_SCRIPT_URL, { method: "POST", mode: "cors", body: JSON.stringify(payload) });
+                const result = await res.json();
+                if(result.result === "success") { alert(result.message); e.target.reset(); }
+                else { alert("Error: " + result.message); }
+            } catch (err) { alert("Network Error: Verification failed."); }
+            finally { btn.disabled = false; btn.innerText = "SAVE STAFF MEMBER"; }
+        });
+    </script>
+</body>
+</html>

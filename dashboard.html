@@ -6,47 +6,54 @@
     <title>GES Ahafo Ano North - Dashboard Control Panel</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #fff8f8; margin: 0; padding: 20px; }
+        
+        /* Unified Hub System Navigation Bar */
         .hub-nav-bar { display: flex; flex-wrap: wrap; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255, 255, 255, 0.15); color: #ffffff; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); transition: background-color 0.2s, border-color 0.2s; }
         .hub-nav-btn:hover { background-color: rgba(255, 255, 255, 0.3); border-color: #ffffff; }
         .hub-nav-btn.active { background-color: #ffffff; color: #800000; border-color: #ffffff; cursor: default; }
         .hub-nav-btn.logout { background-color: #e0e0e0; color: #333333; margin-left: auto; border: none; }
         .hub-nav-btn.logout:hover { background-color: #d4d4d4; }
+
         .filter-bar { display: flex; gap: 15px; align-items: center; background-color: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px; border-radius: 4px; }
         .filter-group { display: flex; align-items: center; gap: 5px; }
-        .filter-group label { font-size: 12px; font-weight: bold; color: #333;
- }
+        .filter-group label { font-size: 12px; font-weight: bold; color: #333; }
         .filter-group select { padding: 4px; min-width: 150px; border: 1px solid #aaa; }
         .btn-reset { padding: 5px 15px; background-color: #ff9999; color: black; border: 1px solid #ff6666; cursor: pointer; font-weight: bold; border-radius: 3px; }
         .btn-reset:hover { background-color: #ff8888; }
+        
         .dashboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         .right-column-container, .left-column-container { display: flex; flex-direction: column; gap: 20px; }
         .overall-box-container { display: flex; align-items: flex-start; gap: 20px; }
+        
         fieldset { border: 2px solid #2b579a; border-radius: 4px; padding: 15px; background-color: #fff; }
         fieldset.kg { border-color: #b5e61d; }
         fieldset.primary { border-color: #ffc90e; }
         fieldset.jhs { border-color: #000000; }
         fieldset.totals { border-color: #2b579a; }
         fieldset.admin { border-color: #d2b48c; }
+        
         legend { font-weight: bold; padding: 0 10px; font-size: 13px; text-transform: uppercase; }
         legend.kg { color: #22b14c; }
         legend.primary { color: #ffc90e; }
         legend.jhs { color: #333; }
         legend.totals { color: #2b579a; }
         legend.admin { color: #a0522d; }
+        
         .summary-table { width: 100%; border-collapse: collapse; font-size: 12px; }
         .summary-table td { padding: 4px; vertical-align: middle; }
-        .summary-table input { width: 60px; text-align: center; padding: 2px; border: 1px s
-olid #ccc; }
+        .summary-table input { width: 60px; text-align: center; padding: 2px; border: 1px solid #ccc; }
         .summary-table input[readonly] { background-color: #eee; font-weight: bold; }
+        
         .overall-total-box { border: 3px solid #00bcff; background-color: #fff; padding: 15px; text-align: center; min-width: 180px; border-radius: 4px; }
         .overall-total-box h3 { margin: 0 0 10px 0; font-size: 13px; color: #0088cc; text-transform: uppercase; }
         .overall-total-box .value { font-size: 26px; font-weight: bold; color: #333; }
     </style>
 </head>
 <body>
+
+    <!-- Unified Master Hub System Navigation Bar Link Modules -->
     <div class="hub-nav-bar">
-        <a href="index.html" class="hub-nav-btn">&larr; Main Hub Panel</a>
         <a href="school-basic.html" class="hub-nav-btn">Basic Schools</a>
         <a href="school-second-cycle.html" class="hub-nav-btn">Second Cycle</a>
         <a href="school-infrastructure.html" class="hub-nav-btn">Infrastructure</a>
@@ -54,16 +61,17 @@ olid #ccc; }
         <a href="enrolment.html" class="hub-nav-btn">Enrolment Log</a>
         <a href="staff.html" class="hub-nav-btn">Manage Staff</a>
         <a href="student.html" class="hub-nav-btn">Manage Student</a>
-        <button class="hub-nav-btn logout" onclick="alert('Logging out...')">Logout</button>
+        <a href="index.html" class="hub-nav-btn logout">Logout</a>
     </div>
+
+    <!-- Filter Menu Options -->
     <div class="filter-bar">
         <div class="filter-group">
             <label>FILTER BY CIRCUIT</label>
             <select id="filter_circuit">
                 <option value="ALL">ALL</option>
                 <option value="KOJOBETIAKO" selected>KOJOBETIAKO</option>
-       
-         <option value="AKWASIASE">AKWASIASE</option>
+                <option value="AKWASIASE">AKWASIASE</option>
                 <option value="ANYINASUSO">ANYINASUSO</option>
                 <option value="DWAAHO">DWAAHO</option>
                 <option value="MANFO">MANFO</option>
@@ -93,10 +101,14 @@ olid #ccc; }
         </div>
         <button type="button" class="btn-reset" id="btn_reset">RESET</button>
     </div>
+
+    <!-- Main Workspace Container -->
     <div class="overall-box-container">
-        <div class="dashboard-grid" sty
-le="flex: 1;">
+        <div class="dashboard-grid" style="flex: 1;">
+            
+            <!-- Left Hand Columns Wrapper -->
             <div class="left-column-container">
+                <!-- KG Panel Section -->
                 <fieldset id="kg_summary_section" class="kg">
                     <legend class="kg">KG Teachers Summary</legend>
                     <table class="summary-table">
@@ -121,8 +133,7 @@ le="flex: 1;">
                             <td><input type="number" id="kg_fp" value="71"></td>
                         </tr>
                         <tr>
-              
-              <td>KG MALE NON-PROF TEACHERS</td>
+                            <td>KG MALE NON-PROF TEACHERS</td>
                             <td><input type="number" id="kg_mnp" value="0"></td>
                             <td rowspan="2" style="text-align:right; font-weight:bold;">KG TOTAL NON-PROF TEACHERS</td>
                             <td rowspan="2"><input type="text" id="kg_tnp" value="0" readonly></td>
@@ -133,6 +144,8 @@ le="flex: 1;">
                         </tr>
                     </table>
                 </fieldset>
+
+                <!-- Primary Panel Section -->
                 <fieldset id="primary_summary_section" class="primary">
                     <legend class="primary">Primary Teachers Summary</legend>
                     <table class="summary-table">
@@ -147,8 +160,7 @@ le="flex: 1;">
                             <td><input type="number" id="pri_f" value="143"></td>
                         </tr>
                         <tr>
-          
-                  <td>PRIMARY MALE PROF TEACHERS</td>
+                            <td>PRIMARY MALE PROF TEACHERS</td>
                             <td><input type="number" id="pri_mp" value="192"></td>
                             <td rowspan="2" style="text-align:right; font-weight:bold;">PRIMARY PROF TEACHERS</td>
                             <td rowspan="2"><input type="text" id="pri_tp" value="334" readonly></td>
@@ -170,11 +182,13 @@ le="flex: 1;">
                     </table>
                 </fieldset>
             </div>
+
+            <!-- Right Hand Columns Wrapper -->
             <div class="right-column-container">
+                <!-- JHS Panel Section -->
                 <fieldset id="jhs_summary_section" class="jhs">
                     <legend class="jhs">JHS Teachers Summary</legend>
-         
-           <table class="summary-table">
+                    <table class="summary-table">
                         <tr>
                             <td>JHS MALE TEACHERS</td>
                             <td><input type="number" id="jhs_m" value="212"></td>
@@ -198,8 +212,7 @@ le="flex: 1;">
                         <tr>
                             <td>JHS MALE NON-PROF TEACHERS</td>
                             <td><input type="number" id="jhs_mnp" value="4"></td>
-                            <td rowspan="2" style="tex
-t-align:right; font-weight:bold;">JHS TOTAL NON-PROF TEACHERS</td>
+                            <td rowspan="2" style="text-align:right; font-weight:bold;">JHS TOTAL NON-PROF TEACHERS</td>
                             <td rowspan="2"><input type="text" id="jhs_tnp" value="4" readonly></td>
                         </tr>
                         <tr>
@@ -208,6 +221,7 @@ t-align:right; font-weight:bold;">JHS TOTAL NON-PROF TEACHERS</td>
                         </tr>
                     </table>
                 </fieldset>
+                
                 <fieldset id="totals_summary_section" class="totals">
                     <legend class="totals">Teachers Summary Total</legend>
                     <table class="summary-table">
@@ -224,8 +238,7 @@ t-align:right; font-weight:bold;">JHS TOTAL NON-PROF TEACHERS</td>
                         <tr>
                             <td>TOTAL MALE NON-PROF TEACHERS</td>
                             <td><input type="text" id="tot_mnp" readonly></td>
-                            <td rowspan="2" style="text-align
-:right; font-weight:bold;">TOTAL NON-PROF TEACHERS</td>
+                            <td rowspan="2" style="text-align:right; font-weight:bold;">TOTAL NON-PROF TEACHERS</td>
                             <td rowspan="2"><input type="text" id="tot_np_grand" readonly></td>
                         </tr>
                         <tr>
@@ -234,6 +247,7 @@ t-align:right; font-weight:bold;">JHS TOTAL NON-PROF TEACHERS</td>
                         </tr>
                     </table>
                 </fieldset>
+                
                 <fieldset id="central_summary_section" class="admin">
                     <legend class="admin">Central Administration</legend>
                     <table class="summary-table">
@@ -250,8 +264,7 @@ t-align:right; font-weight:bold;">JHS TOTAL NON-PROF TEACHERS</td>
                         <tr>
                             <td>MALE NON-TEACHING STAFF</td>
                             <td><input type="number" id="adm_mnt" value="8"></td>
-                            <td rowspan="2" style="text-align:right; fon
-t-weight:bold;">TOTAL NON-TEACHING STAFF</td>
+                            <td rowspan="2" style="text-align:right; font-weight:bold;">TOTAL NON-TEACHING STAFF</td>
                             <td rowspan="2"><input type="text" id="adm_nt_staff" value="11" readonly></td>
                         </tr>
                         <tr>
@@ -262,29 +275,35 @@ t-weight:bold;">TOTAL NON-TEACHING STAFF</td>
                 </fieldset>
             </div>
         </div>
+
         <div id="overall_box_section" class="overall-total-box">
             <h3>Overall Total Teachers</h3>
             <div class="value" id="overall_grand_total">716</div>
         </div>
     </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const filterLevel = document.getElementById("filter_level");
+            
             const kgSection = document.getElementById("kg_summary_section");
             const primarySection = document.getElementById("primary_summary_section");
             const jhsSection = document.getElementById("jhs_summary_section");
             const totalsSection = document.getElementById("totals_summary_section");
             const centralSection = document.getElementById("central_summary_section");
             const overallBox = document.getElementById("overall_box_section");
+
+            // Dynamic visibility controller logic
             const updateVisibilityByLevel = () => {
                 const selectedLevel = filterLevel.value;
+
                 kgSection.style.display = "block";
-                pri
-marySection.style.display = "block";
+                primarySection.style.display = "block";
                 jhsSection.style.display = "block";
                 totalsSection.style.display = "block";
                 centralSection.style.display = "block";
                 overallBox.style.display = "block";
+
                 if (selectedLevel === "KG ONLY") {
                     primarySection.style.display = "none";
                     jhsSection.style.display = "none";
@@ -306,64 +325,85 @@ marySection.style.display = "block";
                     jhsSection.style.display = "none";
                     totalsSection.style.display = "none";
                 }
+                
                 calculateLiveDashboard();
             };
-            filter
-Level.addEventListener("change", updateVisibilityByLevel);
+
+            filterLevel.addEventListener("change", updateVisibilityByLevel);
+
+            // Live calculator compiler core logic
             const calculateLiveDashboard = () => {
                 const getVal = (id) => parseInt(document.getElementById(id).value, 10) || 0;
+                
                 const kgVisible = kgSection.style.display !== "none";
                 const priVisible = primarySection.style.display !== "none";
                 const jhsVisible = jhsSection.style.display !== "none";
                 const admVisible = centralSection.style.display !== "none";
+
+                // KG
                 const kgM = getVal("kg_m"), kgF = getVal("kg_f");
                 const kgMP = getVal("kg_mp"), kgFP = getVal("kg_fp");
                 const kgMNP = getVal("kg_mnp"), kgFNP = getVal("kg_fnp");
                 document.getElementById("kg_t").value = kgM + kgF;
                 document.getElementById("kg_tp").value = kgMP + kgFP;
                 document.getElementById("kg_tnp").value = kgMNP + kgFNP;
+
+                // Primary
                 const priM = getVal("pri_m"), priF = getVal("pri_f");
                 const priMP = getVal("pri_mp"), priFP = getVal("pri_fp");
                 const priMNP = getVal("pri_mnp"), priFNP = getVal("pri_fnp");
                 document.getElementById("pri_t").value = priM + priF;
                 document.getElementById("pri_tp").value = priMP + priFP;
                 document.getElementById("pri_tnp").value = priMNP + priFNP;
+
+                // JHS
                 const jhsM = getVal("jhs_m"), jhsF = getVal("jhs_f");
-                const jhsMP = getVal("jhs_mp"), jhsFP = getVal("jhs_fp")
-;
+                const jhsMP = getVal("jhs_mp"), jhsFP = getVal("jhs_fp");
                 const jhsMNP = getVal("jhs_mnp"), jhsFNP = getVal("jhs_fnp");
                 document.getElementById("jhs_t").value = jhsM + jhsF;
                 document.getElementById("jhs_tp").value = jhsMP + jhsFP;
                 document.getElementById("jhs_tnp").value = jhsMNP + jhsFNP;
+
+                // Central Admin
                 const admMT = getVal("adm_mt"), admFT = getVal("adm_ft");
                 const admMNT = getVal("adm_mnt"), admFNT = getVal("adm_fnt");
                 document.getElementById("adm_t_staff").value = admMT + admFT;
                 document.getElementById("adm_nt_staff").value = admMNT + admFNT;
+
+                // Global tallies updates
                 const totalMaleProf = (kgVisible ? kgMP : 0) + (priVisible ? priMP : 0) + (jhsVisible ? jhsMP : 0);
                 const totalFemaleProf = (kgVisible ? kgFP : 0) + (priVisible ? priFP : 0) + (jhsVisible ? jhsFP : 0);
                 const totalMaleNonProf = (kgVisible ? kgMNP : 0) + (priVisible ? priMNP : 0) + (jhsVisible ? jhsMNP : 0);
                 const totalFemaleNonProf = (kgVisible ? kgFNP : 0) + (priVisible ? priFNP : 0) + (jhsVisible ? jhsFNP : 0);
+
                 document.getElementById("tot_mp").value = totalMaleProf;
                 document.getElementById("tot_fp").value = totalFemaleProf;
                 document.getElementById("tot_p_grand").value = totalMaleProf + totalFemaleProf;
+                
                 document.getElementById("tot_mnp").value = totalMaleNonProf;
                 document.getElementById("tot_fnp").value = totalFemaleNonProf;
-          
-      document.getElementById("tot_np_grand").value = totalMaleNonProf + totalFemaleNonProf;
+                document.getElementById("tot_np_grand").value = totalMaleNonProf + totalFemaleNonProf;
+
+                // Grand summary total tally box update
                 let grandTotal = 0;
                 if (kgVisible) grandTotal += (kgM + kgF);
                 if (priVisible) grandTotal += (priM + priF);
                 if (jhsVisible) grandTotal += (jhsM + jhsF);
-                if (admVisible) grandTotal += (admMT + admFT);
+                if (admVisible) grandTotal += (admMT + admFT); 
+
                 document.getElementById("overall_grand_total").innerText = grandTotal;
             };
+
             document.body.addEventListener("input", calculateLiveDashboard);
+            
             document.getElementById("btn_reset").addEventListener("click", () => {
                 filterLevel.value = "ALL";
                 document.getElementById("filter_circuit").value = "ALL";
                 document.getElementById("filter_school").value = "ALL";
                 updateVisibilityByLevel();
             });
+
+            // Initial kickoff calculations load
             updateVisibilityByLevel();
         });
     </script>

@@ -1,10 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const mountNode = document.getElementById('enrolment-mount');
-  if (!mountNode) {
-    console.warn("Mount point '#enrolment-mount' not found.");
-    return;
-  }
-
   // ========================================================================= //
   // 1. TEMPLATE INJECTION: Full Gender Segregation Layout                     //
   // ========================================================================= //
@@ -32,8 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
         </select>
 
         <label>SELECT LEVEL</label>
-        <select name="select_level">
+        <select name="select_level" id="select_level">
           <option value="ALL BASIC" selected>ALL BASIC</option>
+          <option value="KG ONLY">KG ONLY</option>
+          <option value="PRIMARY ONLY">PRIMARY ONLY</option>
+          <option value="JHS ONLY">JHS ONLY</option>
+          <option value="KG AND PRIMARY">KG AND PRIMARY</option>
+          <option value="PRIMARY AND JHS">PRIMARY AND JHS</option>
+          <option value="KG, PRIMARY AND JHS">KG, PRIMARY AND JHS</option>
         </select>
       </fieldset>
 
@@ -42,172 +41,56 @@ document.addEventListener("DOMContentLoaded", () => {
         <input type="text" name="emis_code" value="1066340072" readonly>
 
         <label>CIRCUIT</label>
-        <input type="text" name="circuit" value="KOJOBETIAKO" readonly>
+        <select name="circuit" id="circuit">
+          <option value="KOJOBETIAKO" selected>KOJOBETIAKO</option>
+          <option value="AKWASIASE">AKWASIASE</option>
+          <option value="ANYINASUSO">ANYINASUSO</option>
+          <option value="DWAAHO">DWAAHO</option>
+          <option value="MANFO">MANFO</option>
+          <option value="SUBRISO">SUBRISO</option>
+          <option value="SUPONSO">SUPONSO</option>
+          <option value="TEPA URBAN A">TEPA URBAN A</option>
+          <option value="TEPA URBAN B">TEPA URBAN B</option>
+          <option value="TWABIDI">TWABIDI</option>
+        </select>
 
         <label>NAME OF SCHOOL</label>
         <input type="text" name="name_of_school" value="ABONSUASO M/A JHS" readonly>
       </fieldset>
 
-      <h3>KG ENROLMENT</h3>
-      <table>
-        <tr><th>LEVEL</th><th>BOYS</th><th>GIRLS</th><th>TOTAL</th></tr>
-        <tr><td>KG 1</td><td><input type="number" id="kg1_b" name="kg1_b" value="0"></td><td><input type="number" id="kg1_g" name="kg1_g" value="0"></td><td><input type="number" id="kg1_t" readonly value="0"></td></tr>
-        <tr><td>KG 2</td><td><input type="number" id="kg2_b" name="kg2_b" value="0"></td><td><input type="number" id="kg2_g" name="kg2_g" value="0"></td><td><input type="number" id="kg2_t" readonly value="0"></td></tr>
-        <tr><td>KG GRAND TOTAL</td><td><input type="number" id="kg_gt_b" readonly value="0"></td><td><input type="number" id="kg_gt_g" readonly value="0"></td><td><input type="number" id="kg_gt" readonly value="0"></td></tr>
-      </table>
+      <div id="kg_section">
+        <h3>KG ENROLMENT</h3>
+        <table>
+          <tr><th>LEVEL</th><th>BOYS</th><th>GIRLS</th><th>TOTAL</th></tr>
+          <tr><td>KG 1</td><td><input type="number" id="kg1_b" name="kg1_b" value="0"></td><td><input type="number" id="kg1_g" name="kg1_g" value="0"></td><td><input type="number" id="kg1_t" readonly value="0"></td></tr>
+          <tr><td>KG 2</td><td><input type="number" id="kg2_b" name="kg2_b" value="0"></td><td><input type="number" id="kg2_g" name="kg2_g" value="0"></td><td><input type="number" id="kg2_t" readonly value="0"></td></tr>
+          <tr><td>KG GRAND TOTAL</td><td><input type="number" id="kg_gt_b" readonly value="0"></td><td><input type="number" id="kg_gt_g" readonly value="0"></td><td><input type="number" id="kg_gt" readonly value="0"></td></tr>
+        </table>
+      </div>
 
-      <h3>PRIMARY ENROLMENT</h3>
-      <table>
-        <tr><th>LEVEL</th><th>BOYS</th><th>GIRLS</th><th>TOTAL</th></tr>
-        <tr><td>PRIMARY 1</td><td><input type="number" id="p1_b" name="p1_b" value="0"></td><td><input type="number" id="p1_g" name="p1_g" value="0"></td><td><input type="number" id="p1_t" readonly value="0"></td></tr>
-        <tr><td>PRIMARY 2</td><td><input type="number" id="p2_b" name="p2_b" value="0"></td><td><input type="number" id="p2_g" name="p2_g" value="0"></td><td><input type="number" id="p2_t" readonly value="0"></td></tr>
-        <tr><td>PRIMARY 3</td><td><input type="number" id="p3_b" name="p3_b" value="0"></td><td><input type="number" id="p3_g" name="p3_g" value="0"></td><td><input type="number" id="p3_t" readonly value="0"></td></tr>
-        <tr><td>PRIMARY 4</td><td><input type="number" id="p4_b" name="p4_b" value="0"></td><td><input type="number" id="p4_g" name="p4_g" value="0"></td><td><input type="number" id="p4_t" readonly value="0"></td></tr>
-        <tr><td>PRIMARY 5</td><td><input type="number" id="p5_b" name="p5_b" value="0"></td><td><input type="number" id="p5_g" name="p5_g" value="0"></td><td><input type="number" id="p5_t" readonly value="0"></td></tr>
-        <tr><td>PRIMARY 6</td><td><input type="number" id="p6_b" name="p6_b" value="0"></td><td><input type="number" id="p6_g" name="p6_g" value="0"></td><td><input type="number" id="p6_t" readonly value="0"></td></tr>
-        <tr><td>PRIMARY GRAND TOTAL</td><td><input type="number" id="primary_gt_b" readonly value="0"></td><td><input type="number" id="primary_gt_g" readonly value="0"></td><td><input type="number" id="primary_gt" readonly value="0"></td></tr>
-      </table>
+      <div id="primary_section">
+        <h3>PRIMARY ENROLMENT</h3>
+        <table>
+          <tr><th>LEVEL</th><th>BOYS</th><th>GIRLS</th><th>TOTAL</th></tr>
+          <tr><td>PRIMARY 1</td><td><input type="number" id="p1_b" name="p1_b" value="0"></td><td><input type="number" id="p1_g" name="p1_g" value="0"></td><td><input type="number" id="p1_t" readonly value="0"></td></tr>
+          <tr><td>PRIMARY 2</td><td><input type="number" id="p2_b" name="p2_b" value="0"></td><td><input type="number" id="p2_g" name="p2_g" value="0"></td><td><input type="number" id="p2_t" readonly value="0"></td></tr>
+          <tr><td>PRIMARY 3</td><td><input type="number" id="p3_b" name="p3_b" value="0"></td><td><input type="number" id="p3_g" name="p3_g" value="0"></td><td><input type="number" id="p3_t" readonly value="0"></td></tr>
+          <tr><td>PRIMARY 4</td><td><input type="number" id="p4_b" name="p4_b" value="0"></td><td><input type="number" id="p4_g" name="p4_g" value="0"></td><td><input type="number" id="p4_t" readonly value="0"></td></tr>
+          <tr><td>PRIMARY 5</td><td><input type="number" id="p5_b" name="p5_b" value="0"></td><td><input type="number" id="p5_g" name="p5_g" value="0"></td><td><input type="number" id="p5_t" readonly value="0"></td></tr>
+          <tr><td>PRIMARY 6</td><td><input type="number" id="p6_b" name="p6_b" value="0"></td><td><input type="number" id="p6_g" name="p6_g" value="0"></td><td><input type="number" id="p6_t" readonly value="0"></td></tr>
+          <tr><td>PRIMARY GRAND TOTAL</td><td><input type="number" id="primary_gt_b" readonly value="0"></td><td><input type="number" id="primary_gt_g" readonly value="0"></td><td><input type="number" id="primary_gt" readonly value="0"></td></tr>
+        </table>
+      </div>
 
-      <h3>JHS ENROLMENT</h3>
-      <table>
-        <tr><th>LEVEL</th><th>BOYS</th><th>GIRLS</th><th>TOTAL</th></tr>
-        <tr><td>JHS 1</td><td><input type="number" id="jhs1_b" name="jhs1_b" value="0"></td><td><input type="number" id="jhs1_g" name="jhs1_g" value="0"></td><td><input type="number" id="jhs1_t" readonly value="0"></td></tr>
-        <tr><td>JHS 2</td><td><input type="number" id="jhs2_b" name="jhs2_b" value="0"></td><td><input type="number" id="jhs2_g" name="jhs2_g" value="0"></td><td><input type="number" id="jhs2_t" readonly value="0"></td></tr>
-        <tr><td>JHS 3</td><td><input type="number" id="jhs3_b" name="jhs3_b" value="0"></td><td><input type="number" id="jhs3_g" name="jhs3_g" value="0"></td><td><input type="number" id="jhs3_t" readonly value="0"></td></tr>
-        <tr><td>JHS GRAND TOTAL</td><td><input type="number" id="jhs_gt_b" readonly value="0"></td><td><input type="number" id="jhs_gt_g" readonly value="0"></td><td><input type="number" id="jhs_gt" readonly value="0"></td></tr>
-      </table>
+      <div id="jhs_section">
+        <h3>JHS ENROLMENT</h3>
+        <table>
+          <tr><th>LEVEL</th><th>BOYS</th><th>GIRLS</th><th>TOTAL</th></tr>
+          <tr><td>JHS 1</td><td><input type="number" id="jhs1_b" name="jhs1_b" value="0"></td><td><input type="number" id="jhs1_g" name="jhs1_g" value="0"></td><td><input type="number" id="jhs1_t" readonly value="0"></td></tr>
+          <tr><td>JHS 2</td><td><input type="number" id="jhs2_b" name="jhs2_b" value="0"></td><td><input type="number" id="jhs2_g" name="jhs2_g" value="0"></td><td><input type="number" id="jhs2_t" readonly value="0"></td></tr>
+          <tr><td>JHS 3</td><td><input type="number" id="jhs3_b" name="jhs3_b" value="0"></td><td><input type="number" id="jhs3_g" name="jhs3_g" value="0"></td><td><input type="number" id="jhs3_t" readonly value="0"></td></tr>
+          <tr><td>JHS GRAND TOTAL</td><td><input type="number" id="jhs_gt_b" readonly value="0"></td><td><input type="number" id="jhs_gt_g" readonly value="0"></td><td><input type="number" id="jhs_gt" readonly value="0"></td></tr>
+        </table>
+      </div>
     </form>
   `;
-
-  // ========================================================================= //
-  // 2. LIVE CALCULATOR ENGINE                                                 //
-  // ========================================================================= //
-  const form = document.getElementById("enrolmentForm");
-
-  const calculateLiveTotals = () => {
-    const getNum = (id) => parseInt(document.getElementById(id).value, 10) || 0;
-
-    // KG Calculations
-    const k1b = getNum("kg1_b"), k1g = getNum("kg1_g");
-    const k2b = getNum("kg2_b"), k2g = getNum("kg2_g");
-    document.getElementById("kg1_t").value = k1b + k1g;
-    document.getElementById("kg2_t").value = k2b + k2g;
-
-    const kgTotalBoys = k1b + k2b;
-    const kgTotalGirls = k1g + k2g;
-    document.getElementById("kg_gt_b").value = kgTotalBoys;
-    document.getElementById("kg_gt_g").value = kgTotalGirls;
-    document.getElementById("kg_gt").value = kgTotalBoys + kgTotalGirls;
-
-    // Primary Calculations
-    let primTotalBoys = 0;
-    let primTotalGirls = 0;
-    for (let i = 1; i <= 6; i++) {
-      const pb = getNum(`p${i}_b`);
-      const pg = getNum(`p${i}_g`);
-      document.getElementById(`p${i}_t`).value = pb + pg;
-      primTotalBoys += pb;
-      primTotalGirls += pg;
-    }
-    document.getElementById("primary_gt_b").value = primTotalBoys;
-    document.getElementById("primary_gt_g").value = primTotalGirls;
-    document.getElementById("primary_gt").value = primTotalBoys + primTotalGirls;
-
-    // JHS Calculations
-    let jhsTotalBoys = 0;
-    let jhsTotalGirls = 0;
-    for (let i = 1; i <= 3; i++) {
-      const jb = getNum(`jhs${i}_b`);
-      const jg = getNum(`jhs${i}_g`);
-      document.getElementById(`jhs${i}_t`).value = jb + jg;
-      jhsTotalBoys += jb;
-      jhsTotalGirls += jg;
-    }
-    document.getElementById("jhs_gt_b").value = jhsTotalBoys;
-    document.getElementById("jhs_gt_g").value = jhsTotalGirls;
-    document.getElementById("jhs_gt").value = jhsTotalBoys + jhsTotalGirls;
-  };
-
-  // Run baseline initialization calculation
-  calculateLiveTotals();
-  form.addEventListener("input", calculateLiveTotals);
-
-  const clearFormAndResetTotals = () => {
-    form.reset();
-    calculateLiveTotals();
-  };
-
-  document.getElementById("btnClear").addEventListener("click", clearFormAndResetTotals);
-  document.getElementById("btnNew").addEventListener("click", clearFormAndResetTotals);
-
-  // ========================================================================= //
-  // 3. SECURE DATABASE TRANSMISSION (POST)                                    //
-  // ========================================================================= //
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const APP_SCRIPT_URL = "https://script.google.com/macros/library/d/1zdsNU_n1STrWGKR5juFQ1QfpFqDRv3FFlEyHbQ7W4456qOpp744EqTvT/9";
-    const saveButton = document.getElementById("btnSave");
-    
-    saveButton.disabled = true;
-    saveButton.innerText = "SAVING...";
-
-    const rawData = new FormData(form);
-    const payloadData = {};
-    rawData.forEach((value, key) => {
-      payloadData[key] = value;
-    });
-
-    // Pack calculated sub-totals into payload properties
-    payloadData["KG_Total_Boys"] = document.getElementById("kg_gt_b").value;
-    payloadData["KG_Total_Girls"] = document.getElementById("kg_gt_g").value;
-    payloadData["KG_Grand_Total"] = document.getElementById("kg_gt").value;
-
-    payloadData["Primary_Total_Boys"] = document.getElementById("primary_gt_b").value;
-    payloadData["Primary_Total_Girls"] = document.getElementById("primary_gt_g").value;
-    payloadData["Primary_Grand_Total"] = document.getElementById("primary_gt").value;
-
-    payloadData["JHS_Total_Boys"] = document.getElementById("jhs_gt_b").value;
-    payloadData["JHS_Total_Girls"] = document.getElementById("jhs_gt_g").value;
-    payloadData["JHS_Grand_Total"] = document.getElementById("jhs_gt").value;
-
-    // Calculate total added enrollment metrics
-    const freshStudentsSubmitted = (parseInt(payloadData["KG_Grand_Total"]) || 0) + 
-                                   (parseInt(payloadData["Primary_Grand_Total"]) || 0) + 
-                                   (parseInt(payloadData["JHS_Grand_Total"]) || 0);
-
-    const payload = {
-      formType: "Enrolment",
-      data: payloadData
-    };
-
-    try {
-      const response = await fetch(APP_SCRIPT_URL, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(payload)
-      });
-      
-      const result = await response.json();
-      if (result.result === "success") {
-        let stats = JSON.parse(localStorage.getItem('ges_stats')) || { totalSchools: 114, activeStaff: 1420, totalEnrolment: 34180 };
-        stats.totalEnrolment += freshStudentsSubmitted;
-        localStorage.setItem('ges_stats', JSON.stringify(stats));
-        
-        alert("Data package written into GES Master Spreadsheet successfully!
-Live dashboard counters updated.");
-        clearFormAndResetTotals();
-      } else {
-        alert("Spreadsheet entry error: " + result.message);
-      }
-    } catch (err) {
-      console.error("Network write exception: ", err);
-      alert("Network Error: Could not post data package. Ensure web access permissions or check Web App URL deployment setup.");
-    } finally {
-      saveButton.disabled = false;
-      saveButton.innerText = "SAVE";
-    }
-  });
-});

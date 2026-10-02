@@ -2,17 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GES - Manage Staff Registry</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #fff8f8; margin: 0; padding: 20px; }
-        .hub-nav-bar { display: flex; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; }
-        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255,255,255,0.15); color: white; border-radius: 4px; font-size: 12px; font-weight: bold; }
-        .hub-nav-btn.active { background-color: white; color: #800000; }
-        .form-container { background: white; padding: 20px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 600px; margin: 0 auto; }
-        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; }
-        label { font-size: 12px; font-weight: bold; color: #333; }
-        input, select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-        button { padding: 10px; background-color: #800000; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        .hub-nav-bar { display: flex; flex-wrap: wrap; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255,255,255,0.15); color: white; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); transition: background-color 0.2s; }
+        .hub-nav-btn:hover { background-color: rgba(255, 255, 255, 0.3); }
+        .hub-nav-btn.active { background-color: white; color: #800000; border-color: white; cursor: default; }
+        .hub-nav-btn.logout { background-color: #e0e0e0; color: #333; margin-left: auto; border: none; }
+        .hub-nav-btn.logout:hover { background-color: #d4d4d4; }
+        .form-container { background: white; padding: 25px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 650px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .form-container h2 { color: #800000; margin-top: 0; font-size: 20px; border-bottom: 2px solid #800000; padding-bottom: 8px; margin-bottom: 20px; text-transform: uppercase; }
+        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px; }
+        label { font-size: 11px; font-weight: bold; color: #333; text-transform: uppercase; }
+        input, select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; width: 100%; box-sizing: border-box; }
+        input[readonly] { background-color: #f9f9f9; color: #555; }
+        button { padding: 12px; background-color: #800000; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 13px; width: 100%; margin-top: 10px; transition: background-color 0.2s; }
+        button:hover { background-color: #660000; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
     </style>
 </head>
 <body>
@@ -25,7 +33,7 @@
         <a href="enrolment.html" class="hub-nav-btn">Enrolment Log</a>
         <a href="staff.html" class="hub-nav-btn active">Manage Staff</a>
         <a href="student.html" class="hub-nav-btn">Manage Student</a>
-        <a href="index.html" class="hub-nav-btn">Logout</a>
+        <a href="index.html" class="hub-nav-btn logout">Logout</a>
     </div>
 
     <div class="form-container">
@@ -35,8 +43,8 @@
             <div class="form-group"><label>CIRCUIT</label><input type="text" name="Circuit" value="KOJOBETIAKO" readonly></div>
             <div class="form-group"><label>NAME OF SCHOOL</label><input type="text" name="School_Name" value="ABONSUASO M/A JHS" readonly></div>
             <div class="form-group"><label>STAFF ID</label><input type="text" name="Staff_ID" required placeholder="e.g. TS-12345"></div>
-            <div class="form-group"><label>FIRST NAME</label><input type="text" name="First_Name" required></div>
-            <div class="form-group"><label>LAST NAME</label><input type="text" name="Last_Name" required></div>
+            <div class="form-group"><label>FIRST NAME</label><input type="text" name="First_Name" required placeholder="Enter first name"></div>
+            <div class="form-group"><label>LAST NAME</label><input type="text" name="Last_Name" required placeholder="Enter last name"></div>
             <div class="form-group">
                 <label>GENDER</label>
                 <select name="Gender">
@@ -54,7 +62,8 @@
         document.getElementById("staffForm").addEventListener("submit", async (e) => {
             e.preventDefault();
             const btn = document.getElementById("btnSave");
-            btn.disabled = true; btn.innerText = "SAVING...";
+            btn.disabled = true; 
+            btn.innerText = "SAVING TO DATABASE...";
             
             const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_WEB_APP_URL_HERE";
             const formData = new FormData(e.target);
@@ -64,12 +73,30 @@
             const payload = { formType: "Staff", data: payloadData };
 
             try {
-                const res = await fetch(APP_SCRIPT_URL, { method: "POST", mode: "cors", body: JSON.stringify(payload) });
+                const res = await fetch(APP_SCRIPT_URL, { 
+                    method: "POST", 
+                    mode: "cors", 
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(payload) 
+                });
                 const result = await res.json();
-                if(result.result === "success") { alert(result.message); e.target.reset(); }
-                else { alert("Error: " + result.message); }
-            } catch (err) { alert("Network Error: Verification failed."); }
-            finally { btn.disabled = false; btn.innerText = "SAVE STAFF MEMBER"; }
+                if(result.result === "success") { 
+                    alert(result.message); 
+                    e.target.reset();
+                    // Retain school details after dynamic clear operations
+                    document.getElementsByName("EMIS_Code")[0].value = "1066340072";
+                    document.getElementsByName("Circuit")[0].value = "KOJOBETIAKO";
+                    document.getElementsByName("School_Name")[0].value = "ABONSUASO M/A JHS";
+                } else { 
+                    alert("Spreadsheet Processing Error: " + result.message); 
+                }
+            } catch (err) { 
+                alert("Network Gateway Exception: Verification or pipeline failed."); 
+                console.error(err);
+            } finally { 
+                btn.disabled = false; 
+                btn.innerText = "SAVE STAFF MEMBER"; 
+            }
         });
     </script>
 </body>

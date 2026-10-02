@@ -1,351 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GES - Student Registration Dashboard</title>
-  <style>
-    /* Global Resets & Theme Base */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      background-color: #FAF8F5;
-      padding: 20px;
-      color: #333333;
-    }
-
-    .register-container {
-      background: #ffffff;
-      width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 25px;
-      border: 1px solid #dcdad4;
-      border-radius: 4px;
-    }
-
-    .header-title {
-      color: #00a2e8;
-      font-size: 24px;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    /* Top Control Bar */
-    .top-bar {
-      border: 1px solid #00a2e8;
-      padding: 12px;
-      border-radius: 4px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-      margin-bottom: 25px;
-    }
-
-    .btn {
-      padding: 8px 24px;
-      font-size: 13px;
-      font-weight: bold;
-      color: #ffffff;
-      border: none;
-      cursor: pointer;
-      border-radius: 4px;
-      text-transform: uppercase;
-    }
-
-    .btn-save { background-color: #00a2e8; }
-    .btn-save:hover { background-color: #0089c4; }
-    .btn-back { background-color: #777777; }
-    .btn-back:hover { background-color: #555555; }
-
-    /* 3-Column Responsive Grid Architecture */
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      align-items: start;
-    }
-
-    fieldset {
-      border-radius: 4px;
-      padding: 20px 15px;
-      background-color: #ffffff;
-      height: 100%;
-    }
-
-    legend {
-      font-size: 13px;
-      font-weight: bold;
-      padding: 0 6px;
-      text-transform: uppercase;
-    }
-
-    /* Field Alignment Form Rows */
-    .field-row {
-      display: flex;
-      align-items: center;
-      margin-bottom: 12px;
-      gap: 10px;
-    }
-
-    .field-row label {
-      width: 160px;
-      font-size: 11px;
-      font-weight: bold;
-      color: #555555;
-      text-transform: uppercase;
-      flex-shrink: 0;
-    }
-
-    .field-row input, .field-row select, .field-row textarea {
-      flex: 1;
-      padding: 6px 8px;
-      border: 1px solid #cccccc;
-      border-radius: 2px;
-      font-size: 13px;
-      outline: none;
-      width: 100%;
-      background-color: #ffffff;
-    }
-
-    .field-row input:focus, .field-row select:focus, .field-row textarea:focus {
-      border-color: #00a2e8;
-    }
-
-    /* Grayed-out Read Only System Fields */
-    .readonly-field {
-      background-color: #f0f0f0 !important;
-      color: #666666;
-    }
-
-    /* Footer Search Module */
-    .search-footer {
-      margin-top: 25px;
-      padding-top: 15px;
-      border-top: 1px solid #cccccc;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .search-label {
-      font-size: 12px;
-      font-weight: bold;
-      color: #d9534f;
-      text-transform: uppercase;
-    }
-
-    .search-input {
-      width: 300px;
-      padding: 6px 10px;
-      border: 1px solid #cccccc;
-      border-radius: 2px;
-      font-size: 13px;
-    }
-
-    /* Responsive Mobile Overrides */
-    @media screen and (max-width: 1024px) {
-      .form-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .top-bar {
-        flex-direction: column;
-      }
-      .btn {
-        width: 100%;
-        text-align: center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>GES - Manage Student Registry</title>
+    <!-- Styles correspond identically to staff.html definitions -->
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #fff8f8; margin: 0; padding: 20px; }
+        .hub-nav-bar { display: flex; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255,255,255,0.15); color: white; border-radius: 4px; font-size: 12px; font-weight: bold; }
+        .hub-nav-btn.active { background-color: white; color: #800000; }
+        .form-container { background: white; padding: 20px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; }
+        label { font-size: 12px; font-weight: bold; color: #333; }
+        input, select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px; background-color: #800000; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; }
+    </style>
 </head>
 <body>
 
-<div class="register-container">
-  <div class="header-title">Student Registration</div>
-  
-  <form id="studentRegistrationForm" onsubmit="event.preventDefault(); alert('Student Profile Compiled successfully!');">
-    
-    <!-- Top Actions panel Layout -->
-    <div class="top-bar">
-      <button type="submit" class="btn btn-save">Submit</button>
-      <button type="button" class="btn btn-back" onclick="window.location.href='dashboard.html'">Back</button>
+    <div class="hub-nav-bar">
+        <a href="school-basic.html" class="hub-nav-btn">Basic Schools</a>
+        <a href="school-second-cycle.html" class="hub-nav-btn">Second Cycle</a>
+        <a href="school-infrastructure.html" class="hub-nav-btn">Infrastructure</a>
+        <a href="dashboard.html" class="hub-nav-btn">Overview Dashboard</a>
+        <a href="enrolment.html" class="hub-nav-btn">Enrolment Log</a>
+        <a href="staff.html" class="hub-nav-btn">Manage Staff</a>
+        <a href="student.html" class="hub-nav-btn active">Manage Student</a>
+        <a href="index.html" class="hub-nav-btn">Logout</a>
     </div>
 
-    <!-- Main Entry Structure Box Blocks -->
-    <div class="form-grid">
-
-      <!-- COLUMN 1: STUDENT DETAILS (Green Container) -->
-      <fieldset style="border: 2px solid #22b14c;">
-        <legend style="color: #22b14c;">STUDENT DETAILS</legend>
-        
-        <div class="field-row">
-          <label>STUDENTID</label>
-          <input type="text" placeholder="System Generated" class="readonly-field" readonly>
-        </div>
-        <div class="field-row">
-          <label>SURNAME</label>
-          <input type="text" required>
-        </div>
-        <div class="field-row">
-          <label>OTHER NAME</label>
-          <input type="text" required>
-        </div>
-        <div class="field-row">
-          <label>DATE OF BIRTH</label>
-          <input type="date" required>
-        </div>
-        <div class="field-row">
-          <label>AGE</label>
-          <input type="text" style="max-width: 80px;">
-        </div>
-        <div class="field-row">
-          <label>SEX</label>
-          <select required>
-            <option value="" disabled selected>-- Select --</option>
-            <option value="BOY">BOY</option>
-            <option value="GIRL">GIRL</option>
-          </select>
-        </div>
-        <div class="field-row">
-          <label>HOMETOWN</label>
-          <input type="text" required>
-        </div>
-        <div class="field-row">
-          <label>CLASS</label>
-          <select required>
-            <option value="" disabled selected>-- Select --</option>
-            <option value="JHS1">JHS 1</option>
-            <option value="JHS2">JHS 2</option>
-            <option value="JHS3">JHS 3</option>
-          </select>
-        </div>
-        <div class="field-row">
-          <label>STUDENT STATUS</label>
-          <select>
-            <option>Active</option>
-            <option>Transferred</option>
-            <option>Suspended</option>
-          </select>
-        </div>
-        <div class="field-row">
-          <label>SCHOOL POSITION</label>
-          <input type="text" placeholder="e.g. Senior Prefect">
-        </div>
-      </fieldset>
-
-      <!-- COLUMN 2: BECE REGISTRATION (Blue Container) -->
-      <fieldset style="border: 2px solid #0022b8;">
-        <legend style="color: #0022b8;">BECE REGISTRATION</legend>
-        
-        <div class="field-row">
-          <label>EMIS CODE</label>
-          <input type="text" value="1066340072" class="readonly-field" readonly>
-        </div>
-        <div class="field-row">
-          <label>SCHOOL NAME</label>
-          <input type="text" value="ABONSUASO M/A JHS" class="readonly-field" readonly>
-        </div>
-        <div class="field-row">
-          <label>WAEC SCHOOL NUMBER</label>
-          <input type="text" placeholder="Enter school index number">
-        </div>
-        <div class="field-row">
-          <label>CENTRE NUMBER</label>
-          <input type="text">
-        </div>
-        <div class="field-row">
-          <label>EXAM YEAR</label>
-          <input type="text" value="2027">
-        </div>
-        <div class="field-row">
-          <label>OPTIONAL SUBJECT 1</label>
-          <select>
-            <option value="">-- None --</option>
-            <option value="French">French</option>
-            <option value="Arabic">Arabic</option>
-          </select>
-        </div>
-        <div class="field-row">
-          <label>OPTIONAL SUBJECT 2</label>
-          <select>
-            <option value="">-- None --</option>
-          </select>
-        </div>
-        <div class="field-row">
-          <label>GHANAIAN LANGUAGE</label>
-          <select>
-            <option value="Asante_Twi">Asante Twi</option>
-            <option value="Akuapem_Twi">Akuapem Twi</option>
-            <option value="Fante">Fante</option>
-            <option value="Ga">Ga</option>
-            <option value="Ewe">Ewe</option>
-          </select>
-        </div>
-      </fieldset>
-
-      <!-- COLUMN 3: GUARDIAN INFORMATION (Yellow Container) -->
-      <fieldset style="border: 2px solid #ffc90e;">
-        <legend style="color: #ffc90e;">GUARDIAN INFORMATION</legend>
-        
-        <div class="field-row">
-          <label>GUARDIAN NAME</label>
-          <input type="text" required>
-        </div>
-        <div class="field-row">
-          <label>RELATIONSHIP</label>
-          <input type="text" placeholder="e.g. Father / Mother" required>
-        </div>
-        <div class="field-row">
-          <label>OCCUPATION</label>
-          <input type="text">
-        </div>
-        <div class="field-row">
-          <label>TELEPHON NUMBER</label>
-          <input type="tel" maxlength="10" required>
-        </div>
-        <div class="field-row">
-          <label>CITY/TOWN</label>
-          <input type="text" required>
-        </div>
-        <div class="field-row">
-          <label>REGION</label>
-          <select required>
-            <option value="">-- Select --</option>
-            <option value="Ashanti">Ashanti</option>
-            <option value="Ahafo">Ahafo</option>
-            <option value="Greater Accra">Greater Accra</option>
-          </select>
-        </div>
-        <div class="field-row">
-          <label>DISTRICT</label>
-          <select required>
-            <option value="">-- Select --</option>
-            <option value="Ahafo Ano North">Ahafo Ano North</option>
-          </select>
-        </div>
-        <div class="field-row" style="align-items: flex-start;">
-          <label>ADDRESS</label>
-          <textarea rows="3" required></textarea>
-        </div>
-      </fieldset>
-
+    <div class="form-container">
+        <h2>Student Enrollment Profiles Entry</h2>
+        <form id="studentForm">
+            <div class="form-group"><label>EMIS CODE</label><input type="text" name="EMIS_Code" value="1066340072" readonly></div>
+            <div class="form-group"><label>CIRCUIT</label><input type="text" name="Circuit" value="KOJOBETIAKO" readonly></div>
+            <div class="form-group"><label>NAME OF SCHOOL</label><input type="text" name="School_Name" value="ABONSUASO M/A JHS" readonly></div>
+            <div class="form-group"><label>STUDENT SYSTEM ID</label><input type="text" name="Student_ID" required placeholder="ST-2026-XXXX"></div>
+            <div class="form-group"><label>FIRST NAME</label><input type="text" name="First_Name" required></div>
+            <div class="form-group"><label>LAST NAME</label><input type="text" name="Last_Name" required></div>
+            <div class="form-group">
+                <label>CURRENT ASSIGNED CLASS</label>
+                <select name="Current_Class">
+                    <option value="KG 1">KG 1</option><option value="KG 2">KG 2</option>
+                    <option value="Primary 1">Primary 1</option><option value="Primary 6">Primary 6</option>
+                    <option value="JHS 1">JHS 1</option><option value="JHS 3">JHS 3</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>GENDER</label>
+                <select name="Gender"><option value="Male">Male</option><option value="Female">Female</option></select>
+            </div>
+            <div class="form-group"><label>BECE INDEX NUMBER (FOR JHS 3 ONLY)</label><input type="text" name="BECE_Index_Number" placeholder="10-Digit Exam Code Index"></div>
+            <button type="submit" id="btnSave">REGISTER STUDENT</button>
+        </form>
     </div>
 
-    <!-- Bottom Filter Search Panel -->
-    <div class="search-footer">
-      <span class="search-label">Search by SURNAME</span>
-      <input type="text" class="search-input" placeholder="Type surname to search...">
-    </div>
+    <script>
+        document.getElementById("studentForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("btnSave");
+            btn.disabled = true; btn.innerText = "SAVING...";
+            
+            const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_WEB_APP_URL_HERE";
+            const formData = new FormData(e.target);
+            const payloadData = {};
+            formData.forEach((val, key) => payloadData[key] = val);
 
-  </form>
-</div>
+            const payload = { formType: "Student", data: payloadData };
 
+            try {
+                const res = await fetch(APP_SCRIPT_URL, { method: "POST", mode: "cors", body: JSON.stringify(payload) });
+                const result = await res.json();
+                if(result.result === "success") { alert(result.message); e.target.reset(); }
+            } catch (err) { alert("Execution crash encountered."); }
+            finally { btn.disabled = false; btn.innerText = "REGISTER STUDENT"; }
+        });
+    </script>
 </body>
 </html>

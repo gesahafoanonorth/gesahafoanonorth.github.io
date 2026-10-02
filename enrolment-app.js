@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div>
                         <label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">CIRCUIT</label>
                         <select name="Circuit" style="width:100%; padding:5px;">
+                             <option value="Select Circuit" selected>Select Circuit</option>
                             <option value="KOJOBETIAKO">KOJOBETIAKO</option>
                             <option value="AKWASIASE">AKWASIASE</option>
                             <option value="ANYINASUSO">ANYINASUSO</option>

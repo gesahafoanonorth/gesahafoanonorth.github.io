@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div>
                         <label style="display:block; font-size:11px; font-weight:bold; color:red; margin-bottom:4px;">SELECT LEVEL</label>
                         <select name="Selected_Level" id="select_level" style="width:100%; padding:5px;">
-                            <option value="ALL BASIC" selected>ALL BASIC</option>
+                            <option value="Select Level" selected>Select Level</option>
                             <option value="KG ONLY">KG ONLY</option>
                             <option value="PRIMARY ONLY">PRIMARY ONLY</option>
                             <option value="JHS ONLY">JHS ONLY</option>

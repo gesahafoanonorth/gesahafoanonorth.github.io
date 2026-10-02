@@ -15,6 +15,13 @@
         .hub-nav-btn.logout { background-color: #e0e0e0; color: #333333; margin-left: auto; border: none; }
         .hub-nav-btn.logout:hover { background-color: #d4d4d4; }
 
+        /* Dashboard View Tabs Switching System */
+        .dashboard-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #800000; padding-bottom: 10px; }
+        .tab-link { padding: 10px 20px; background-color: #f0f0f0; border: 1px solid #ccc; border-bottom: none; border-radius: 5px 5px 0 0; cursor: pointer; font-weight: bold; color: #555; }
+        .tab-link.active-tab { background-color: #800000; color: white; border-color: #800000; }
+        .tab-content { display: none; }
+        .tab-content.active-content { display: block; }
+
         .filter-bar { display: flex; gap: 15px; align-items: center; background-color: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px; border-radius: 4px; }
         .filter-group { display: flex; align-items: center; gap: 5px; }
         .filter-group label { font-size: 12px; font-weight: bold; color: #333; }
@@ -26,7 +33,7 @@
         .right-column-container, .left-column-container { display: flex; flex-direction: column; gap: 20px; }
         .overall-box-container { display: flex; align-items: flex-start; gap: 20px; }
         
-        fieldset { border: 2px solid #2b579a; border-radius: 4px; padding: 15px; background-color: #fff; }
+        fieldset { border: 2px solid #2b579a; border-radius: 4px; padding: 15px; background-color: #fff; margin-bottom: 15px; }
         fieldset.kg { border-color: #b5e61d; }
         fieldset.primary { border-color: #ffc90e; }
         fieldset.jhs { border-color: #000000; }
@@ -42,12 +49,18 @@
         
         .summary-table { width: 100%; border-collapse: collapse; font-size: 12px; }
         .summary-table td { padding: 4px; vertical-align: middle; }
-        .summary-table input { width: 60px; text-align: center; padding: 2px; border: 1px solid #ccc; }
+        .summary-table input { width: 65px; text-align: center; padding: 2px; border: 1px solid #ccc; }
         .summary-table input[readonly] { background-color: #eee; font-weight: bold; }
         
         .overall-total-box { border: 3px solid #00bcff; background-color: #fff; padding: 15px; text-align: center; min-width: 180px; border-radius: 4px; }
         .overall-total-box h3 { margin: 0 0 10px 0; font-size: 13px; color: #0088cc; text-transform: uppercase; }
         .overall-total-box .value { font-size: 26px; font-weight: bold; color: #333; }
+
+        /* Student Enrolment Custom Layout Styles */
+        .enrol-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .enrol-inline-group { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 10px; }
+        .enrol-inline-group > div { display: flex; align-items: center; gap: 5px; margin-bottom: 5px; }
+        .enrol-inline-group label { font-size: 11px; font-weight: bold; width: 110px; display: inline-block; }
     </style>
 </head>
 <body>
@@ -64,228 +77,395 @@
         <a href="index.html" class="hub-nav-btn logout">Logout</a>
     </div>
 
-    <!-- Filter Menu Options -->
-    <div class="filter-bar">
-        <div class="filter-group">
-            <label>FILTER BY CIRCUIT</label>
-            <select id="filter_circuit">
-                <option value="ALL">ALL</option>
-                <option value="KOJOBETIAKO" selected>KOJOBETIAKO</option>
-                <option value="AKWASIASE">AKWASIASE</option>
-                <option value="ANYINASUSO">ANYINASUSO</option>
-                <option value="DWAAHO">DWAAHO</option>
-                <option value="MANFO">MANFO</option>
-                <option value="SUBRISO">SUBRISO</option>
-                <option value="SUPONSO">SUPONSO</option>
-                <option value="TEPA URBAN A">TEPA URBAN A</option>
-                <option value="TEPA URBAN B">TEPA URBAN B</option>
-                <option value="TWABIDI">TWABIDI</option>
-            </select>
-        </div>
-        <div class="filter-group">
-            <label>FILTER BY SCHOOL</label>
-            <select id="filter_school">
-                <option value="ALL">ALL</option>
-                <option value="ABONSUASO M/A JHS" selected>ABONSUASO M/A JHS</option>
-            </select>
-        </div>
-        <div class="filter-group">
-            <label>FILTER BY LEVEL</label>
-            <select id="filter_level">
-                <option value="ALL" selected>ALL</option>
-                <option value="KG ONLY">KG ONLY</option>
-                <option value="PRIMARY ONLY">PRIMARY ONLY</option>
-                <option value="JHS ONLY">JHS ONLY</option>
-                <option value="CENTRAL ADMIN ONLY">CENTRAL ADMIN ONLY</option>
-            </select>
-        </div>
-        <button type="button" class="btn-reset" id="btn_reset">RESET</button>
+    <!-- Toggle Tabs Header -->
+    <div class="dashboard-tabs">
+        <button class="tab-link active-tab" onclick="switchDashboardTab('teachers_tab', this)">Personnel Overview (Teachers)</button>
+        <button class="tab-link" onclick="switchDashboardTab('enrolment_tab', this)">Student Enrolment Analytics</button>
     </div>
 
-    <!-- Main Workspace Container -->
-    <div class="overall-box-container">
-        <div class="dashboard-grid" style="flex: 1;">
-            
-            <!-- Left Hand Columns Wrapper -->
-            <div class="left-column-container">
-                <!-- KG Panel Section -->
-                <fieldset id="kg_summary_section" class="kg">
-                    <legend class="kg">KG Teachers Summary</legend>
-                    <table class="summary-table">
-                        <tr>
-                            <td>KG MALE TEACHERS</td>
-                            <td><input type="number" id="kg_m" value="10"></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">KG TOTAL TEACHERS</td>
-                            <td rowspan="2"><input type="text" id="kg_t" value="81" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>KG FEMALE TEACHERS</td>
-                            <td><input type="number" id="kg_f" value="71"></td>
-                        </tr>
-                        <tr>
-                            <td>KG MALE PROF TEACHERS</td>
-                            <td><input type="number" id="kg_mp" value="10"></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">KG TOTAL PROF TEACHERS</td>
-                            <td rowspan="2"><input type="text" id="kg_tp" value="81" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>KG FEMALE PROF TEACHERS</td>
-                            <td><input type="number" id="kg_fp" value="71"></td>
-                        </tr>
-                        <tr>
-                            <td>KG MALE NON-PROF TEACHERS</td>
-                            <td><input type="number" id="kg_mnp" value="0"></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">KG TOTAL NON-PROF TEACHERS</td>
-                            <td rowspan="2"><input type="text" id="kg_tnp" value="0" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>KG FEMALE NON-PROF TEACHERS</td>
-                            <td><input type="number" id="kg_fnp" value="0"></td>
-                        </tr>
-                    </table>
-                </fieldset>
-
-                <!-- Primary Panel Section -->
-                <fieldset id="primary_summary_section" class="primary">
-                    <legend class="primary">Primary Teachers Summary</legend>
-                    <table class="summary-table">
-                        <tr>
-                            <td>PRIMARY MALE TEACHERS</td>
-                            <td><input type="number" id="pri_m" value="197"></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">PRIMARY TOTAL TEACHERS</td>
-                            <td rowspan="2"><input type="text" id="pri_t" value="340" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>PRIMARY FEMALE TEACHERS</td>
-                            <td><input type="number" id="pri_f" value="143"></td>
-                        </tr>
-                        <tr>
-                            <td>PRIMARY MALE PROF TEACHERS</td>
-                            <td><input type="number" id="pri_mp" value="192"></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">PRIMARY PROF TEACHERS</td>
-                            <td rowspan="2"><input type="text" id="pri_tp" value="334" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>PRIMARY FEMALE PROF TEACHERS</td>
-                            <td><input type="number" id="pri_fp" value="142"></td>
-                        </tr>
-                        <tr>
-                            <td>PRIMARY MALE NON-PROF TEACHERS</td>
-                            <td><input type="number" id="pri_mnp" value="4"></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">PRIMARY NON-PROF TEACHERS</td>
-                            <td rowspan="2"><input type="text" id="pri_tnp" value="6" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>PRIMARY FEMALE NON-PROF TEACHERS</td>
-                            <td><input type="number" id="pri_fnp" value="1"></td>
-                        </tr>
-                    </table>
-                </fieldset>
+    <!-- TAB 1: TEACHERS CONTROL WORKSPACE -->
+    <div id="teachers_tab" class="tab-content active-content">
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label>FILTER BY CIRCUIT</label>
+                <select id="filter_circuit">
+                    <option value="ALL">ALL</option>
+                    <option value="KOJOBETIAKO" selected>KOJOBETIAKO</option>
+                    <option value="AKWASIASE">AKWASIASE</option>
+                    <option value="ANYINASUSO">ANYINASUSO</option>
+                    <option value="DWAAHO">DWAAHO</option>
+                    <option value="MANFO">MANFO</option>
+                    <option value="SUBRISO">SUBRISO</option>
+                    <option value="SUPONSO">SUPONSO</option>
+                    <option value="TEPA URBAN A">TEPA URBAN A</option>
+                    <option value="TEPA URBAN B">TEPA URBAN B</option>
+                    <option value="TWABIDI">TWABIDI</option>
+                </select>
             </div>
-
-            <!-- Right Hand Columns Wrapper -->
-            <div class="right-column-container">
-                <!-- JHS Panel Section -->
-                <fieldset id="jhs_summary_section" class="jhs">
-                    <legend class="jhs">JHS Teachers Summary</legend>
-                    <table class="summary-table">
-                        <tr>
-                            <td>JHS MALE TEACHERS</td>
-                            <td><input type="number" id="jhs_m" value="212"></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">JHS TOTAL TEACHERS</td>
-                            <td rowspan="2"><input type="text" id="jhs_t" value="278" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>JHS FEMALE TEACHERS</td>
-                            <td><input type="number" id="jhs_f" value="66"></td>
-                        </tr>
-                        <tr>
-                            <td>JHS MALE PROF TEACHERS</td>
-                            <td><input type="number" id="jhs_mp" value="211"></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">JHS TOTAL PROF TEACHERS</td>
-                            <td rowspan="2"><input type="text" id="jhs_tp" value="277" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>JHS FEMALE PROF TEACHERS</td>
-                            <td><input type="number" id="jhs_fp" value="66"></td>
-                        </tr>
-                        <tr>
-                            <td>JHS MALE NON-PROF TEACHERS</td>
-                            <td><input type="number" id="jhs_mnp" value="4"></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">JHS TOTAL NON-PROF TEACHERS</td>
-                            <td rowspan="2"><input type="text" id="jhs_tnp" value="4" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>JHS FEMALE NON-PROF TEACHERS</td>
-                            <td><input type="number" id="jhs_fnp" value="0"></td>
-                        </tr>
-                    </table>
-                </fieldset>
-                
-                <fieldset id="totals_summary_section" class="totals">
-                    <legend class="totals">Teachers Summary Total</legend>
-                    <table class="summary-table">
-                        <tr>
-                            <td>TOTAL MALE PROF TEACHERS</td>
-                            <td><input type="text" id="tot_mp" readonly></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">TOTAL PROF TEACHERS</td>
-                            <td rowspan="2"><input type="text" id="tot_p_grand" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>TOTAL FEMALE PROF TEACHERS</td>
-                            <td><input type="text" id="tot_fp" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>TOTAL MALE NON-PROF TEACHERS</td>
-                            <td><input type="text" id="tot_mnp" readonly></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">TOTAL NON-PROF TEACHERS</td>
-                            <td rowspan="2"><input type="text" id="tot_np_grand" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>TOTAL FEMALE NON-PROF TEACHERS</td>
-                            <td><input type="text" id="tot_fnp" readonly></td>
-                        </tr>
-                    </table>
-                </fieldset>
-                
-                <fieldset id="central_summary_section" class="admin">
-                    <legend class="admin">Central Administration</legend>
-                    <table class="summary-table">
-                        <tr>
-                            <td>MALE TEACHING STAFF</td>
-                            <td><input type="number" id="adm_mt" value="17"></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">TOTAL TEACHING STAFF</td>
-                            <td rowspan="2"><input type="text" id="adm_t_staff" value="19" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>FEMALE TEACHING STAFF</td>
-                            <td><input type="number" id="adm_ft" value="2"></td>
-                        </tr>
-                        <tr>
-                            <td>MALE NON-TEACHING STAFF</td>
-                            <td><input type="number" id="adm_mnt" value="8"></td>
-                            <td rowspan="2" style="text-align:right; font-weight:bold;">TOTAL NON-TEACHING STAFF</td>
-                            <td rowspan="2"><input type="text" id="adm_nt_staff" value="11" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>FEMALE NON-TEACHING STAFF</td>
-                            <td><input type="number" id="adm_fnt" value="3"></td>
-                        </tr>
-                    </table>
-                </fieldset>
+            <div class="filter-group">
+                <label>FILTER BY SCHOOL</label>
+                <select id="filter_school">
+                    <option value="ALL">ALL</option>
+                    <option value="ABONSUASO M/A JHS" selected>ABONSUASO M/A JHS</option>
+                </select>
             </div>
+            <div class="filter-group">
+                <label>FILTER BY LEVEL</label>
+                <select id="filter_level">
+                    <option value="ALL" selected>ALL</option>
+                    <option value="KG ONLY">KG ONLY</option>
+                    <option value="PRIMARY ONLY">PRIMARY ONLY</option>
+                    <option value="JHS ONLY">JHS ONLY</option>
+                    <option value="CENTRAL ADMIN ONLY">CENTRAL ADMIN ONLY</option>
+                </select>
+            </div>
+            <button type="button" class="btn-reset" id="btn_reset">RESET</button>
         </div>
 
-        <div id="overall_box_section" class="overall-total-box">
-            <h3>Overall Total Teachers</h3>
-            <div class="value" id="overall_grand_total">716</div>
+        <div class="overall-box-container">
+            <div class="dashboard-grid" style="flex: 1;">
+                <div class="left-column-container">
+                    <fieldset id="kg_summary_section" class="kg">
+                        <legend class="kg">KG Teachers Summary</legend>
+                        <table class="summary-table">
+                            <tr>
+                                <td>KG MALE TEACHERS</td>
+                                <td><input type="number" id="kg_m" value="10"></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">KG TOTAL TEACHERS</td>
+                                <td rowspan="2"><input type="text" id="kg_t" value="81" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>KG FEMALE TEACHERS</td>
+                                <td><input type="number" id="kg_f" value="71"></td>
+                            </tr>
+                            <tr>
+                                <td>KG MALE PROF TEACHERS</td>
+                                <td><input type="number" id="kg_mp" value="10"></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">KG TOTAL PROF TEACHERS</td>
+                                <td rowspan="2"><input type="text" id="kg_tp" value="81" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>KG FEMALE PROF TEACHERS</td>
+                                <td><input type="number" id="kg_fp" value="71"></td>
+                            </tr>
+                            <tr>
+                                <td>KG MALE NON-PROF TEACHERS</td>
+                                <td><input type="number" id="kg_mnp" value="0"></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">KG TOTAL NON-PROF TEACHERS</td>
+                                <td rowspan="2"><input type="text" id="kg_tnp" value="0" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>KG FEMALE NON-PROF TEACHERS</td>
+                                <td><input type="number" id="kg_fnp" value="0"></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+
+                    <fieldset id="primary_summary_section" class="primary">
+                        <legend class="primary">Primary Teachers Summary</legend>
+                        <table class="summary-table">
+                            <tr>
+                                <td>PRIMARY MALE TEACHERS</td>
+                                <td><input type="number" id="pri_m" value="197"></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">PRIMARY TOTAL TEACHERS</td>
+                                <td rowspan="2"><input type="text" id="pri_t" value="340" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>PRIMARY FEMALE TEACHERS</td>
+                                <td><input type="number" id="pri_f" value="143"></td>
+                            </tr>
+                            <tr>
+                                <td>PRIMARY MALE PROF TEACHERS</td>
+                                <td><input type="number" id="pri_mp" value="192"></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">PRIMARY PROF TEACHERS</td>
+                                <td rowspan="2"><input type="text" id="pri_tp" value="334" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>PRIMARY FEMALE PROF TEACHERS</td>
+                                <td><input type="number" id="pri_fp" value="142"></td>
+                            </tr>
+                            <tr>
+                                <td>PRIMARY MALE NON-PROF TEACHERS</td>
+                                <td><input type="number" id="pri_mnp" value="4"></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">PRIMARY NON-PROF TEACHERS</td>
+                                <td rowspan="2"><input type="text" id="pri_tnp" value="6" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>PRIMARY FEMALE NON-PROF TEACHERS</td>
+                                <td><input type="number" id="pri_fnp" value="1"></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+
+                <div class="right-column-container">
+                    <fieldset id="jhs_summary_section" class="jhs">
+                        <legend class="jhs">JHS Teachers Summary</legend>
+                        <table class="summary-table">
+                            <tr>
+                                <td>JHS MALE TEACHERS</td>
+                                <td><input type="number" id="jhs_m" value="212"></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">JHS TOTAL TEACHERS</td>
+                                <td rowspan="2"><input type="text" id="jhs_t" value="278" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>JHS FEMALE TEACHERS</td>
+                                <td><input type="number" id="jhs_f" value="66"></td>
+                            </tr>
+                            <tr>
+                                <td>JHS MALE PROF TEACHERS</td>
+                                <td><input type="number" id="jhs_mp" value="211"></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">JHS TOTAL PROF TEACHERS</td>
+                                <td rowspan="2"><input type="text" id="jhs_tp" value="277" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>JHS FEMALE PROF TEACHERS</td>
+                                <td><input type="number" id="jhs_fp" value="66"></td>
+                            </tr>
+                            <tr>
+                                <td>JHS MALE NON-PROF TEACHERS</td>
+                                <td><input type="number" id="jhs_mnp" value="4"></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">JHS TOTAL NON-PROF TEACHERS</td>
+                                <td rowspan="2"><input type="text" id="jhs_tnp" value="4" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>JHS FEMALE NON-PROF TEACHERS</td>
+                                <td><input type="number" id="jhs_fnp" value="0"></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+
+                    <fieldset id="totals_summary_section" class="totals">
+                        <legend class="totals">Teachers Summary Total</legend>
+                        <table class="summary-table">
+                            <tr>
+                                <td>TOTAL MALE PROF TEACHERS</td>
+                                <td><input type="text" id="tot_mp" readonly></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">TOTAL PROF TEACHERS</td>
+                                <td rowspan="2"><input type="text" id="tot_p_grand" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>TOTAL FEMALE PROF TEACHERS</td>
+                                <td><input type="text" id="tot_fp" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>TOTAL MALE NON-PROF TEACHERS</td>
+                                <td><input type="text" id="tot_mnp" readonly></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">TOTAL NON-PROF TEACHERS</td>
+                                <td rowspan="2"><input type="text" id="tot_np_grand" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>TOTAL FEMALE NON-PROF TEACHERS</td>
+                                <td><input type="text" id="tot_fnp" readonly></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+
+                    <fieldset id="central_summary_section" class="admin">
+                        <legend class="admin">Central Administration</legend>
+                        <table class="summary-table">
+                            <tr>
+                                <td>MALE TEACHING STAFF</td>
+                                <td><input type="number" id="adm_mt" value="17"></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">TOTAL TEACHING STAFF</td>
+                                <td rowspan="2"><input type="text" id="adm_t_staff" value="19" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>FEMALE TEACHING STAFF</td>
+                                <td><input type="number" id="adm_ft" value="2"></td>
+                            </tr>
+                            <tr>
+                                <td>MALE NON-TEACHING STAFF</td>
+                                <td><input type="number" id="adm_mnt" value="8"></td>
+                                <td rowspan="2" style="text-align:right; font-weight:bold;">TOTAL NON-TEACHING STAFF</td>
+                                <td rowspan="2"><input type="text" id="adm_nt_staff" value="11" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>FEMALE NON-TEACHING STAFF</td>
+                                <td><input type="number" id="adm_fnt" value="3"></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div id="overall_box_section" class="overall-total-box">
+                <h3>Overall Total Teachers</h3>
+                <div class="value" id="overall_grand_total">716</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: STUDENT ENROLMENT CONTROL WORKSPACE -->
+    <div id="enrolment_tab" class="tab-content">
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label>FILTER BY SCHOOL</label>
+                <select id="enrol_filter_school">
+                    <option value="ALL">ALL</option>
+                    <option value="ABONSUASO M/A JHS" selected>ABONSUASO M/A JHS</option>
+                </select>
+            </div>
+            <button type="button" class="btn-reset" id="btn_enrol_reset">RESET</button>
+        </div>
+
+        <div class="enrol-grid">
+            <div>
+                <!-- KG Fieldset -->
+                <fieldset class="kg">
+                    <legend class="kg">KG Enrolment</legend>
+                    <div class="enrol-inline-group">
+                        <div><label>KG 1 BOYS</label><input type="number" id="s_kg1_b" value="0"></div>
+                        <div><label>KG 2 BOYS</label><input type="number" id="s_kg2_b" value="0"></div>
+                        <div><label>KG BOYS</label><input type="text" id="s_kg_tb" value="0" readonly></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>KG 1 GIRLS</label><input type="number" id="s_kg1_g" value="0"></div>
+                        <div><label>KG 2 GIRLS</label><input type="number" id="s_kg2_g" value="0"></div>
+                        <div><label>KG GIRLS</label><input type="text" id="s_kg_tg" value="0" readonly></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>KG 1 TOTAL</label><input type="text" id="s_kg1_t" value="0" readonly></div>
+                        <div><label>KG 2 TOTAL</label><input type="text" id="s_kg2_t" value="0" readonly></div>
+                        <div><label>KG TOTAL</label><input type="text" id="s_kg_t" value="0" readonly style="background:#fff3cd;"></div>
+                    </div>
+                </fieldset>
+
+                <!-- Primary Fieldset -->
+                <fieldset class="primary">
+                    <legend class="primary">Primary Enrolment</legend>
+                    <div class="enrol-inline-group">
+                        <div><label>PRIMARY 1 BOYS</label><input type="number" id="s_p1_b" value="0"></div>
+                        <div><label>PRIMARY 4 BOYS</label><input type="number" id="s_p4_b" value="0"></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>PRIMARY 1 GIRLS</label><input type="number" id="s_p1_g" value="0"></div>
+                        <div><label>PRIMARY 4 GIRLS</label><input type="number" id="s_p4_g" value="0"></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>PRIMARY 1 TOTAL</label><input type="text" id="s_p1_t" value="0" readonly></div>
+                        <div><label>PRIMARY 4 TOTAL</label><input type="text" id="s_p4_t" value="0" readonly></div>
+                    </div>
+                    <hr style="border:0; border-top:1px dashed #ccc; margin:10px 0;">
+                    <div class="enrol-inline-group">
+                        <div><label>PRIMARY 2 BOYS</label><input type="number" id="s_p2_b" value="0"></div>
+                        <div><label>PRIMARY 5 BOYS</label><input type="number" id="s_p5_b" value="0"></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>PRIMARY 2 GIRLS</label><input type="number" id="s_p2_g" value="0"></div>
+                        <div><label>PRIMARY 5 GIRLS</label><input type="number" id="s_p5_g" value="0"></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>PRIMARY 2 TOTAL</label><input type="text" id="s_p2_t" value="0" readonly></div>
+                        <div><label>PRIMARY 5 TOTAL</label><input type="text" id="s_p5_t" value="0" readonly></div>
+                    </div>
+                    <hr style="border:0; border-top:1px dashed #ccc; margin:10px 0;">
+                    <div class="enrol-inline-group">
+                        <div><label>PRIMARY 3 BOYS</label><input type="number" id="s_p3_b" value="0"></div>
+                        <div><label>PRIMARY 6 BOYS</label><input type="number" id="s_p6_b" value="0"></div>
+                        <div><label>PRIMARY BOYS</label><input type="text" id="s_pri_tb" value="0" readonly></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>PRIMARY 3 GIRLS</label><input type="number" id="s_p3_g" value="0"></div>
+                        <div><label>PRIMARY 6 GIRLS</label><input type="number" id="s_p6_g" value="0"></div>
+                        <div><label>PRIMARY GIRLS</label><input type="text" id="s_pri_tg" value="0" readonly></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>PRIMARY 3 TOTAL</label><input type="text" id="s_p3_t" value="0" readonly></div>
+                        <div><label>PRIMARY 6 TOTAL</label><input type="text" id="s_p6_t" value="0" readonly></div>
+                        <div><label>PRIMARY TOTAL</label><input type="text" id="s_pri_t" value="0" readonly style="background:#fff3cd;"></div>
+                    </div>
+                </fieldset>
+
+                <!-- JHS Fieldset -->
+                <fieldset class="jhs">
+                    <legend class="jhs">JHS Enrolment</legend>
+                    <div class="enrol-inline-group">
+                        <div><label>JHS 1 BOYS</label><input type="number" id="s_jhs1_b" value="54"></div>
+                        <div><label>JHS 3 BOYS</label><input type="number" id="s_jhs3_b" value="87"></div>
+                        <div><label>JHS BOYS</label><input type="text" id="s_jhs_tb" value="208" readonly></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>JHS 1 GIRLS</label><input type="number" id="s_jhs1_g" value="54"></div>
+                        <div><label>JHS 3 GIRLS</label><input type="number" id="s_jhs3_g" value="65"></div>
+                        <div><label>JHS GIRLS</label><input type="text" id="s_jhs_tg" value="186" readonly></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>JHS 1 TOTAL</label><input type="text" id="s_jhs1_t" value="108" readonly></div>
+                        <div><label>JHS 3 TOTAL</label><input type="text" id="s_jhs3_t" value="152" readonly></div>
+                        <div><label>JHS TOTAL</label><input type="text" id="s_jhs_t" value="394" readonly style="background:#fff3cd;"></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>JHS 2 BOYS</label><input type="number" id="s_jhs2_b" value="67"></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>JHS 2 GIRLS</label><input type="number" id="s_jhs2_g" value="67"></div>
+                    </div>
+                    <div class="enrol-inline-group">
+                        <div><label>JHS 2 TOTAL</label><input type="text" id="s_jhs2_t" value="134" readonly></div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Tally Summaries Right Column Sidebar -->
+            <div>
+                <fieldset class="totals">
+                    <legend class="totals">Grand Total</legend>
+                    <div style="margin-bottom:10px;">
+                        <label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">BOYS</label>
+                        <input type="text" id="s_grand_boys" value="208" readonly style="width:100%; padding:5px; text-align:center; font-weight:bold; background:#eee;">
+                    </div>
+                    <div style="margin-bottom:10px;">
+                        <label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">GIRLS</label>
+                        <input type="text" id="s_grand_girls" value="186" readonly style="width:100%; padding:5px; text-align:center; font-weight:bold; background:#eee;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">TOTAL</label>
+                        <input type="text" id="s_grand_total" value="394" readonly style="width:100%; padding:6px; text-align:center; font-size:16px; font-weight:bold; background:#fff3cd; border:2px solid #ffc107;">
+                    </div>
+                </fieldset>
+
+                <fieldset class="admin">
+                    <legend class="admin">Gender Parity Index (GPI)</legend>
+                    <div style="margin-bottom:10px;">
+                        <label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">KG GPI</label>
+                        <input type="text" id="s_kg_gpi" value="0" readonly style="width:100%; padding:4px; text-align:center;">
+                    </div>
+                    <div style="margin-bottom:10px;">
+                        <label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">PRIMARY GPI</label>
+                        <input type="text" id="s_pri_gpi" value="0" readonly style="width:100%; padding:4px; text-align:center;">
+                    </div>
+                    <div style="margin-bottom:10px;">
+                        <label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">JHS GPI</label>
+                        <input type="text" id="s_jhs_gpi" value="0.8942307692" readonly style="width:100%; padding:4px; text-align:center;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">OVERALL GPI</label>
+                        <input type="text" id="s_overall_gpi" value="0.8942307692" readonly style="width:100%; padding:5px; font-weight:bold; text-align:center; background:#eaf8dd; border:1px solid #22b14c;">
+                    </div>
+                </fieldset>
+            </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const filterLevel = document.getElementById("filter_level");
+        // Tab switching workflow logic
+        function switchDashboardTab(tabId, btn) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(c => c.classList.remove('active-content'));
             
+            const links = document.querySelectorAll('.tab-link');
+            links.forEach(l => l.classList.remove('active-tab'));
+            
+            document.getElementById(tabId).classList.add('active-content');
+            btn.classList.add('active-tab');
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // ==========================================
+            // TEACHERS DASHBOARD CALCULATION BLOCK
+            // ==========================================
+            const filterLevel = document.getElementById("filter_level");
             const kgSection = document.getElementById("kg_summary_section");
             const primarySection = document.getElementById("primary_summary_section");
             const jhsSection = document.getElementById("jhs_summary_section");
@@ -293,10 +473,8 @@
             const centralSection = document.getElementById("central_summary_section");
             const overallBox = document.getElementById("overall_box_section");
 
-            // Dynamic visibility controller logic
             const updateVisibilityByLevel = () => {
                 const selectedLevel = filterLevel.value;
-
                 kgSection.style.display = "block";
                 primarySection.style.display = "block";
                 jhsSection.style.display = "block";
@@ -305,42 +483,28 @@
                 overallBox.style.display = "block";
 
                 if (selectedLevel === "KG ONLY") {
-                    primarySection.style.display = "none";
-                    jhsSection.style.display = "none";
-                    totalsSection.style.display = "none";
-                    centralSection.style.display = "none";
+                    primarySection.style.display = "none"; jhsSection.style.display = "none";
+                    totalsSection.style.display = "none"; centralSection.style.display = "none";
                 } else if (selectedLevel === "PRIMARY ONLY") {
-                    kgSection.style.display = "none";
-                    jhsSection.style.display = "none";
-                    totalsSection.style.display = "none";
-                    centralSection.style.display = "none";
+                    kgSection.style.display = "none"; jhsSection.style.display = "none";
+                    totalsSection.style.display = "none"; centralSection.style.display = "none";
                 } else if (selectedLevel === "JHS ONLY") {
-                    kgSection.style.display = "none";
-                    primarySection.style.display = "none";
-                    totalsSection.style.display = "none";
-                    centralSection.style.display = "none";
+                    kgSection.style.display = "none"; primarySection.style.display = "none";
+                    totalsSection.style.display = "none"; centralSection.style.display = "none";
                 } else if (selectedLevel === "CENTRAL ADMIN ONLY") {
-                    kgSection.style.display = "none";
-                    primarySection.style.display = "none";
-                    jhsSection.style.display = "none";
-                    totalsSection.style.display = "none";
+                    kgSection.style.display = "none"; primarySection.style.display = "none";
+                    jhsSection.style.display = "none"; totalsSection.style.display = "none";
                 }
-                
                 calculateLiveDashboard();
             };
 
-            filterLevel.addEventListener("change", updateVisibilityByLevel);
-
-            // Live calculator compiler core logic
             const calculateLiveDashboard = () => {
                 const getVal = (id) => parseInt(document.getElementById(id).value, 10) || 0;
-                
                 const kgVisible = kgSection.style.display !== "none";
                 const priVisible = primarySection.style.display !== "none";
                 const jhsVisible = jhsSection.style.display !== "none";
                 const admVisible = centralSection.style.display !== "none";
 
-                // KG
                 const kgM = getVal("kg_m"), kgF = getVal("kg_f");
                 const kgMP = getVal("kg_mp"), kgFP = getVal("kg_fp");
                 const kgMNP = getVal("kg_mnp"), kgFNP = getVal("kg_fnp");
@@ -348,7 +512,6 @@
                 document.getElementById("kg_tp").value = kgMP + kgFP;
                 document.getElementById("kg_tnp").value = kgMNP + kgFNP;
 
-                // Primary
                 const priM = getVal("pri_m"), priF = getVal("pri_f");
                 const priMP = getVal("pri_mp"), priFP = getVal("pri_fp");
                 const priMNP = getVal("pri_mnp"), priFNP = getVal("pri_fnp");
@@ -356,7 +519,6 @@
                 document.getElementById("pri_tp").value = priMP + priFP;
                 document.getElementById("pri_tnp").value = priMNP + priFNP;
 
-                // JHS
                 const jhsM = getVal("jhs_m"), jhsF = getVal("jhs_f");
                 const jhsMP = getVal("jhs_mp"), jhsFP = getVal("jhs_fp");
                 const jhsMNP = getVal("jhs_mnp"), jhsFNP = getVal("jhs_fnp");
@@ -364,13 +526,11 @@
                 document.getElementById("jhs_tp").value = jhsMP + jhsFP;
                 document.getElementById("jhs_tnp").value = jhsMNP + jhsFNP;
 
-                // Central Admin
                 const admMT = getVal("adm_mt"), admFT = getVal("adm_ft");
                 const admMNT = getVal("adm_mnt"), admFNT = getVal("adm_fnt");
                 document.getElementById("adm_t_staff").value = admMT + admFT;
                 document.getElementById("adm_nt_staff").value = admMNT + admFNT;
 
-                // Global tallies updates
                 const totalMaleProf = (kgVisible ? kgMP : 0) + (priVisible ? priMP : 0) + (jhsVisible ? jhsMP : 0);
                 const totalFemaleProf = (kgVisible ? kgFP : 0) + (priVisible ? priFP : 0) + (jhsVisible ? jhsFP : 0);
                 const totalMaleNonProf = (kgVisible ? kgMNP : 0) + (priVisible ? priMNP : 0) + (jhsVisible ? jhsMNP : 0);
@@ -379,23 +539,20 @@
                 document.getElementById("tot_mp").value = totalMaleProf;
                 document.getElementById("tot_fp").value = totalFemaleProf;
                 document.getElementById("tot_p_grand").value = totalMaleProf + totalFemaleProf;
-                
                 document.getElementById("tot_mnp").value = totalMaleNonProf;
                 document.getElementById("tot_fnp").value = totalFemaleNonProf;
                 document.getElementById("tot_np_grand").value = totalMaleNonProf + totalFemaleNonProf;
 
-                // Grand summary total tally box update
                 let grandTotal = 0;
                 if (kgVisible) grandTotal += (kgM + kgF);
                 if (priVisible) grandTotal += (priM + priF);
                 if (jhsVisible) grandTotal += (jhsM + jhsF);
-                if (admVisible) grandTotal += (admMT + admFT); 
-
+                if (admVisible) grandTotal += (admMT + admFT);
                 document.getElementById("overall_grand_total").innerText = grandTotal;
             };
 
-            document.body.addEventListener("input", calculateLiveDashboard);
-            
+            filterLevel.addEventListener("change", updateVisibilityByLevel);
+            document.getElementById("teachers_tab").addEventListener("input", calculateLiveDashboard);
             document.getElementById("btn_reset").addEventListener("click", () => {
                 filterLevel.value = "ALL";
                 document.getElementById("filter_circuit").value = "ALL";
@@ -403,8 +560,80 @@
                 updateVisibilityByLevel();
             });
 
-            // Initial kickoff calculations load
+            // ==========================================
+            // STUDENT ENROLMENT CALCULATION BLOCK
+            // ==========================================
+            const calculateEnrolmentTotals = () => {
+                const getEnrol = (id) => parseInt(document.getElementById(id).value, 10) || 0;
+                const calcGpi = (girls, boys) => boys > 0 ? (girls / boys).toFixed(10) : "0";
+
+                // KG Math
+                const kg1b = getEnrol("s_kg1_b"), kg1g = getEnrol("s_kg1_g");
+                const kg2b = getEnrol("s_kg2_b"), kg2g = getEnrol("s_kg2_g");
+                document.getElementById("s_kg1_t").value = kg1b + kg1g;
+                document.getElementById("s_kg2_t").value = kg2b + kg2g;
+                
+                const totalKgB = kg1b + kg2b;
+                const totalKgG = kg1g + kg2g;
+                document.getElementById("s_kg_tb").value = totalKgB;
+                document.getElementById("s_kg_tg").value = totalKgG;
+                document.getElementById("s_kg_t").value = totalKgB + totalKgG;
+                document.getElementById("s_kg_gpi").value = calcGpi(totalKgG, totalKgB);
+
+                // Primary Math
+                let totalPriB = 0, totalPriG = 0;
+                for (let i = 1; i <= 6; i++) {
+                    const pb = getEnrol(`s_p${i}_b`), pg = getEnrol(`s_p${i}_g`);
+                    document.getElementById(`s_p${i}_t`).value = pb + pg;
+                    totalPriB += pb;
+                    totalPriG += pg;
+                }
+                document.getElementById("s_pri_tb").value = totalPriB;
+                document.getElementById("s_pri_tg").value = totalPriG;
+                document.getElementById("s_pri_t").value = totalPriB + totalPriG;
+                document.getElementById("s_pri_gpi").value = calcGpi(totalPriG, totalPriB);
+
+                // JHS Math
+                let totalJhsB = 0, totalJhsG = 0;
+                for (let i = 1; i <= 3; i++) {
+                    const jb = getEnrol(`s_jhs${i}_b`), jg = getEnrol(`s_jhs${i}_g`);
+                    document.getElementById(`s_jhs${i}_t`).value = jb + jg;
+                    totalJhsB += totalJhsB; // wait, let's fix loop sum logic
+                }
+                // manual read matching original snapshot layout values perfectly
+                const j1b = getEnrol("s_jhs1_b"), j1g = getEnrol("s_jhs1_g");
+                const j2b = getEnrol("s_jhs2_b"), j2g = getEnrol("s_jhs2_g");
+                const j3b = getEnrol("s_jhs3_b"), j3g = getEnrol("s_jhs3_g");
+                
+                document.getElementById("s_jhs1_t").value = j1b + j1g;
+                document.getElementById("s_jhs2_t").value = j2b + j2g;
+                document.getElementById("s_jhs3_t").value = j3b + j3g;
+                
+                const jhsTotalB = j1b + j2b + j3b;
+                const jhsTotalG = j1g + j2g + j3g;
+                document.getElementById("s_jhs_tb").value = jhsTotalB;
+                document.getElementById("s_jhs_tg").value = jhsTotalG;
+                document.getElementById("s_jhs_t").value = jhsTotalB + jhsTotalG;
+                document.getElementById("s_jhs_gpi").value = calcGpi(jhsTotalG, jhsTotalB);
+
+                // Grand Summaries Tally Layout
+                const grandB = totalKgB + totalPriB + jhsTotalB;
+                const grandG = totalKgG + totalPriG + jhsTotalG;
+                document.getElementById("s_grand_boys").value = grandB;
+                document.getElementById("s_grand_girls").value = grandG;
+                document.getElementById("s_grand_total").value = grandB + grandG;
+                document.getElementById("s_overall_gpi").value = calcGpi(grandG, grandB);
+            };
+
+            document.getElementById("enrolment_tab").addEventListener("input", calculateEnrolmentTotals);
+            document.getElementById("btn_enrol_reset").addEventListener("click", () => {
+                document.getElementById("enrol_filter_school").value = "ALL";
+                calculateEnrolmentTotals();
+            });
+
+            // Perform baseline startups execution runs
             updateVisibilityByLevel();
+            calculateEnrolmentTotals();
         });
     </script>
 </body>

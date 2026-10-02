@@ -3,312 +3,398 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES Ahafo Ano North - Main Control Panel</title>
+    <title>GES Ahafo Ano North - Teachers Dashboard</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: #f7f9fc;
-            padding: 0;
-            margin: 0;
-        }
-
-        /* Institutional Top Header Branding */
-        .portal-header {
-            background-color: #ffffff;
-            text-align: center;
-            padding: 20px 10px 10px 10px;
-        }
-
-        .portal-header h1 {
-            font-size: 18px;
-            color: #A31D1D;
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        .portal-header p {
-            font-size: 12px;
-            color: #666666;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Top Menu Navigation Bar */
-        .main-nav {
-            background-color: #ffffff;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            border-bottom: 1px solid #e0e0e0;
-            position: relative;
-        }
-
-        .nav-item {
-            color: #333333;
-            font-size: 14px;
-            font-weight: 700;
-            padding: 12px 10px;
-            cursor: pointer;
-            text-decoration: none;
-            position: relative;
-            user-select: none;
-        }
-
-        .nav-item:hover {
-            color: #000000;
-        }
-
-        /* Active navigation arrow pointing down */
-        .nav-item.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 6px;
-            border-style: solid;
-            border-color: transparent transparent #2998ff transparent;
-            display: block;
-            width: 0;
-            height: 0;
-        }
-
-        /* Sub-Navigation Ribbon Bar */
-        .sub-nav-container {
-            background-color: #2998ff;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .sub-nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            padding: 10px 20px;
-            gap: 25px;
-        }
-
-        .sub-nav.active {
-            display: flex;
-        }
-
-        .sub-nav-item {
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: 500;
-            text-decoration: none;
-            padding: 6px 0;
-            opacity: 0.9;
-            transition: opacity 0.2s ease, text-decoration 0.2s;
-        }
-
-        .sub-nav-item:hover {
-            opacity: 1;
-            text-decoration: underline;
-        }
-
-        /* Main Statistics Panel Layout Container */
-        .main-content {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 30px;
-            background: #ffffff;
-            border-radius: 12px;
-            border: 1px solid #eaeaea;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        }
-
-        .welcome-block {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .welcome-block h2 {
-            color: #333333;
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
-
-        .welcome-block p {
-            color: #666666;
-            font-size: 14px;
-        }
-
-        /* Statistics Counter Metric Grid */
-        .stats-grid {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 35px;
-            flex-wrap: wrap;
-        }
-
-        .stats-card {
-            flex: 1;
-            min-width: 220px;
-            background: #fafbfc;
-            border: 1px solid #eef2f6;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .stats-card .stats-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: #888888;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-
-        .stats-card .stats-value {
-            font-size: 28px;
-            font-weight: 800;
-            color: #0A3C9B;
-            transition: color 0.3s ease;
-        }
-
-        /* Animation effect class when values shift live */
-        .pulse-highlight {
-            color: #22b14c !important;
-            transform: scale(1.05);
-        }
-
-        .stats-card .stats-subtitle {
-            font-size: 11px;
-            color: #666666;
-            margin-top: 5px;
-        }
-
-        .btn-logout {
-            display: inline-block;
-            margin-top: 40px;
-            width: 100%;
-            text-align: center;
-            color: #A31D1D;
-            font-weight: 700;
-            font-size: 14px;
-            text-decoration: none;
-        }
-
-        .btn-logout:hover {
-            text-decoration: underline;
-        }
+        body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; }
+        .dashboard-container { max-width: 1300px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .filter-bar { display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 15px; margin-bottom: 25px; background: #fafafa; padding: 15px; border: 1px solid #e0e0e0; border-radius: 4px; align-items: flex-end; }
+        .filter-bar label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #333; }
+        .filter-bar select { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; }
+        .btn-reset { padding: 6px 20px; background-color: #ff9999; color: #fff; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; height: 32px; }
+        .btn-reset:hover { background-color: #ff6666; }
+        
+        .grid-layout { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .full-width { grid-column: span 2; }
+        
+        fieldset { border: 2px solid #ccc; border-radius: 6px; padding: 15px; margin-bottom: 10px; background: #fff; }
+        fieldset.kg { border-color: #b5e61d; }
+        fieldset.primary { border-color: #ffc90e; }
+        fieldset.jhs { border-color: #2b579a; }
+        fieldset.totals { border-color: #002060; }
+        fieldset.central { border-color: #595959; }
+        
+        legend { font-weight: bold; padding: 0 8px; font-size: 13px; text-transform: uppercase; }
+        fieldset.kg legend { color: #22b14c; }
+        fieldset.primary legend { color: #e6b000; }
+        fieldset.jhs legend { color: #2b579a; }
+        fieldset.totals legend { color: #002060; }
+        fieldset.central legend { color: #595959; }
+        
+        table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
+        th { background: #f2f2f2; padding: 6px; font-weight: bold; border-bottom: 1px solid #ccc; text-align: center; }
+        td { padding: 6px; border-bottom: 1px solid #eee; }
+        td.label-cell { width: 45%; font-weight: 500; }
+        
+        input[type="number"], input[type="text"] { width: 85px; padding: 4px; text-align: center; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; }
+        input[readonly] { background-color: #eeeeee; border-color: #ccc; color: #333; font-weight: bold; }
+        input.grand-total-box { background-color: #fff3cd; border-color: #ffc107; color: #856404; }
+        
+        .overall-summary-box { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fff; border: 3px solid #00bcff; border-radius: 6px; padding: 20px; text-align: center; }
+        .overall-summary-box h3 { margin: 0 0 10px 0; color: #007bb0; font-size: 14px; text-transform: uppercase; }
+        .overall-summary-box input { width: 140px; font-size: 24px; height: 50px; text-align: center; font-weight: bold; color: #002060; background: #e6f7ff; border: 2px solid #00bcff; }
     </style>
 </head>
 <body>
 
-    <!-- Institutional Header -->
-    <div class="portal-header">
-        <h1>AHAFO ANO NORTH MUNICIPAL EDUCATION DIRECTORATE</h1>
-        <p>GES Management Hub &bull; Main Control Panel</p>
-    </div>
-
-    <!-- Main Navigation Bar -->
-    <nav class="main-nav">
-        <div class="nav-item active" onclick="switchTab('master-records', this)">School Master Records</div>
-        <div class="nav-item" onclick="switchTab('data-logs', this)">Data Log Modules</div>
-    </nav>
-
-    <!-- Sub-Navigation Ribbon Container -->
-    <div class="sub-nav-container">
-        <div id="master-records" class="sub-nav active">
-            <a href="school-basic.html" class="sub-nav-item">Basic Schools Register</a>
-            <a href="school-second-cycle.html" class="sub-nav-item">Second Cycle Register</a>
-            <a href="school-infrastructure.html" class="sub-nav-item">School Infrastructure</a>
-        </div>
-        <div id="data-logs" class="sub-nav">
-            <a href="enrolment.html" class="sub-nav-item">Basic Enrolment Log</a>
-            <a href="staff.html" class="sub-nav-item">Manage Staff</a>
-            <a href="student.html" class="sub-nav-item">Manage Student</a>
-        </div>
-    </div>
-
-    <!-- Main Content Workspace Area -->
-    <main class="main-content">
-        <div class="welcome-block">
-            <h2>District Statistical Overview</h2>
-            <p>Live consolidation data across Ahafo Ano North educational installations.</p>
-        </div>
-
-        <!-- Dynamic Statistics Counters -->
-        <div class="stats-grid">
-            <div class="stats-card" id="card-schools">
-                <div class="stats-title">Total Institutions</div>
-                <div class="stats-value" id="stat-schools">114</div>
-                <div class="stats-subtitle">KG, Primary, JHS & Second-Cycle</div>
-            </div>
-            <div class="stats-card" id="card-staff">
-                <div class="stats-title">Active Personnel</div>
-                <div class="stats-value" id="stat-staff">1,420</div>
-                <div class="stats-subtitle">Teaching & Non-Teaching Staff</div>
-            </div>
-            <div class="stats-card" id="card-students">
-                <div class="stats-title">Total Enrollment</div>
-                <div class="stats-value" id="stat-students">34,180</div>
-                <div class="stats-subtitle">Current Academic Term</div>
-            </div>
-        </div>
-        
+<div class="dashboard-container">
+    <h2 style="color: #2b579a; text-align: center; margin-top: 0; text-transform: uppercase; letter-spacing: 0.5px;">Ahafo Ano North - Teachers Staffing Live Dashboard</h2>
+    
+    <!-- Filter Bar Component -->
+    <div class="filter-bar">
         <div>
-            <a href="index.html" class="btn-logout">Logout from System</a>
+            <label>FILTER BY CIRCUIT</label>
+            <select id="filter_circuit">
+                <option value="ALL">ALL CIRCUITS</option>
+                <option value="KOJOBETIAKO">KOJOBETIAKO</option>
+                <option value="AKWASIASE">AKWASIASE</option>
+                <option value="ANYINASUSO">ANYINASUSO</option>
+                <option value="DWAAHO">DWAAHO</option>
+                <option value="MANFO">MANFO</option>
+                <option value="SUBRISO">SUBRISO</option>
+                <option value="SUPONSO">SUPONSO</option>
+                <option value="TEPA URBAN A">TEPA URBAN A</option>
+                <option value="TEPA URBAN B">TEPA URBAN B</option>
+                <option value="TWABIDI">TWABIDI</option>
+            </select>
         </div>
-    </main>
+        <div>
+            <label>FILTER BY SCHOOL</label>
+            <select id="filter_school">
+                <option value="ALL">ALL SCHOOLS</option>
+                <option value="ABONSUASO M/A JHS">ABONSUASO M/A JHS</option>
+            </select>
+        </div>
+        <div>
+            <label>FILTER BY LEVEL</label>
+            <select id="filter_level">
+                <option value="ALL">ALL LEVELS</option>
+                <option value="KG">KG ONLY</option>
+                <option value="PRIMARY">PRIMARY ONLY</option>
+                <option value="JHS">JHS ONLY</option>
+            </select>
+        </div>
+        <div>
+            <button type="button" class="btn-reset" id="btnReset">RESET</button>
+        </div>
+    </div>
 
-    <!-- Tab Swapping & Real-Time Live Sync Logic Engine -->
-    <script>
-        function switchTab(targetId, element) {
-            document.querySelectorAll('.nav-item').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.sub-nav').forEach(menu => menu.classList.remove('active'));
-            element.classList.add('active');
-            document.getElementById(targetId).classList.add('active');
-        }
+    <!-- Live Data Visualization Sections Grid -->
+    <div class="grid-layout">
+        
+        <!-- KG Summary Block -->
+        <fieldset class="kg" id="sec_kg">
+            <legend>KG Teachers Summary</legend>
+            <table>
+                <tr>
+                    <td class="label-cell">KG MALE TEACHERS</td>
+                    <td><input type="number" id="kg_m" value="10"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">KG TOTAL TEACHERS</label>
+                        <input type="text" id="kg_tot" readonly value="81">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">KG FEMALE TEACHERS</td>
+                    <td><input type="number" id="kg_f" value="71"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">KG MALE PROF TEACHERS</td>
+                    <td><input type="number" id="kg_m_prof" value="10"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">KG TOTAL PROF</label>
+                        <input type="text" id="kg_tot_prof" readonly value="81">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">KG FEMALE PROF TEACHERS</td>
+                    <td><input type="number" id="kg_f_prof" value="71"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">KG MALE NON-PROF TEACHERS</td>
+                    <td><input type="number" id="kg_m_nonprof" value="0"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">KG TOTAL NON-PROF</label>
+                        <input type="text" id="kg_tot_nonprof" readonly value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">KG FEMALE NON-PROF TEACHERS</td>
+                    <td><input type="number" id="kg_f_nonprof" value="0"></td>
+                </tr>
+            </table>
+        </fieldset>
 
-        // Pull values from memory and apply micro-animations if a value shifts live
-        function loadLiveDashboardStats() {
-            let stats = JSON.parse(localStorage.getItem('ges_stats')) || { totalSchools: 114, activeStaff: 1420, totalEnrolment: 34180 };
-            
-            const schoolsEl = document.getElementById('stat-schools');
-            const staffEl = document.getElementById('stat-staff');
-            const studentsEl = document.getElementById('stat-students');
+        <!-- JHS Summary Block -->
+        <fieldset class="jhs" id="sec_jhs">
+            <legend>JHS Teachers Summary</legend>
+            <table>
+                <tr>
+                    <td class="label-cell">JHS MALE TEACHERS</td>
+                    <td><input type="number" id="jhs_m" value="212"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">JHS TOTAL TEACHERS</label>
+                        <input type="text" id="jhs_tot" readonly value="278">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">JHS FEMALE TEACHERS</td>
+                    <td><input type="number" id="jhs_f" value="66"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">JHS MALE PROF TEACHERS</td>
+                    <td><input type="number" id="jhs_m_prof" value="211"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">JHS TOTAL PROF</label>
+                        <input type="text" id="jhs_tot_prof" readonly value="277">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">JHS FEMALE PROF TEACHERS</td>
+                    <td><input type="number" id="jhs_f_prof" value="66"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">JHS MALE NON-PROF TEACHERS</td>
+                    <td><input type="number" id="jhs_m_nonprof" value="4"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">JHS TOTAL NON-PROF</label>
+                        <input type="text" id="jhs_tot_nonprof" readonly value="1">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">JHS FEMALE NON-PROF TEACHERS</td>
+                    <td><input type="number" id="jhs_f_nonprof" value="0"></td>
+                </tr>
+            </table>
+        </fieldset>
 
-            // Check for changes to trigger visual pulse highlight
-            if(schoolsEl.textContent !== stats.totalSchools.toString()) triggerPulse('card-schools');
-            if(staffEl.textContent !== stats.activeStaff.toLocaleString()) triggerPulse('card-staff');
-            if(studentsEl.textContent !== stats.totalEnrolment.toLocaleString()) triggerPulse('card-students');
+        <!-- Primary Summary Block -->
+        <fieldset class="primary" id="sec_primary">
+            <legend>Primary Teachers Summary</legend>
+            <table>
+                <tr>
+                    <td class="label-cell">PRIMARY MALE TEACHERS</td>
+                    <td><input type="number" id="p_m" value="197"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">PRIMARY TOTAL TEACHERS</label>
+                        <input type="text" id="p_tot" readonly value="340">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">PRIMARY FEMALE TEACHERS</td>
+                    <td><input type="number" id="p_f" value="143"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">PRIMARY MALE PROF TEACHERS</td>
+                    <td><input type="number" id="p_m_prof" value="192"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">PRIMARY PROF TEACHERS</label>
+                        <input type="text" id="p_tot_prof" readonly value="334">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">PRIMARY FEMALE PROF TEACHERS</td>
+                    <td><input type="number" id="p_f_prof" value="142"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">PRIMARY MALE NON-PROF TEACHERS</td>
+                    <td><input type="number" id="p_m_nonprof" value="4"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">PRIMARY NON-PROF TEACHERS</label>
+                        <input type="text" id="p_tot_nonprof" readonly value="6">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">PRIMARY FEMALE NON-PROF TEACHERS</td>
+                    <td><input type="number" id="p_f_nonprof" value="1"></td>
+                </tr>
+            </table>
+        </fieldset>
 
-            schoolsEl.textContent = stats.totalSchools;
-            staffEl.textContent = stats.activeStaff.toLocaleString();
-            studentsEl.textContent = stats.totalEnrolment.toLocaleString();
-        }
+        <!-- Total Consolidated Engine Summary Block -->
+        <fieldset class="totals" id="sec_totals">
+            <legend>Teachers Summary Total</legend>
+            <table>
+                <tr>
+                    <td class="label-cell">TOTAL MALE PROF TEACHERS</td>
+                    <td><input type="text" id="tot_m_prof" readonly value="434"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">TOTAL PROF TEACHERS</label>
+                        <input type="text" id="tot_prof" readonly value="711">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">TOTAL FEMALE PROF TEACHERS</td>
+                    <td><input type="text" id="tot_f_prof" readonly value="282"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">TOTAL MALE NON-PROF TEACHERS</td>
+                    <td><input type="text" id="tot_m_nonprof" readonly value="4"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">TOTAL NON-PROF TEACHERS</label>
+                        <input type="text" id="tot_nonprof" readonly value="5">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">TOTAL FEMALE NON-PROF TEACHERS</td>
+                    <td><input type="text" id="tot_f_nonprof" readonly value="1"></td>
+                </tr>
+            </table>
+        </fieldset>
 
-        function triggerPulse(cardId) {
-            const card = document.getElementById(cardId);
-            card.classList.add('pulse-highlight');
-            setTimeout(() => card.classList.remove('pulse-highlight'), 800);
-        }
+        <!-- Central Administration Block -->
+        <fieldset class="central" id="sec_central">
+            <legend>Central Administration</legend>
+            <table>
+                <tr>
+                    <td class="label-cell">MALE TEACHING STAFF</td>
+                    <td><input type="number" id="ca_m_teach" value="17"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">TOTAL TEACHING STAFF</label>
+                        <input type="text" id="ca_tot_teach" readonly value="19">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">FEMALE TEACHING STAFF</td>
+                    <td><input type="number" id="ca_f_teach" value="2"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">MALE NON-TEACHING STAFF</td>
+                    <td><input type="number" id="ca_m_nonteach" value="8"></td>
+                    <td rowspan="2" style="text-align: center; vertical-align: middle;">
+                        <label style="display:block; font-size:10px; font-weight:bold;">TOTAL NON-TEACHING STAFF</label>
+                        <input type="text" id="ca_tot_nonteach" readonly value="11">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">FEMALE NON-TEACHING STAFF</td>
+                    <td><input type="number" id="ca_f_nonteach" value="3"></td>
+                </tr>
+            </table>
+        </fieldset>
 
-        // LIVE STORAGE LISTENER: Detects entries from other open tabs instantly
-        window.addEventListener('storage', (e) => {
-            if (e.key === 'ges_stats') {
-                loadLiveDashboardStats();
-            }
-        });
+        <!-- Overall KPI Container Module -->
+        <div class="overall-summary-box">
+            <h3>Overall Total Teachers</h3>
+            <input type="text" id="overall_grand_total" readonly value="716" class="grand-total-box">
+        </div>
 
-        // Initialize layout baseline counters on view mount
-        window.onload = loadLiveDashboardStats;
-    </script>
+    </div>
+</div>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const getVal = (id) => parseInt(document.getElementById(id).value, 10) || 0;
+    const setVal = (id, val) => { document.getElementById(id).value = val; };
+
+    const recalculateDashboard = () => {
+        // 1. KG Calculations
+        const kgM = getVal("kg_m"), kgF = getVal("kg_f");
+        const kgMProf = getVal("kg_m_prof"), kgFProf = getVal("kg_f_prof");
+        const kgMNon = getVal("kg_m_nonprof"), kgFNon = getVal("kg_f_nonprof");
+        
+        const kgTotal = kgM + kgF;
+        const kgTotalProf = kgMProf + kgFProf;
+        const kgTotalNonProf = kgMNon + kgFNon;
+        
+        setVal("kg_tot", kgTotal);
+        setVal("kg_tot_prof", kgTotalProf);
+        setVal("kg_tot_nonprof", kgTotalNonProf);
+
+        // 2. Primary Calculations
+        const pM = getVal("p_m"), pF = getVal("p_f");
+        const pMProf = getVal("p_m_prof"), pFProf = getVal("p_f_prof");
+        const pMNon = getVal("p_m_nonprof"), pFNon = getVal("p_f_nonprof");
+        
+        const pTotal = pM + pF;
+        const pTotalProf = pMProf + pFProf;
+        const pTotalNonProf = pMNon + pFNon;
+        
+        setVal("p_tot", pTotal);
+        setVal("p_tot_prof", pTotalProf);
+        setVal("p_tot_nonprof", pTotalNonProf);
+
+        // 3. JHS Calculations
+        const jhsM = getVal("jhs_m"), jhsF = getVal("jhs_f");
+        const jhsMProf = getVal("jhs_m_prof"), jhsFProf = getVal("jhs_f_prof");
+        const jhsMNon = getVal("jhs_m_nonprof"), jhsFNon = getVal("jhs_f_nonprof");
+        
+        const jhsTotal = jhsM + jhsF;
+        const jhsTotalProf = jhsMProf + jhsFProf;
+        const jhsTotalNonProf = jhsMNon + jhsFNon;
+        
+        setVal("jhs_tot", jhsTotal);
+        setVal("jhs_tot_prof", jhsTotalProf);
+        setVal("jhs_tot_nonprof", jhsTotalNonProf);
+
+        // 4. Central Administration Calculations
+        const caMTeach = getVal("ca_m_teach"), caFTeach = getVal("ca_f_teach");
+        const caMNon = getVal("ca_m_nonteach"), caFNon = getVal("ca_f_nonteach");
+        
+        const caTotalTeach = caMTeach + caFTeach;
+        const caTotalNonTeach = caMNon + caFNon;
+        
+        setVal("ca_tot_teach", caTotalTeach);
+        setVal("ca_tot_nonteach", caTotalNonTeach);
+
+        // 5. Consolidated Cross-Section Summaries
+        const totalMaleProf = kgMProf + pMProf + jhsMProf;
+        const totalFemaleProf = kgFProf + pFProf + jhsFProf;
+        const totalProf = totalMaleProf + totalFemaleProf;
+
+        const totalMaleNonProf = kgMNon + pMNon + jhsMNon;
+        const totalFemaleNonProf = kgFNon + pFNon + jhsFNon;
+        const totalNonProf = totalMaleNonProf + totalFemaleNonProf;
+
+        setVal("tot_m_prof", totalMaleProf);
+        setVal("tot_f_prof", totalFemaleProf);
+        setVal("tot_prof", totalProf);
+        
+        setVal("tot_m_nonprof", totalMaleNonProf);
+        setVal("tot_f_nonprof", totalFemaleNonProf);
+        setVal("tot_nonprof", totalNonProf);
+
+        // 6. Overall Grand Summary Core Metrics
+        const overallGrandTotal = totalProf + totalNonProf + caTotalTeach; 
+        setVal("overall_grand_total", overallGrandTotal);
+    };
+
+    // Level filters dynamic visibility rendering toggle
+    const filterLevelSelect = document.getElementById("filter_level");
+    const toggleLevelSections = () => {
+        const val = filterLevelSelect.value;
+        document.getElementById("sec_kg").style.display = (val === "ALL" || val === "KG") ? "block" : "none";
+        document.getElementById("sec_primary").style.display = (val === "ALL" || val === "PRIMARY") ? "block" : "none";
+        document.getElementById("sec_jhs").style.display = (val === "ALL" || val === "JHS") ? "block" : "none";
+    };
+
+    filterLevelSelect.addEventListener("change", toggleLevelSections);
+    
+    // Listen for manual field adjustments to fire mathematical aggregation loops
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener("input", recalculateDashboard);
+    });
+
+    document.getElementById("btnReset").addEventListener("click", () => {
+        document.getElementById("filter_circuit").value = "ALL";
+        document.getElementById("filter_school").value = "ALL";
+        filterLevelSelect.value = "ALL";
+        toggleLevelSections();
+        recalculateDashboard();
+    });
+
+    // Run baseline initial computation loop
+    recalculateDashboard();
+});
+</script>
 </body>
 </html>

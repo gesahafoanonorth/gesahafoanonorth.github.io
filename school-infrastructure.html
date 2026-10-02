@@ -1,347 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GES - School Infrastructure Registry</title>
-  <style>
-    /* Pure CSS Architecture - Bypasses External Blocked Libraries Completely */
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; }
-    body { background-color: #FAF6F0; padding: 20px; color: #2d2d2d; display: flex; justify-content: center; align-items: start; min-height: 100vh; }
-    
-    .master-wrapper { background: #ffffff; width: 100%; max-width: 1200px; padding: 30px; border-radius: 6px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #dcdad4; }
-    .header-title { text-align: center; color: #8B0000; font-size: 24px; font-weight: bold; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 0.5px; }
-    
-    .top-action-bar { border: 1px solid #8B0000; padding: 15px; border-radius: 4px; display: flex; justify-content: flex-end; gap: 15px; margin-bottom: 30px; }
-    .btn { padding: 10px 28px; font-weight: bold; font-size: 13px; border: none; border-radius: 4px; cursor: pointer; text-transform: uppercase; color: #ffffff; }
-    .btn-save { background-color: #8B0000; }
-    .btn-save:hover { background-color: #700000; }
-    .btn-back { background-color: #5A5C5E; }
-    .btn-back:hover { background-color: #454749; }
-
-    /* Widescreen Double-Column System */
-    .form-splitter-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-    .full-width-section { grid-column: span 2; }
-    
-    fieldset { border: 1.5px solid #8B0000; border-radius: 6px; padding: 20px; background-color: #ffffff; margin-bottom: 5px; }
-    legend { font-size: 13px; font-weight: bold; color: #8B0000; padding: 0 8px; text-transform: uppercase; }
-    
-    .field-row { display: flex; align-items: center; margin-bottom: 12px; gap: 15px; }
-    .field-row label { width: 180px; font-size: 12px; font-weight: bold; color: #444444; text-transform: uppercase; flex-shrink: 0; }
-    .field-row input, .field-row select { flex: 1; padding: 8px 10px; border: 1px solid #cccccc; border-radius: 4px; font-size: 13px; outline: none; width: 100%; background-color: #ffffff; }
-    .field-row input:focus, .field-row select:focus { border-color: #8B0000; }
-    .readonly-bg { background-color: #f3f4f6 !important; color: #555555; }
-
-    .sub-grid-tally { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .tally-item { display: flex; flex-direction: column; }
-    .tally-item label { font-size: 10px; font-weight: bold; color: #555555; margin-bottom: 4px; text-transform: uppercase; }
-    .tally-item input { padding: 6px 10px; border: 1px solid #cccccc; border-radius: 4px; font-size: 13px; outline: none; }
-    .tally-item input:focus { border-color: #8B0000; }
-
-    .furniture-three-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-
-    /* Mobile Responsiveness Rules */
-    @media screen and (max-width: 768px) {
-      body { padding: 10px; }
-      .master-wrapper { padding: 15px; }
-      .top-action-bar { flex-direction: column; gap: 10px; padding: 10px; }
-      .top-action-bar .btn { width: 100%; text-align: center; }
-      .form-splitter-grid, .sub-grid-tally, .furniture-three-grid { grid-template-columns: 1fr; }
-      .full-width-section { grid-column: span 1; }
-      .field-row { flex-direction: column; align-items: flex-start; gap: 6px; }
-      .field-row label { width: 100%; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>GES - School Infrastructure</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #fff8f8; margin: 0; padding: 20px; }
+        .hub-nav-bar { display: flex; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; }
+        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255,255,255,0.15); color: white; border-radius: 4px; font-size: 12px; font-weight: bold; }
+        .hub-nav-btn.active { background-color: white; color: #800000; }
+        .form-container { background: white; padding: 20px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; }
+        label { font-size: 12px; font-weight: bold; color: #333; }
+        input, select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px; background-color: #800000; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; }
+    </style>
 </head>
 <body>
 
-  <div class="master-wrapper">
-    <div class="header-title">School Infrastructure & Logistics Profiling</div>
-    
-    <form id="infrastructureForm" onsubmit="event.preventDefault(); alert('Profile successfully validated and compiled!');">
-      
-      <div class="top-action-bar">
-        <button type="submit" class="btn btn-save">Submit</button>
-        <button type="button" class="btn btn-back" onclick="window.location.href='dashboard.html'">Back</button>
-      </div>
+    <div class="hub-nav-bar">
+        <a href="school-basic.html" class="hub-nav-btn">Basic Schools</a>
+        <a href="school-second-cycle.html" class="hub-nav-btn">Second Cycle</a>
+        <a href="school-infrastructure.html" class="hub-nav-btn active">Infrastructure</a>
+        <a href="dashboard.html" class="hub-nav-btn">Overview Dashboard</a>
+        <a href="enrolment.html" class="hub-nav-btn">Enrolment Log</a>
+        <a href="staff.html" class="hub-nav-btn">Manage Staff</a>
+        <a href="student.html" class="hub-nav-btn">Manage Student</a>
+        <a href="index.html" class="hub-nav-btn">Logout</a>
+    </div>
 
-      <div class="form-splitter-grid">
+    <div class="form-container">
+        <h2>Institutional Asset & Structural Status Log</h2>
+        <form id="infraForm">
+            <div class="form-group"><label>EMIS CODE</label><input type="text" name="EMIS_Code" value="1066340072" readonly></div>
+            <div class="form-group"><label>CIRCUIT</label><input type="text" name="Circuit" value="KOJOBETIAKO" readonly></div>
+            <div class="form-group"><label>NAME OF SCHOOL</label><input type="text" name="School_Name" value="ABONSUASO M/A JHS" readonly></div>
+            <div class="form-group"><label>TOTAL NUMBER OF CLASSROOMS</label><input type="number" name="Total_Classrooms" value="0"></div>
+            <div class="form-group"><label>CLASSROOMS IN GOOD CONDITION</label><input type="number" name="Classrooms_In_Good_Condition" value="0"></div>
+            <div class="form-group"><label>STRUCTURES NEEDING MAJOR REPAIRS</label><input type="number" name="Classrooms_Needing_Major_Repair" value="0"></div>
+            <div class="form-group">
+                <label>SAFE WATER SOURCE AVAILABLE ON SITE?</label>
+                <select name="Water_Source_Available"><option value="Yes">Yes</option><option value="No">No</option></select>
+            </div>
+            <div class="form-group">
+                <label>TOILET FACILITIES FUNCTIONAL?</label>
+                <select name="Toilet_Facilities_Functional"><option value="Yes">Yes</option><option value="No">No</option></select>
+            </div>
+            <button type="submit" id="btnSave">SUBMIT STRUCTURE REPORT</button>
+        </form>
+    </div>
 
-        <!-- BLOCK 1: GENERAL SCHOOL PROFILE -->
-        <fieldset>
-          <legend>General School Profile</legend>
-          <div class="field-row">
-            <label>INFRAID</label>
-            <input type="text" value="(System Generated)" class="readonly-bg" readonly>
-          </div>
-          <div class="field-row">
-            <label>EMIS Code</label>
-            <input type="text" id="emisCode" placeholder="Enter School EMIS Code" required>
-          </div>
-          <div class="field-row">
-            <label>Circuit</label>
-            <select id="circuit" required>
-              <option value="" disabled selected>-- Select Circuit --</option>
-              <option value="AKWASIASE">AKWASIASE</option>
-              <option value="ANYINASUSO">ANYINASUSO</option>
-              <option value="DWAAHO">DWAAHO</option>
-              <option value="KOJOBETIAKO">KOJOBETIAKO</option>
-              <option value="MANFO">MANFO</option>
-              <option value="SUBRISO">SUBRISO</option>
-              <option value="SUPONSO">SUPONSO</option>
-              <option value="TEPA URBAN A">TEPA URBAN A</option>
-              <option value="TEPA URBAN B">TEPA URBAN B</option>
-              <option value="TWABIDI">TWABIDI</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>Name of Institution</label>
-            <input type="text" id="schoolName" placeholder="Enter Official Institution Name" required>
-          </div>
-          <div class="field-row">
-            <label>School Status</label>
-            <select id="schoolStatus" required>
-              <option value="" disabled selected>-- Select Status --</option>
-              <option value="Public">Public</option>
-              <option value="Private">Private</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>School Levels</label>
-            <select id="schoolLevels">
-              <option value="">-- Select Levels --</option>
-              <option value="KG">KG Only</option>
-              <option value="Primary">Primary Only</option>
-              <option value="JHS">JHS Only</option>
-              <option value="KG-Primary">KG & Primary</option>
-              <option value="Primary-JHS">Primary & JHS</option>
-              <option value="Basic">Basic (KG, Primary & JHS)</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>WAEC Code</label>
-            <input type="text" placeholder="Enter WAEC Code if applicable">
-          </div>
-          <div class="field-row">
-            <label>Year Established</label>
-            <input type="number" placeholder="YYYY" min="1900" max="2027">
-          </div>
-          <div class="field-row">
-            <label>School Category</label>
-            <input type="text" placeholder="e.g. Category A, B, C">
-          </div>
-          <div class="field-row">
-            <label>School Free meals Availability</label>
-            <select id="freemeals">
-              <option value="">-- Select --</option>
-              <option value="Yes">Available</option>
-              <option value="No">Not Available</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>GALOP</label>
-            <select id="galop">
-              <option value="">-- Select --</option>
-              <option value="Beneficiary">Beneficiary</option>
-              <option value="Non-Beneficiary">Non-Beneficiary</option>
-            </select>
-          </div>
-        </fieldset>
-        <!-- BLOCK 2: MANAGEMENT & LOCALITY DETAILS -->
-        <fieldset>
-          <legend>Management & Locality Details</legend>
-          <div class="field-row">
-            <label>Name of Headteacher</label>
-            <input type="text" id="headName" placeholder="Enter Full Name" required>
-          </div>
-          <div class="field-row">
-            <label>Headteacher Contact</label>
-            <input type="tel" id="headContact" placeholder="Enter Contact Number" required>
-          </div>
-          <div class="field-row">
-            <label>Education Management</label>
-            <input type="text" placeholder="e.g. Public / Mission Management">
-          </div>
-          <div class="field-row">
-            <label>Locality</label>
-            <input type="text" placeholder="Town or Community Name">
-          </div>
-          <div class="field-row">
-            <label>Type of Locality</label>
-            <select id="localityType">
-              <option value="">-- Select Type --</option>
-              <option value="Urban">Urban</option>
-              <option value="Peri-Urban">Peri-Urban</option>
-              <option value="Rural">Rural</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>School Address</label>
-            <input type="text" placeholder="P.O. Box / Postal Address">
-          </div>
-          <div class="field-row">
-            <label>School E-Mail</label>
-            <input type="email" placeholder="e.g. school@ges.gov.gh">
-          </div>
-          <div class="field-row">
-            <label>GPS Address</label>
-            <input type="text" placeholder="e.g. AK-123-4567">
-          </div>
-        </fieldset>
+    <script>
+        document.getElementById("infraForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("btnSave");
+            btn.disabled = true; btn.innerText = "SAVING...";
+            
+            const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_WEB_APP_URL_HERE";
+            const formData = new FormData(e.target);
+            const payloadData = {};
+            formData.forEach((val, key) => payloadData[key] = val);
 
-        <!-- BLOCK 3: UTILITIES & ENVIRONMENTAL ACCESS -->
-        <fieldset>
-          <legend>Utilities & Environmental Access</legend>
-          <div class="field-row">
-            <label>Vehicle Accessibility</label>
-            <select id="vehicleAccess">
-              <option value="">-- Select --</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>Type of Road</label>
-            <select id="roadType">
-              <option value="">-- Select --</option>
-              <option value="Tarred">Tarred</option>
-              <option value="Murt">Murt / Earth Road</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>Wired for Electricity</label>
-            <select id="wiredElectricity">
-              <option value="">-- Select --</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>Electricity Functional</label>
-            <select id="functionalElectricity">
-              <option value="">-- Select --</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>Main Source of Water</label>
-            <select id="waterSource">
-              <option value="">-- Select --</option>
-              <option value="Borehole">Borehole</option>
-              <option value="Pipe-borne">Pipe-borne</option>
-              <option value="River/Stream">River / Stream</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>Water Storage Facility</label>
-            <select id="waterStorage">
-              <option value="">-- Select --</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>Main Toilet Facility</label>
-            <select id="toiletFacility">
-              <option value="">-- Select --</option>
-              <option value="KVIP">KVIP</option>
-              <option value="Water Closet">Water Closet</option>
-              <option value="Pit Latrine">Pit Latrine</option>
-            </select>
-          </div>
-        </fieldset>
+            const payload = { formType: "Infrastructure", data: payloadData };
 
-        <!-- BLOCK 4: LABORATORIES & SPECIAL FACILITIES -->
-        <fieldset>
-          <legend>Laboratories & Special Facilities</legend>
-          <div class="field-row">
-            <label>Computer Lab</label>
-            <select id="computerLab">
-              <option value="">-- Select --</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>Science Lab</label>
-            <select id="scienceLab">
-              <option value="">-- Select --</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>Headquarters Available</label>
-            <select id="hqAvailable">
-              <option value="">-- Select --</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <label>Playground</label>
-            <select id="playground">
-              <option value="">-- Select --</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-        </fieldset>
-        <!-- BLOCK 5: STRUCTURAL ROOM TALLIES -->
-        <fieldset>
-          <legend>Structural Room Tallies</legend>
-          <div class="sub-grid-tally">
-            <div class="tally-item"><label>NUM CLASS UNDER TREE</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUM OF PERMANENT CLASSROOM</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUM OF TEMPORARY CLASSROOM</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUM OF UNCOMPLETED CLASSROOM</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER OF OFFICE</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER OF LIBRARY</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER OF STAFF ROOM</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER OF STOREROOM</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item" style="grid-column: span 2;"><label>NUMBER OF TEACHERS QUARTERS</label><input type="number" min="0" value="0"></div>
-          </div>
-        </fieldset>
-
-        <!-- BLOCK 6: ASSET INVENTORY & LOGBOOKS -->
-        <fieldset>
-          <legend>Asset Inventory & Logbooks</legend>
-          <div class="sub-grid-tally">
-            <div class="tally-item"><label>INVENTORY</label><input type="text" placeholder="Status Ledger"></div>
-            <div class="tally-item"><label>TEACHER ATTENDANCE BOOK</label><input type="text" placeholder="Status Ledger"></div>
-            <div class="tally-item"><label>CLASS REGISTER</label><input type="text" placeholder="Status Ledger"></div>
-            <div class="tally-item"><label>LOGBOOK</label><input type="text" placeholder="Status Ledger"></div>
-            <div class="tally-item"><label>VISITORS BOOK</label><input type="text" placeholder="Status Ledger"></div>
-            <div class="tally-item"><label>PRINTERS</label><input type="text" placeholder="Status Tally"></div>
-            <div class="tally-item"><label>NUMBER OF LAPTOP</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER OF DESKTOP COMPUTER</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>FINANCIAL RECORD BOOK</label><input type="text" placeholder="Status Ledger"></div>
-            <div class="tally-item"><label>STAFF MOVEMENT BOOK</label><input type="text" placeholder="Status Ledger"></div>
-            <div class="tally-item"><label>LIBRARY BOOKS</label><input type="text" placeholder="Status Ledger"></div>
-            <div class="tally-item"><label>ADMISSION REGISTER</label><input type="text" placeholder="Status Ledger"></div>
-          </div>
-        </fieldset>
-
-        <!-- BLOCK 7: SCHOOL FURNITURE AUDIT TALLIES -->
-        <fieldset class="full-width-section">
-          <legend>School Furniture Audit Tallies</legend>
-          <div class="furniture-three-grid">
-            <div class="tally-item"><label>NUMBER TEACHERS TABLE</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER TEACHERS CHAIR</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER CUPBOARD</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER MONO CHAIR</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER DUAL CHAIR</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER OF BENCH</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER OF MONO TABLE</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER OF DUAL TABLE</label><input type="number" min="0" value="0"></div>
-            <div class="tally-item"><label>NUMBER OF HEXAGONAL</label><input type="number" min="0" value="0"></div>
-          </div>
-        </fieldset>
-
-      </div>
-    </form>
-  </div>
-
+            try {
+                const res = await fetch(APP_SCRIPT_URL, { method: "POST", mode: "cors", body: JSON.stringify(payload) });
+                const result = await res.json();
+                if(result.result === "success") { alert(result.message); }
+            } catch (err) { alert("Infrastructure transmission post dropped."); }
+            finally { btn.disabled = false; btn.innerText = "SUBMIT STRUCTURE REPORT"; }
+        });
+    </script>
 </body>
 </html>

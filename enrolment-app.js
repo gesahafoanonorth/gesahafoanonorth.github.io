@@ -11,19 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
     mountNode.innerHTML = `
     <div class="register-container" style="max-width: 1200px; margin: 0 auto; font-family: Arial, sans-serif; padding: 20px;">
         <div class="header-title" style="color: #2b579a; font-size: 22px; font-weight: bold; text-align: center; margin-bottom: 20px; text-transform: uppercase;">
-            Basic School Enrolment Log (Gender Segregated)
+            Basic School Enrolment Log
         </div>
         <form id="enrolmentForm">
             <div class="top-bar" style="border-bottom: 2px solid #2b579a; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: flex-end; gap: 10px;">
                 <button type="button" class="btn" id="btnNew" style="padding: 6px 15px; background-color: #f0f4f8; color: #2b579a; border: 1px solid #2b579a; font-weight: bold; border-radius: 4px; cursor: pointer;">NEW</button>
-                <button type="submit" class="btn" id="btnSave" style="padding: 6px 15px; background-color: #2b2b2b; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer;">SAVE</button>
+                <button type="submit" class="btn" id="btnSave" style="padding: 6px 15px; background-color: #2b2b2b; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer;">SUBMIT</button>
                 <button type="button" class="btn" id="btnClear" style="padding: 6px 15px; background-color: #fff0f0; color: #d9534f; border: 1px solid #d9534f; font-weight: bold; border-radius: 4px; cursor: pointer;">CLEAR</button>
                 <button type="button" class="btn" onclick="window.location.href='dashboard.html'" style="padding: 6px 15px; background-color: #6c757d; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer;">BACK</button>
             </div>
             <fieldset style="border: 1px solid #ccc; margin-bottom: 20px; padding: 15px; background: #fafafa; border-radius: 4px;">
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 15px;">
-                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">ACADEMIC YEAR</label><select name="Academic_Year" style="width:100%; padding:5px;"><option value="2026/2027">2026/2027</option></select></div>
-                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">ACADEMIC TERM</label><select name="Academic_Term" style="width:100%; padding:5px;"><option value="Term 1">Term 1</option><option value="Term 2">Term 2</option><option value="Term 3">Term 3</option></select></div>
+                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">ACADEMIC YEAR</label><select name="Academic_Year" style="width:100%; padding:5px;"><option value="Select Year">Select Year</option><option value="Term 1">Term 1</option><option value="Term 2">Term 2</option><option value="Term 3">Term 3</option></select></div>
+                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">ACADEMIC TERM</label><select name="Academic_Term" style="width:100%; padding:5px;"><option value="Select Term">Select Term</option><option value="Term 1">Term 1</option><option value="Term 2">Term 2</option><option value="Term 3">Term 3</option></select></div>
                     <div>
                         <label style="display:block; font-size:11px; font-weight:bold; color:red; margin-bottom:4px;">SELECT LEVEL</label>
                         <select name="Selected_Level" id="select_level" style="width:100%; padding:5px;">
@@ -38,15 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
-                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">EMIS CODE</label><input type="text" name="EMIS_Code" value="1066340072" style="width:100%; padding:5px;"></div>
+                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">EMIS CODE</label><input type="text" name="EMIS_Code" value="" style="width:100%; padding:5px;"></div>
                     <div>
                         <label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">CIRCUIT</label>
                         <select name="Circuit" style="width:100%; padding:5px;">
-                             <option value="Select Circuit" selected>Select Circuit</option>
-                            <option value="KOJOBETIAKO">KOJOBETIAKO</option>
+                            <option value="Select Circuit" selected>Select Circuit</option>
                             <option value="AKWASIASE">AKWASIASE</option>
                             <option value="ANYINASUSO">ANYINASUSO</option>
                             <option value="DWAAHO">DWAAHO</option>
+                            <option value="KOJOBETIAKO">KOJOBETIAKO</option>
                             <option value="MANFO">MANFO</option>
                             <option value="SUBRISO">SUBRISO</option>
                             <option value="SUPONSO">SUPONSO</option>
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <option value="TWABIDI">TWABIDI</option>
                         </select>
                     </div>
-                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">NAME OF SCHOOL</label><input type="text" name="School_Name" value="ABONSUASO M/A JHS" style="width:100%; padding:5px;"></div>
+                    <div><label style="display:block; font-size:11px; font-weight:bold; margin-bottom:4px;">NAME OF SCHOOL</label><input type="text" name="School_Name" value="" style="width:100%; padding:5px;"></div>
                 </div>
             </fieldset>
             

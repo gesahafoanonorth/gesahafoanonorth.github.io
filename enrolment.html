@@ -1,96 +1,28 @@
-  // ========================================================================= //
-  // 1. TEMPLATE INJECTION: Full Gender Segregation Layout                     //
-  // ========================================================================= //
-  mountNode.innerHTML = `
-    <form id="enrolmentForm">
-      <h2>Basic School Enrolment Log (Gender Segregated)</h2>
-      <div class="actions">
-        <button type="button" id="btnNew">NEW</button>
-        <button type="submit" id="btnSave">SAVE</button>
-        <button type="button" id="btnClear">CLEAR</button>
-        <button type="button" id="btnBack" disabled>BACK</button>
-      </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic School Enrolment Log</title>
+    <style>
+        body {
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+        }
+        #enrolment-mount {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
 
-      <fieldset>
-        <label>ACADEMIC YEAR</label>
-        <select name="academic_year">
-          <option value="2026/2027" selected>2026/2027</option>
-        </select>
+    <!-- Target Mount point for App Script Layout Engine JS injection -->
+    <div id="enrolment-mount"></div>
 
-        <label>ACADEMIC TERM</label>
-        <select name="academic_term">
-          <option value="Term 1" selected>Term 1</option>
-          <option value="Term 2">Term 2</option>
-          <option value="Term 3">Term 3</option>
-        </select>
-
-        <label>SELECT LEVEL</label>
-        <select name="select_level" id="select_level">
-          <option value="ALL BASIC" selected>ALL BASIC</option>
-          <option value="KG ONLY">KG ONLY</option>
-          <option value="PRIMARY ONLY">PRIMARY ONLY</option>
-          <option value="JHS ONLY">JHS ONLY</option>
-          <option value="KG AND PRIMARY">KG AND PRIMARY</option>
-          <option value="PRIMARY AND JHS">PRIMARY AND JHS</option>
-          <option value="KG, PRIMARY AND JHS">KG, PRIMARY AND JHS</option>
-        </select>
-      </fieldset>
-
-      <fieldset>
-        <label>EMIS CODE</label>
-        <input type="text" name="emis_code" value="1066340072" readonly>
-
-        <label>CIRCUIT</label>
-        <select name="circuit" id="circuit">
-          <option value="KOJOBETIAKO" selected>KOJOBETIAKO</option>
-          <option value="AKWASIASE">AKWASIASE</option>
-          <option value="ANYINASUSO">ANYINASUSO</option>
-          <option value="DWAAHO">DWAAHO</option>
-          <option value="MANFO">MANFO</option>
-          <option value="SUBRISO">SUBRISO</option>
-          <option value="SUPONSO">SUPONSO</option>
-          <option value="TEPA URBAN A">TEPA URBAN A</option>
-          <option value="TEPA URBAN B">TEPA URBAN B</option>
-          <option value="TWABIDI">TWABIDI</option>
-        </select>
-
-        <label>NAME OF SCHOOL</label>
-        <input type="text" name="name_of_school" value="ABONSUASO M/A JHS" readonly>
-      </fieldset>
-
-      <div id="kg_section">
-        <h3>KG ENROLMENT</h3>
-        <table>
-          <tr><th>LEVEL</th><th>BOYS</th><th>GIRLS</th><th>TOTAL</th></tr>
-          <tr><td>KG 1</td><td><input type="number" id="kg1_b" name="kg1_b" value="0"></td><td><input type="number" id="kg1_g" name="kg1_g" value="0"></td><td><input type="number" id="kg1_t" readonly value="0"></td></tr>
-          <tr><td>KG 2</td><td><input type="number" id="kg2_b" name="kg2_b" value="0"></td><td><input type="number" id="kg2_g" name="kg2_g" value="0"></td><td><input type="number" id="kg2_t" readonly value="0"></td></tr>
-          <tr><td>KG GRAND TOTAL</td><td><input type="number" id="kg_gt_b" readonly value="0"></td><td><input type="number" id="kg_gt_g" readonly value="0"></td><td><input type="number" id="kg_gt" readonly value="0"></td></tr>
-        </table>
-      </div>
-
-      <div id="primary_section">
-        <h3>PRIMARY ENROLMENT</h3>
-        <table>
-          <tr><th>LEVEL</th><th>BOYS</th><th>GIRLS</th><th>TOTAL</th></tr>
-          <tr><td>PRIMARY 1</td><td><input type="number" id="p1_b" name="p1_b" value="0"></td><td><input type="number" id="p1_g" name="p1_g" value="0"></td><td><input type="number" id="p1_t" readonly value="0"></td></tr>
-          <tr><td>PRIMARY 2</td><td><input type="number" id="p2_b" name="p2_b" value="0"></td><td><input type="number" id="p2_g" name="p2_g" value="0"></td><td><input type="number" id="p2_t" readonly value="0"></td></tr>
-          <tr><td>PRIMARY 3</td><td><input type="number" id="p3_b" name="p3_b" value="0"></td><td><input type="number" id="p3_g" name="p3_g" value="0"></td><td><input type="number" id="p3_t" readonly value="0"></td></tr>
-          <tr><td>PRIMARY 4</td><td><input type="number" id="p4_b" name="p4_b" value="0"></td><td><input type="number" id="p4_g" name="p4_g" value="0"></td><td><input type="number" id="p4_t" readonly value="0"></td></tr>
-          <tr><td>PRIMARY 5</td><td><input type="number" id="p5_b" name="p5_b" value="0"></td><td><input type="number" id="p5_g" name="p5_g" value="0"></td><td><input type="number" id="p5_t" readonly value="0"></td></tr>
-          <tr><td>PRIMARY 6</td><td><input type="number" id="p6_b" name="p6_b" value="0"></td><td><input type="number" id="p6_g" name="p6_g" value="0"></td><td><input type="number" id="p6_t" readonly value="0"></td></tr>
-          <tr><td>PRIMARY GRAND TOTAL</td><td><input type="number" id="primary_gt_b" readonly value="0"></td><td><input type="number" id="primary_gt_g" readonly value="0"></td><td><input type="number" id="primary_gt" readonly value="0"></td></tr>
-        </table>
-      </div>
-
-      <div id="jhs_section">
-        <h3>JHS ENROLMENT</h3>
-        <table>
-          <tr><th>LEVEL</th><th>BOYS</th><th>GIRLS</th><th>TOTAL</th></tr>
-          <tr><td>JHS 1</td><td><input type="number" id="jhs1_b" name="jhs1_b" value="0"></td><td><input type="number" id="jhs1_g" name="jhs1_g" value="0"></td><td><input type="number" id="jhs1_t" readonly value="0"></td></tr>
-          <tr><td>JHS 2</td><td><input type="number" id="jhs2_b" name="jhs2_b" value="0"></td><td><input type="number" id="jhs2_g" name="jhs2_g" value="0"></td><td><input type="number" id="jhs2_t" readonly value="0"></td></tr>
-          <tr><td>JHS 3</td><td><input type="number" id="jhs3_b" name="jhs3_b" value="0"></td><td><input type="number" id="jhs3_g" name="jhs3_g" value="0"></td><td><input type="number" id="jhs3_t" readonly value="0"></td></tr>
-          <tr><td>JHS GRAND TOTAL</td><td><input type="number" id="jhs_gt_b" readonly value="0"></td><td><input type="number" id="jhs_gt_g" readonly value="0"></td><td><input type="number" id="jhs_gt" readonly value="0"></td></tr>
-        </table>
-      </div>
-    </form>
-  `;
+    <script src="enrolment-app.js"></script>
+</body>
+</html>

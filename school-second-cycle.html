@@ -3,27 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES - Second Cycle Register</title>
+    <title>GES - Second Cycle School Master Profile Setup</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #fff8f8; margin: 0; padding: 20px; }
-        .hub-nav-bar { display: flex; flex-wrap: wrap; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; }
-        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255,255,255,0.15); color: white; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); transition: background-color 0.2s; }
-        .hub-nav-btn:hover { background-color: rgba(255, 255, 255, 0.3); }
-        .hub-nav-btn.active { background-color: white; color: #800000; border-color: white; cursor: default; }
-        .hub-nav-btn.logout { background-color: #e0e0e0; color: #333; margin-left: auto; border: none; }
+        
+        /* Master Hub Navigation Bar Layout */
+        .hub-nav-bar { display: flex; flex-wrap: wrap; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255, 255, 255, 0.15); color: #ffffff; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); transition: background-color 0.2s, border-color 0.2s; }
+        .hub-nav-btn:hover { background-color: rgba(255, 255, 255, 0.3); border-color: #ffffff; }
+        .hub-nav-btn.active { background-color: #ffffff; color: #800000; border-color: #ffffff; cursor: default; }
+        .hub-nav-btn.logout { background-color: #e0e0e0; color: #333333; margin-left: auto; border: none; }
         .hub-nav-btn.logout:hover { background-color: #d4d4d4; }
-        .form-container { background: white; padding: 25px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 650px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .form-container h2 { color: #800000; margin-top: 0; font-size: 20px; border-bottom: 2px solid #800000; padding-bottom: 8px; margin-bottom: 20px; text-transform: uppercase; }
-        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px; }
-        label { font-size: 11px; font-weight: bold; color: #333; text-transform: uppercase; }
-        input, select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; width: 100%; box-sizing: border-box; }
-        button { padding: 12px; background-color: #800000; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 13px; width: 100%; margin-top: 10px; transition: background-color 0.2s; }
-        button:hover { background-color: #660000; }
-        button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        /* Form Presentation Layout Setup */
+        .form-container { background: #ffffff; padding: 30px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 750px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .form-title { color: #800000; font-size: 20px; font-weight: bold; text-transform: uppercase; border-bottom: 3px solid #800000; padding-bottom: 8px; margin-bottom: 25px; letter-spacing: 0.5px; }
+        
+        .form-section-divider { font-size: 12px; font-weight: bold; color: #2b579a; text-transform: uppercase; letter-spacing: 1px; margin: 25px 0 15px 0; padding-bottom: 5px; border-bottom: 1px dashed #cbd5e1; }
+        
+        .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 11px; font-weight: bold; color: #333333; text-transform: uppercase; }
+        .form-group input, .form-group select { padding: 10px; border: 1px solid #cccccc; border-radius: 4px; font-size: 14px; color: #333333; width: 100%; box-sizing: border-box; }
+        .form-group input::placeholder { color: #aaaaaa; }
+        
+        .form-container button[type="submit"] { width: 100%; padding: 12px; background-color: #800000; color: #ffffff; border: none; font-weight: bold; font-size: 13px; border-radius: 4px; cursor: pointer; text-transform: uppercase; transition: background-color 0.2s; margin-top: 10px; }
+        .form-container button[type="submit"]:hover { background-color: #600000; }
     </style>
 </head>
 <body>
-
+    <!-- Master Shared Hub Navigation System Bar -->
     <div class="hub-nav-bar">
         <a href="school-basic.html" class="hub-nav-btn">Basic Schools</a>
         <a href="school-second-cycle.html" class="hub-nav-btn active">Second Cycle</a>
@@ -36,67 +44,196 @@
     </div>
 
     <div class="form-container">
-        <h2>Second Cycle (SHS/TVET/STEM) Profile Master</h2>
-        <form id="secondCycleForm">
-            <div class="form-group"><label>EMIS CODE</label><input type="text" name="EMIS_Code" required placeholder="Enter Senior High EMIS code"></div>
-            <div class="form-group"><label>NAME OF INSTITUTION</label><input type="text" name="School_Name" required placeholder="Official Secondary Campus Name"></div>
+        <div class="form-title">Second Cycle School Master Profile Setup</div>
+        
+        <form id="secondCycleSchoolForm">
+            <div class="form-section-divider">Administrative Foundation</div>
+            
             <div class="form-group">
-                <label>INSTITUTIONAL TRACK TYPE</label>
-                <select name="Institution_Type">
-                    <option value="SHS Only">SHS Only</option>
-                    <option value="SHTS (Technical)">SHTS (Technical)</option>
-                    <option value="TVET Center">TVET Center</option>
-                    <option value="STEM Academy">STEM Academy</option>
+                <label>MMDA Name</label>
+                <input type="text" name="MMDA_Name" value="Ahafo Ano North Municipal Assembly" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Name of School</label>
+                <input type="text" name="School_Name" placeholder="Enter institutional official second-cycle name" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Circuit</label>
+                <select name="Circuit" required>
+                    <option value="" disabled selected>Select Circuit</option>
+                    <option value="KOJOBETIAKO">KOJOBETIAKO</option>
+                    <option value="AKWASIASE">AKWASIASE</option>
+                    <option value="ANYINASUSO">ANYINASUSO</option>
+                    <option value="DWAAHO">DWAAHO</option>
+                    <option value="MANFO">MANFO</option>
+                    <option value="SUBRISO">SUBRISO</option>
+                    <option value="SUPONSO">SUPONSO</option>
+                    <option value="TEPA URBAN A">TEPA URBAN A</option>
+                    <option value="TEPA URBAN B">TEPA URBAN B</option>
+                    <option value="TWABIDI">TWABIDI</option>
                 </select>
             </div>
+
             <div class="form-group">
-                <label>SCHOOL CATEGORY</label>
-                <select name="Category_Type">
-                    <option value="Category A">Category A</option>
-                    <option value="Category B">Category B</option>
-                    <option value="Category C">Category C</option>
+                <label>EMIS Code</label>
+                <input type="text" name="EMIS_Code" placeholder="Enter secondary institutional EMIS code" required>
+            </div>
+
+            <div class="form-group">
+                <label>School Email</label>
+                <input type="email" name="School_Email" placeholder="e.g. schoolname@ges.gov.gh">
+            </div>
+
+            <div class="form-group">
+                <label>School Model</label>
+                <select name="School_Model" required>
+                    <option value="" disabled selected>Select School Model</option>
+                    <option value="Mainstream">Mainstream</option>
+                    <option value="Integrated">Integrated</option>
+                    <option value="Special">Special</option>
+                    <option value="STEM Only">STEM Only</option>
                 </select>
             </div>
-            <div class="form-group"><label>HEADMASTER / HEADMISTRESS NAME</label><input type="text" name="Headmaster_Name" placeholder="Full name of administrator"></div>
-            <button type="submit" id="btnSave">SAVE SECOND CYCLE LOG</button>
+
+            <div class="form-group">
+                <label>Level</label>
+                <select name="Level_Scope" required>
+                    <option value="" disabled selected>Select Level Track</option>
+                    <option value="SHS (General)">SHS (General)</option>
+                    <option value="SHTS">SHTS</option>
+                    <option value="TVET">TVET</option>
+                    <option value="STEM">STEM</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Affiliation Type</label>
+                <select name="Affiliation_Type" required>
+                    <option value="" disabled selected>Select Affiliation Type</option>
+                    <option value="Public/non-religious (government)">Public/non-religious (government)</option>
+                    <option value="Religious (mission/faith based)">Religious (mission/faith based)</option>
+                    <option value="Private">Private</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Sector</label>
+                <select name="Sector_Type" required>
+                    <option value="" disabled selected>Select Sector</option>
+                    <option value="Public">Public</option>
+                    <option value="Private">Private</option>
+                </select>
+            </div>
+
+            <div class="form-section-divider">Institutional Leadership</div>
+
+            <div class="form-group">
+                <label>Headmaster / Headmistress Name</label>
+                <input type="text" name="Headmaster_Name" placeholder="First and last name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Staff ID of Headmaster / Headmistress</label>
+                <input type="text" name="Headmaster_Staff_ID" placeholder="e.g. TS-XXXXX" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address of Headmaster / Headmistress</label>
+                <input type="email" name="Headmaster_Email" placeholder="e.g. headmaster@gmail.com">
+            </div>
+            <div class="form-section-divider">Data Officer Profile</div>
+
+            <div class="form-group">
+                <label>Name of Data Officer</label>
+                <input type="text" name="Data_Officer_Name" placeholder="Official handling reporting logs" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address of Data Officer</label>
+                <input type="email" name="Data_Officer_Email" placeholder="e.g. dataofficer@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Telephone Number of Data Officer</label>
+                <input type="text" name="Data_Officer_Phone" placeholder="e.g. +233 XX XXX XXXX" required>
+            </div>
+
+            <div class="form-group">
+                <label>Staff ID of Data Officer</label>
+                <input type="text" name="Data_Officer_Staff_ID" placeholder="e.g. TS-YYYYY" required>
+            </div>
+
+            <div class="form-section-divider">Geographic Properties</div>
+
+            <div class="form-group">
+                <label>Area Type</label>
+                <select name="Area_Type" required>
+                    <option value="" disabled selected>Select Area Type</option>
+                    <option value="Urban">Urban</option>
+                    <option value="Peri-Urban">Peri-Urban</option>
+                    <option value="Rural">Rural</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Location / Physical Address</label>
+                <input type="text" name="Location_Address" placeholder="e.g. Off Main Highway, Tepa Block B" required>
+            </div>
+            
+            <button type="submit" id="btnSave">Save Second Cycle Log</button>
         </form>
     </div>
 
     <script>
-        document.getElementById("secondCycleForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById("btnSave");
-            btn.disabled = true; 
-            btn.innerText = "WRITING SECONDARY INDEX...";
-            
-            const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_WEB_APP_URL_HERE";
-            const formData = new FormData(e.target);
-            const payloadData = {};
-            formData.forEach((val, key) => payloadData[key] = val);
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("secondCycleSchoolForm");
+            const saveButton = document.getElementById("btnSave");
 
-            const payload = { formType: "SecondCycle", data: payloadData };
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                
+                // UPDATE VALUE: Replace with your deployed Google Web App URL link
+                const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE";
+                
+                saveButton.disabled = true;
+                saveButton.innerText = "SAVING...";
 
-            try {
-                const res = await fetch(APP_SCRIPT_URL, { 
-                    method: "POST", 
-                    mode: "cors", 
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify(payload) 
+                const formData = new FormData(form);
+                const payloadData = {};
+                formData.forEach((val, key) => {
+                    payloadData[key] = val;
                 });
-                const result = await res.json();
-                if(result.result === "success") { 
-                    alert(result.message); 
-                    e.target.reset();
-                } else {
-                    alert("Error processing secondary cycle log: " + result.message);
+
+                const payload = {
+                    formType: "Second_Cycle",
+                    data: payloadData
+                };
+
+                try {
+                    const res = await fetch(APP_SCRIPT_URL, {
+                        method: "POST",
+                        mode: "cors",
+                        headers: { "Content-Type": "text/plain;charset=utf-8" },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    const result = await res.json();
+                    if (result.result === "success") {
+                        alert(result.message);
+                        form.reset();
+                    } else {
+                        alert("Spreadsheet DB Error: " + result.message);
+                    }
+                } catch (err) {
+                    console.error("API Gateway connectivity exception: ", err);
+                    alert("Network Error: Unable to transmit data logs to your Google Sheets database engine.");
+                } finally {
+                    saveButton.disabled = false;
+                    saveButton.innerText = "Save Second Cycle Log";
                 }
-            } catch (err) { 
-                alert("Database engine script lookup failed."); 
-                console.error(err);
-            } finally { 
-                btn.disabled = false; 
-                btn.innerText = "SAVE SECOND CYCLE LOG"; 
-            }
+            });
         });
     </script>
 </body>

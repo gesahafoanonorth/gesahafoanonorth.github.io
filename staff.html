@@ -3,28 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES - Manage Staff Registry</title>
+    <title>GES - Staff Information Management Registry</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #fff8f8; margin: 0; padding: 20px; }
-        .hub-nav-bar { display: flex; flex-wrap: wrap; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; }
-        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255,255,255,0.15); color: white; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); transition: background-color 0.2s; }
-        .hub-nav-btn:hover { background-color: rgba(255, 255, 255, 0.3); }
-        .hub-nav-btn.active { background-color: white; color: #800000; border-color: white; cursor: default; }
-        .hub-nav-btn.logout { background-color: #e0e0e0; color: #333; margin-left: auto; border: none; }
+        
+        /* Master Hub Navigation Bar Layout */
+        .hub-nav-bar { display: flex; flex-wrap: wrap; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255, 255, 255, 0.15); color: #ffffff; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); transition: background-color 0.2s, border-color 0.2s; }
+        .hub-nav-btn:hover { background-color: rgba(255, 255, 255, 0.3); border-color: #ffffff; }
+        .hub-nav-btn.active { background-color: #ffffff; color: #800000; border-color: #ffffff; cursor: default; }
+        .hub-nav-btn.logout { background-color: #e0e0e0; color: #333333; margin-left: auto; border: none; }
         .hub-nav-btn.logout:hover { background-color: #d4d4d4; }
-        .form-container { background: white; padding: 25px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 650px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .form-container h2 { color: #800000; margin-top: 0; font-size: 20px; border-bottom: 2px solid #800000; padding-bottom: 8px; margin-bottom: 20px; text-transform: uppercase; }
-        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px; }
-        label { font-size: 11px; font-weight: bold; color: #333; text-transform: uppercase; }
-        input, select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; width: 100%; box-sizing: border-box; }
-        input[readonly] { background-color: #f9f9f9; color: #555; }
-        button { padding: 12px; background-color: #800000; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 13px; width: 100%; margin-top: 10px; transition: background-color 0.2s; }
-        button:hover { background-color: #660000; }
-        button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        /* Form Presentation Layout Setup */
+        .register-container { background: #ffffff; padding: 30px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 1300px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
+        
+        /* Main Grid Matrices matching image structure */
+        .top-row-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
+        .employment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .banking-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+
+        fieldset { border: 2px solid #2b579a; border-radius: 6px; padding: 20px; background-color: #ffffff; margin-bottom: 20px; }
+        fieldset.personal { border-color: #d9534f; }
+        fieldset.academic { border-color: #428bca; }
+        fieldset.contact { border-color: #5cb85c; }
+        fieldset.employment { border-color: #f0ad4e; }
+        fieldset.banking { border-color: #a0522d; }
+
+        legend { font-size: 14px; font-weight: bold; padding: 0 8px; text-transform: uppercase; }
+        fieldset.personal legend { color: #d9534f; }
+        fieldset.academic legend { color: #428bca; }
+        fieldset.contact legend { color: #5cb85c; }
+        fieldset.employment legend { color: #f0ad4e; }
+        fieldset.banking legend { color: #a0522d; }
+
+        .field-row { display: flex; align-items: center; margin-bottom: 12px; gap: 10px; }
+        .field-row.last { margin-bottom: 0; }
+        .field-row label { width: 150px; font-size: 11px; font-weight: bold; color: #444444; text-transform: uppercase; flex-shrink: 0; }
+        .field-row input, .field-row select { flex: 1; padding: 6px 8px; border: 1px solid #cccccc; border-radius: 4px; font-size: 13px; width: 100%; box-sizing: border-box; }
+        
+        .read-only-bg { background-color: #eeeeee !important; color: #555555; }
+        .formula-calculated-bg { background-color: #eaf8dd !important; font-weight: bold; }
+
+        /* Search & Submit Section Rules */
+        .bottom-action-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 15px; gap: 20px; border-top: 1px dashed #cccccc; padding-top: 20px; }
+        .search-bar { display: flex; align-items: center; gap: 8px; flex: 1; max-width: 600px; }
+        .search-bar label { font-size: 12px; font-weight: bold; color: #333333; }
+        .search-bar input { flex: 1; padding: 8px 10px; border: 1px solid #bbbbbb; border-radius: 4px; font-size: 13px; }
+        .search-btn { padding: 8px 15px; background-color: #f0f4f8; border: 1px solid #2b579a; color: #2b579a; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        
+        #btnSubmit { padding: 12px 30px; background-color: #ff9999; color: black; border: 1px solid #ff6666; font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; transition: background 0.2s; }
+        #btnSubmit:hover { background-color: #ff8888; }
     </style>
 </head>
 <body>
-
+    <!-- Master Shared Hub Navigation System Bar -->
     <div class="hub-nav-bar">
         <a href="school-basic.html" class="hub-nav-btn">Basic Schools</a>
         <a href="school-second-cycle.html" class="hub-nav-btn">Second Cycle</a>
@@ -36,67 +69,259 @@
         <a href="index.html" class="hub-nav-btn logout">Logout</a>
     </div>
 
-    <div class="form-container">
-        <h2>Personnel & Staff Registration Form</h2>
+    <div class="register-container">
         <form id="staffForm">
-            <div class="form-group"><label>EMIS CODE</label><input type="text" name="EMIS_Code" value="1066340072" readonly></div>
-            <div class="form-group"><label>CIRCUIT</label><input type="text" name="Circuit" value="KOJOBETIAKO" readonly></div>
-            <div class="form-group"><label>NAME OF SCHOOL</label><input type="text" name="School_Name" value="ABONSUASO M/A JHS" readonly></div>
-            <div class="form-group"><label>STAFF ID</label><input type="text" name="Staff_ID" required placeholder="e.g. TS-12345"></div>
-            <div class="form-group"><label>FIRST NAME</label><input type="text" name="First_Name" required placeholder="Enter first name"></div>
-            <div class="form-group"><label>LAST NAME</label><input type="text" name="Last_Name" required placeholder="Enter last name"></div>
-            <div class="form-group">
-                <label>GENDER</label>
-                <select name="Gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
+            
+            <!-- Top Column Grid Layout Slots Row -->
+            <div class="top-row-grid">
+                
+                <!-- Personal Information Fieldset -->
+                <fieldset class="personal">
+                    <legend class="personal">Personal Information</legend>
+                    <div class="field-row"><label>Teacher ID</label><input type="text" name="Teacher_ID" required placeholder="Enter unique ID"></div>
+                    <div class="field-row">
+                        <label>Title</label>
+                        <select name="Title">
+                            <option value="" disabled selected>Select</option>
+                            <option value="Mr.">Mr.</option><option value="Mrs.">Mrs.</option><option value="Ms.">Ms.</option><option value="Dr.">Dr.</option>
+                        </select>
+                    </div>
+                    <div class="field-row"><label>Surname</label><input type="text" name="Surname" required></div>
+                    <div class="field-row"><label>Other Names</label><input type="text" name="Other_Names" required></div>
+                    <div class="field-row">
+                        <label>Gender</label>
+                        <select name="Gender" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="Male">Male</option><option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="field-row"><label>Date of Birth</label><input type="date" name="Date_of_Birth" id="dob_input" required></div>
+                    <div class="field-row"><label>Age</label><input type="text" name="Age" id="age_box" class="read-only-bg formula-calculated-bg" readonly value="0"></div>
+                    <div class="field-row last">
+                        <label>Religion</label>
+                        <select name="Religion">
+                            <option value="" disabled selected>Select</option>
+                            <option value="Christianity">Christianity</option><option value="Islam">Islam</option><option value="Traditional">Traditional</option><option value="Other">Other</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <!-- Academic And School Details Fieldset -->
+                <fieldset class="academic">
+                    <legend class="academic">Academic And School Details</legend>
+                    <div class="field-row"><label>Circuit</label><input type="text" name="Circuit" value="KOJOBETIAKO" class="read-only-bg" readonly></div>
+                    <div class="field-row"><label>Name of School</label><input type="text" name="School_Name" value="ABONSUASO M/A JHS" class="read-only-bg" readonly></div>
+                    <div class="field-row">
+                        <label>Association Type</label>
+                        <select name="Association_Type">
+                            <option value="" disabled selected>Select</option>
+                            <option value="GNAT">GNAT</option><option value="NAGRAT">NAGRAT</option><option value="CCT-GH">CCT-GH</option>
+                        </select>
+                    </div>
+                    <div class="field-row">
+                        <label>Staff Type</label>
+                        <select name="Staff_Type">
+                            <option value="" disabled selected>Select</option>
+                            <option value="Teaching">Teaching</option><option value="Non-Teaching">Non-Teaching</option>
+                        </select>
+                    </div>
+                    <div class="field-row">
+                        <label>Training Status</label>
+                        <select name="Training_Status">
+                            <option value="" disabled selected>Select</option>
+                            <option value="Professional">Professional</option><option value="Non-Professional">Non-Professional</option>
+                        </select>
+                    </div>
+                    <div class="field-row"><label>Position</label><input type="text" name="Position" placeholder="e.g. Class Teacher"></div>
+                    <div class="field-row">
+                        <label>Level Taught</label>
+                        <select name="Level_Taught">
+                            <option value="" disabled selected>Select</option>
+                            <option value="KG">KG</option><option value="Primary">Primary</option><option value="JHS">JHS</option>
+                        </select>
+                    </div>
+                    <div class="field-row"><label>Class Taught</label><input type="text" name="Class_Taught" placeholder="e.g. Primary 4 / JHS 2"></div>
+                    <div class="field-row last"><label>Subject Taught</label><input type="text" name="Subject_Taught" placeholder="e.g. Mathematics"></div>
+                </fieldset>
+
+                <!-- Contact And Location Details Fieldset -->
+                <fieldset class="contact">
+                    <legend class="contact">Contact And Location Details</legend>
+                    <div class="field-row"><label>Nationality</label><input type="text" name="Nationality" value="Ghanaian"></div>
+                    <div class="field-row"><label>Hometown</label><input type="text" name="Hometown"></div>
+                    <div class="field-row">
+                        <label>Region</label>
+                        <select name="Region">
+                            <option value="" disabled selected>Select</option>
+                            <option value="Ahafo">Ahafo</option><option value="Ashanti">Ashanti</option><option value="Bono">Bono</option>
+                        </select>
+                    </div>
+                    <div class="field-row">
+                        <label>District</label>
+                        <select name="District">
+                            <option value="" disabled selected>Select</option>
+                            <option value="Ahafo Ano North Municipal">Ahafo Ano North Municipal</option>
+                        </select>
+                    </div>
+                    <div class="field-row"><label>GPS Address</label><input type="text" name="GPS_Address" placeholder="e.g. AN-0002-1234"></div>
+                    <div class="field-row"><label>E-Mail</label><input type="email" name="Email_Address" placeholder="teacher@example.com"></div>
+                    <div class="field-row last"><label>Telephone Number</label><input type="text" name="Telephone_Number"></div>
+                </fieldset>
+
             </div>
-            <div class="form-group"><label>PROFESSIONAL RANK</label><input type="text" name="Professional_Rank" placeholder="e.g. Senior Superintendent"></div>
-            <div class="form-group"><label>POSITION HELD</label><input type="text" name="Position_Held" placeholder="e.g. Class Teacher / Headteacher"></div>
-            <button type="submit" id="btnSave">SAVE STAFF MEMBER</button>
+            <!-- Employment and Qualification Block Segment -->
+            <fieldset class="employment">
+                <legend class="employment">Employment and Qualification</legend>
+                <div class="employment-grid">
+                    <div>
+                        <div class="field-row"><label>File Number</label><input type="text" name="File_Number"></div>
+                        <div class="field-row"><label>Staff ID</label><input type="text" name="Staff_ID" required></div>
+                        <div class="field-row"><label>Registered No.</label><input type="text" name="Registered_No"></div>
+                        <div class="field-row"><label>SSNIT Number</label><input type="text" name="SSNIT_Number"></div>
+                        <div class="field-row"><label>TIN Number</label><input type="text" name="TIN_Number"></div>
+                        <div class="field-row">
+                            <label>ID Type</label>
+                            <select name="ID_Type">
+                                <option value="" disabled selected>Select</option>
+                                <option value="Ghana Card">Ghana Card</option><option value="Voters ID">Voters ID</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="field-row"><label>ID Number</label><input type="text" name="ID_Number"></div>
+                        <div class="field-row"><label>Retirement Status</label><input type="text" name="Retirement_Status" id="retirement_box" class="read-only-bg formula-calculated-bg" readonly value="Active"></div>
+                        <div class="field-row"><label>Date Of First Appointment</label><input type="date" name="Date_Of_First_Appointment" id="appointment_input"></div>
+                        <div class="field-row"><label>Years In Service</label><input type="text" name="Years_In_Service" id="service_box" class="read-only-bg formula-calculated-bg" readonly value="0"></div>
+                        <div class="field-row"><label>Academic Qualification</label><input type="text" name="Academic_Qualification" placeholder="e.g. B.Ed Mathematics"></div>
+                        <div class="field-row"><label>Professional Qualification</label><input type="text" name="Professional_Qualification" placeholder="e.g. Diploma in Basic Education"></div>
+                    </div>
+                    
+                    <div>
+                        <div class="field-row"><label>Years To Retired</label><input type="text" name="Years_To_Retired" id="years_to_retire_box" class="read-only-bg formula-calculated-bg" readonly value="0"></div>
+                        <div class="field-row"><label>Date Confirmed</label><input type="date" name="Date_Confirmed"></div>
+                        <div class="field-row"><label>Last Promotion Date</label><input type="date" name="Last_Promotion_Date"></div>
+                        <div class="field-row">
+                            <label>Current Rank</label>
+                            <select name="Current_Rank">
+                                <option value="" disabled selected>Select</option>
+                                <option value="Superintendent II">Superintendent II</option><option value="Principal Superintendent">Principal Superintendent</option>
+                            </select>
+                        </div>
+                        <div class="field-row"><label>Specialisation</label><input type="text" name="Specialisation" placeholder="e.g. Science / RME"></div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Banking And Finance Block Segment -->
+            <fieldset class="banking">
+                <legend class="banking">Banking And Finance</legend>
+                <div class="banking-grid">
+                    <div class="field-row"><label>Bank Name</label><input type="text" name="Bank_Name" placeholder="e.g. GCB Bank"></div>
+                    <div class="field-row"><label>Bank Branch</label><input type="text" name="Bank_Branch" placeholder="e.g. Tepa Branch"></div>
+                    <div class="field-row"><label>Accounts Number</label><input type="text" name="Accounts_Number"></div>
+                </div>
+            </fieldset>
+
+            <!-- Lower Workspace Controls Footer Panel -->
+            <div class="bottom-action-bar">
+                <div class="search-bar">
+                    <label>Search by StaffID, Surname, Phone Number</label>
+                    <input type="text" id="search_query_input" placeholder="Enter keywords...">
+                    <button type="button" class="search-btn" onclick="alert('Local database query index lookups initiated...')">🔍</button>
+                </div>
+                <button type="submit" id="btnSubmit">Add New Entry</button>
+            </div>
+
         </form>
     </div>
 
     <script>
-        document.getElementById("staffForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById("btnSave");
-            btn.disabled = true; 
-            btn.innerText = "SAVING TO DATABASE...";
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("staffForm");
+            const saveButton = document.getElementById("btnSubmit");
+
+            // Live Automated Age & Retirement Calculation Controllers
+            const dobInput = document.getElementById("dob_input");
+            const appointmentInput = document.getElementById("appointment_input");
             
-            const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_WEB_APP_URL_HERE";
-            const formData = new FormData(e.target);
-            const payloadData = {};
-            formData.forEach((val, key) => payloadData[key] = val);
+            const ageBox = document.getElementById("age_box");
+            const serviceBox = document.getElementById("service_box");
+            const retirementBox = document.getElementById("retirement_box");
+            const yearsToRetireBox = document.getElementById("years_to_retire_box");
 
-            const payload = { formType: "Staff", data: payloadData };
+            const performLiveDateMath = () => {
+                const standardCurrentYear = 2026; // Grounded to system timeframe
+                
+                if (dobInput.value) {
+                    const birthYear = new Date(dobInput.value).getFullYear();
+                    const calculatedAge = Math.max(0, standardCurrentYear - birthYear);
+                    ageBox.value = calculatedAge;
 
-            try {
-                const res = await fetch(APP_SCRIPT_URL, { 
-                    method: "POST", 
-                    mode: "cors", 
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify(payload) 
-                });
-                const result = await res.json();
-                if(result.result === "success") { 
-                    alert(result.message); 
-                    e.target.reset();
-                    // Retain school details after dynamic clear operations
-                    document.getElementsByName("EMIS_Code")[0].value = "1066340072";
-                    document.getElementsByName("Circuit")[0].value = "KOJOBETIAKO";
-                    document.getElementsByName("School_Name")[0].value = "ABONSUASO M/A JHS";
-                } else { 
-                    alert("Spreadsheet Processing Error: " + result.message); 
+                    // Standard civil service retirement baseline threshold in Ghana is 60 years
+                    const remainingYears = Math.max(0, 60 - calculatedAge);
+                    yearsToRetireBox.value = remainingYears;
+                    retirementBox.value = remainingYears <= 0 ? "Retired" : "Active";
                 }
-            } catch (err) { 
-                alert("Network Gateway Exception: Verification or pipeline failed."); 
-                console.error(err);
-            } finally { 
-                btn.disabled = false; 
-                btn.innerText = "SAVE STAFF MEMBER"; 
-            }
+
+                if (appointmentInput.value) {
+                    const entryYear = new Date(appointmentInput.value).getFullYear();
+                    serviceBox.value = Math.max(0, standardCurrentYear - entryYear);
+                }
+            };
+
+            dobInput.addEventListener("change", performLiveDateMath);
+            appointmentInput.addEventListener("change", performLiveDateMath);
+
+            // POST Submission Logic Engine Gateway Pipeline
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                
+                const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE";
+                saveButton.disabled = true;
+                saveButton.innerText = "SAVING ROWS...";
+
+                const formData = new FormData(form);
+                const payloadData = {};
+                formData.forEach((val, key) => {
+                    payloadData[key] = val;
+                });
+
+                // Inject dynamic properties fields calculated by engine into payload mapping
+                payloadData["Age"] = ageBox.value;
+                payloadData["Years_In_Service"] = serviceBox.value;
+                payloadData["Years_To_Retired"] = yearsToRetireBox.value;
+                payloadData["Retirement_Status"] = retirementBox.value;
+
+                const payload = {
+                    formType: "Staff",
+                    data: payloadData
+                };
+
+                try {
+                    const res = await fetch(APP_SCRIPT_URL, {
+                        method: "POST",
+                        mode: "cors",
+                        headers: { "Content-Type": "text/plain;charset=utf-8" },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    const result = await res.json();
+                    if (result.result === "success") {
+                        alert(result.message);
+                        form.reset();
+                        performLiveDateMath();
+                    } else {
+                        alert("Database API Failure: " + result.message);
+                    }
+                } catch (err) {
+                    console.error("Transmission caught exception: ", err);
+                    alert("Network Error: Link timed out while communicating with your Google Sheets backend API.");
+                } finally {
+                    saveButton.disabled = false;
+                    saveButton.innerText = "Add New Entry";
+                }
+            });
         });
     </script>
 </body>

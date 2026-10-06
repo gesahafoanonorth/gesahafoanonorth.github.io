@@ -3,27 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES - Basic Schools Register</title>
+    <title>GES - Basic School Master Profile Setup</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #fff8f8; margin: 0; padding: 20px; }
-        .hub-nav-bar { display: flex; flex-wrap: wrap; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; }
-        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255,255,255,0.15); color: white; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); transition: background-color 0.2s; }
-        .hub-nav-btn:hover { background-color: rgba(255, 255, 255, 0.3); }
-        .hub-nav-btn.active { background-color: white; color: #800000; border-color: white; cursor: default; }
-        .hub-nav-btn.logout { background-color: #e0e0e0; color: #333; margin-left: auto; border: none; }
+        
+        /* Master Hub Navigation Bar Layout */
+        .hub-nav-bar { display: flex; flex-wrap: wrap; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255, 255, 255, 0.15); color: #ffffff; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); transition: background-color 0.2s, border-color 0.2s; }
+        .hub-nav-btn:hover { background-color: rgba(255, 255, 255, 0.3); border-color: #ffffff; }
+        .hub-nav-btn.active { background-color: #ffffff; color: #800000; border-color: #ffffff; cursor: default; }
+        .hub-nav-btn.logout { background-color: #e0e0e0; color: #333333; margin-left: auto; border: none; }
         .hub-nav-btn.logout:hover { background-color: #d4d4d4; }
-        .form-container { background: white; padding: 25px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 650px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .form-container h2 { color: #800000; margin-top: 0; font-size: 20px; border-bottom: 2px solid #800000; padding-bottom: 8px; margin-bottom: 20px; text-transform: uppercase; }
-        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px; }
-        label { font-size: 11px; font-weight: bold; color: #333; text-transform: uppercase; }
-        input, select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; width: 100%; box-sizing: border-box; }
-        button { padding: 12px; background-color: #800000; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 13px; width: 100%; margin-top: 10px; transition: background-color 0.2s; }
-        button:hover { background-color: #660000; }
-        button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        /* Form Presentation Layout Setup */
+        .form-container { background: #ffffff; padding: 30px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 700px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .form-title { color: #800000; font-size: 20px; font-weight: bold; text-transform: uppercase; border-bottom: 3px solid #800000; padding-bottom: 8px; margin-bottom: 25px; letter-spacing: 0.5px; }
+        
+        .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 11px; font-weight: bold; color: #333333; text-transform: uppercase; }
+        .form-group input, .form-group select { padding: 10px; border: 1px solid #cccccc; border-radius: 4px; font-size: 14px; color: #333333; width: 100%; box-sizing: border-box; }
+        .form-group input::placeholder { color: #aaaaaa; }
+        
+        .form-container button[type="submit"] { width: 100%; padding: 12px; background-color: #800000; color: #ffffff; border: none; font-weight: bold; font-size: 13px; border-radius: 4px; cursor: pointer; text-transform: uppercase; transition: background-color 0.2s; margin-top: 10px; }
+        .form-container button[type="submit"]:hover { background-color: #600000; }
     </style>
 </head>
 <body>
-
+    <!-- Master Shared Hub Navigation System Bar -->
     <div class="hub-nav-bar">
         <a href="school-basic.html" class="hub-nav-btn active">Basic Schools</a>
         <a href="school-second-cycle.html" class="hub-nav-btn">Second Cycle</a>
@@ -36,12 +42,17 @@
     </div>
 
     <div class="form-container">
-        <h2>Basic School Master Profile Setup</h2>
+        <div class="form-title">Basic School Master Profile Setup</div>
+        
         <form id="basicSchoolForm">
-            <div class="form-group"><label>EMIS CODE</label><input type="text" name="EMIS_Code" value="1066340072" required></div>
             <div class="form-group">
-                <label>CIRCUIT</label>
-                <select name="Circuit">
+                <label>EMIS Code</label>
+                <input type="text" name="EMIS_Code" value="1066340072" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Circuit</label>
+                <select name="Circuit" required>
                     <option value="KOJOBETIAKO" selected>KOJOBETIAKO</option>
                     <option value="AKWASIASE">AKWASIASE</option>
                     <option value="ANYINASUSO">ANYINASUSO</option>
@@ -54,50 +65,83 @@
                     <option value="TWABIDI">TWABIDI</option>
                 </select>
             </div>
-            <div class="form-group"><label>NAME OF SCHOOL</label><input type="text" name="School_Name" required placeholder="Enter institutional official name"></div>
-            <div class="form-group"><label>LOCALITY / COMMUNITY</label><input type="text" name="Locality" placeholder="e.g. Abonsuaso Community"></div>
-            <div class="form-group"><label>YEAR ESTABLISHED</label><input type="number" name="Year_Established" value="1995" min="1800" max="2100"></div>
-            <div class="form-group"><label>HEADTEACHER FULL NAME</label><input type="text" name="Headteacher_Name" placeholder="First and last name"></div>
-            <div class="form-group"><label>CONTACT TELEPHONE NUMBER</label><input type="text" name="Contact_Number" placeholder="e.g. +233 XX XXX XXXX"></div>
-            <button type="submit" id="btnSave">SUBMIT SCHOOL ACCOUNT</button>
+            
+            <div class="form-group">
+                <label>Name of School</label>
+                <input type="text" name="School_Name" placeholder="Enter institutional official name" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Locality / Community</label>
+                <input type="text" name="Locality" placeholder="e.g. Abonsuaso Community">
+            </div>
+            <div class="form-group">
+                <label>Year Established</label>
+                <input type="number" name="Year_Established" value="1995" min="1800" max="2100">
+            </div>
+            
+            <div class="form-group">
+                <label>Headteacher Full Name</label>
+                <input type="text" name="Headteacher_Name" placeholder="First and last name">
+            </div>
+            
+            <div class="form-group">
+                <label>Contact Telephone Number</label>
+                <input type="text" name="Contact_Number" placeholder="e.g. +233 XX XXX XXXX">
+            </div>
+            
+            <button type="submit" id="btnSave">Submit School Account</button>
         </form>
     </div>
 
     <script>
-        document.getElementById("basicSchoolForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById("btnSave");
-            btn.disabled = true; 
-            btn.innerText = "POSTING PROFILE ENTRY...";
-            
-            const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_WEB_APP_URL_HERE";
-            const formData = new FormData(e.target);
-            const payloadData = {};
-            formData.forEach((val, key) => payloadData[key] = val);
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("basicSchoolForm");
+            const saveButton = document.getElementById("btnSave");
 
-            const payload = { formType: "Basic", data: payloadData };
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                
+                // UPDATE VALUE: Define your operational deployed web app execution URL here
+                const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE";
+                
+                saveButton.disabled = true;
+                saveButton.innerText = "SUBMITTING...";
 
-            try {
-                const res = await fetch(APP_SCRIPT_URL, { 
-                    method: "POST", 
-                    mode: "cors", 
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify(payload) 
+                const formData = new FormData(form);
+                const payloadData = {};
+                formData.forEach((val, key) => {
+                    payloadData[key] = val;
                 });
-                const result = await res.json();
-                if(result.result === "success") { 
-                    alert(result.message); 
-                    e.target.reset();
-                } else {
-                    alert("Database write error: " + result.message);
+
+                const payload = {
+                    formType: "Basic_School",
+                    data: payloadData
+                };
+
+                try {
+                    const res = await fetch(APP_SCRIPT_URL, {
+                        method: "POST",
+                        mode: "cors",
+                        headers: { "Content-Type": "text/plain;charset=utf-8" },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    const result = await res.json();
+                    if (result.result === "success") {
+                        alert(result.message);
+                        form.reset();
+                    } else {
+                        alert("Database Routing Failure: " + result.message);
+                    }
+                } catch (err) {
+                    console.error("API transmission exception: ", err);
+                    alert("Network Connection Error: Failure communicating with spreadsheet endpoint database API.");
+                } finally {
+                    saveButton.disabled = false;
+                    saveButton.innerText = "Submit School Account";
                 }
-            } catch (err) { 
-                alert("API Pipeline connection loss. Please verify network access settings."); 
-                console.error(err);
-            } finally { 
-                btn.disabled = false; 
-                btn.innerText = "SUBMIT SCHOOL ACCOUNT"; 
-            }
+            });
         });
     </script>
 </body>

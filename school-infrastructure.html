@@ -3,27 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GES - School Infrastructure</title>
+    <title>GES - Institutional Asset & Structural Infrastructure Log</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #fff8f8; margin: 0; padding: 20px; }
-        .hub-nav-bar { display: flex; flex-wrap: wrap; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; }
-        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255,255,255,0.15); color: white; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); transition: background-color 0.2s; }
-        .hub-nav-btn:hover { background-color: rgba(255, 255, 255, 0.3); }
-        .hub-nav-btn.active { background-color: white; color: #800000; border-color: white; cursor: default; }
-        .hub-nav-btn.logout { background-color: #e0e0e0; color: #333; margin-left: auto; border: none; }
+        
+        /* Master Hub Navigation Bar Layout */
+        .hub-nav-bar { display: flex; flex-wrap: wrap; gap: 8px; background-color: #800000; padding: 12px; border-radius: 6px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .hub-nav-btn { text-decoration: none; padding: 7px 14px; background-color: rgba(255, 255, 255, 0.15); color: #ffffff; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); transition: background-color 0.2s, border-color 0.2s; }
+        .hub-nav-btn:hover { background-color: rgba(255, 255, 255, 0.3); border-color: #ffffff; }
+        .hub-nav-btn.active { background-color: #ffffff; color: #800000; border-color: #ffffff; cursor: default; }
+        .hub-nav-btn.logout { background-color: #e0e0e0; color: #333333; margin-left: auto; border: none; }
         .hub-nav-btn.logout:hover { background-color: #d4d4d4; }
-        .form-container { background: white; padding: 25px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 650px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .form-container h2 { color: #800000; margin-top: 0; font-size: 20px; border-bottom: 2px solid #800000; padding-bottom: 8px; margin-bottom: 20px; text-transform: uppercase; }
+
+        /* Form Presentation Layout Setup */
+        .form-container { background: #ffffff; padding: 30px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 1100px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .form-title { color: #800000; font-size: 20px; font-weight: bold; text-transform: uppercase; border-bottom: 3px solid #800000; padding-bottom: 8px; margin-bottom: 25px; letter-spacing: 0.5px; }
+        
+        .form-section-divider { font-size: 12px; font-weight: bold; color: #2b579a; text-transform: uppercase; letter-spacing: 1px; margin: 25px 0 15px 0; padding-bottom: 5px; border-bottom: 1px solid #cbd5e1; }
+        
+        /* Grid Alignment Framework matrices */
+        .form-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .form-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        
         .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px; }
-        label { font-size: 11px; font-weight: bold; color: #333; text-transform: uppercase; }
-        input, select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; width: 100%; box-sizing: border-box; }
-        button { padding: 12px; background-color: #800000; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 13px; width: 100%; margin-top: 10px; transition: background-color 0.2s; }
-        button:hover { background-color: #660000; }
-        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        .form-group label { font-size: 11px; font-weight: bold; color: #333333; text-transform: uppercase; }
+        .form-group input, .form-group select { padding: 8px 10px; border: 1px solid #cccccc; border-radius: 4px; font-size: 13px; color: #333333; width: 100%; box-sizing: border-box; }
+        .form-group input[readonly] { background-color: #eeeeee; color: #555555; cursor: not-allowed; }
+        
+        .form-container button[type="submit"] { width: 100%; padding: 12px; background-color: #800000; color: #ffffff; border: none; font-weight: bold; font-size: 13px; border-radius: 4px; cursor: pointer; text-transform: uppercase; transition: background-color 0.2s; margin-top: 20px; }
+        .form-container button[type="submit"]:hover { background-color: #600000; }
     </style>
 </head>
 <body>
-
+    <!-- Master Shared Hub Navigation System Bar -->
     <div class="hub-nav-bar">
         <a href="school-basic.html" class="hub-nav-btn">Basic Schools</a>
         <a href="school-second-cycle.html" class="hub-nav-btn">Second Cycle</a>
@@ -36,70 +48,193 @@
     </div>
 
     <div class="form-container">
-        <h2>Institutional Asset & Structural Status Log</h2>
-        <form id="infraForm">
-            <div class="form-group"><label>EMIS CODE</label><input type="text" name="EMIS_Code" value="1066340072" readonly></div>
-            <div class="form-group"><label>CIRCUIT</label><input type="text" name="Circuit" value="KOJOBETIAKO" readonly></div>
-            <div class="form-group"><label>NAME OF SCHOOL</label><input type="text" name="School_Name" value="ABONSUASO M/A JHS" readonly></div>
-            <div class="form-group"><label>TOTAL NUMBER OF CLASSROOMS</label><input type="number" name="Total_Classrooms" value="0" min="0"></div>
-            <div class="form-group"><label>CLASSROOMS IN GOOD CONDITION</label><input type="number" name="Classrooms_In_Good_Condition" value="0" min="0"></div>
-            <div class="form-group"><label>STRUCTURES NEEDING MAJOR REPAIRS</label><input type="number" name="Classrooms_Needing_Major_Repair" value="0" min="0"></div>
-            <div class="form-group">
-                <label>SAFE WATER SOURCE AVAILABLE ON SITE?</label>
-                <select name="Water_Source_Available">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
+        <div class="form-title">School Infrastructure Setup Profile</div>
+        
+        <form id="infrastructureForm">
+            <!-- Image 1 Segment: Baseline Identification -->
+            <div class="form-section-divider">1. School Identification & Metadata</div>
+            <div class="form-grid-2">
+                <div class="form-group"><label>Infra ID</label><input type="text" name="Infra_ID" value="(New)" readonly></div>
+                <div class="form-group"><label>EMIS Code</label><input type="text" name="EMIS_Code" value="1066340072"></div>
             </div>
-            <div class="form-group">
-                <label>TOILET FACILITIES FUNCTIONAL?</label>
-                <select name="Toilet_Facilities_Functional">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
+            
+            <div class="form-grid-3">
+                <div class="form-group">
+                    <label>School Status</label>
+                    <select name="School_Status">
+                        <option value="Active" selected>Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>School Levels</label>
+                    <select name="School_Levels">
+                        <option value="KG">KG</option>
+                        <option value="Primary">Primary</option>
+                        <option value="JHS" selected>JHS</option>
+                        <option value="Primary & JHS">Primary & JHS</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Circuit</label><input type="text" name="Circuit" value="KOJOBETIAKO"></div>
             </div>
-            <button type="submit" id="btnSave">SUBMIT STRUCTURE REPORT</button>
+
+            <div class="form-grid-2">
+                <div class="form-group"><label>Name of Institution</label><input type="text" name="School_Name" value="ABONSUASO M/A JHS"></div>
+                <div class="form-group"><label>WAEC Code</label><input type="text" name="WAEC_Code" placeholder="Enter WAEC Centre Number"></div>
+            </div>
+
+            <div class="form-grid-3">
+                <div class="form-group">
+                    <label>Year Established</label>
+                    <select name="Year_Established">
+                        <option value="1995" selected>1995</option>
+                        <option value="2000">2000</option>
+                        <option value="2010">2010</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>School Category</label><input type="text" name="School_Category" placeholder="e.g. Grade A"></div>
+                <div class="form-group">
+                    <label>School Reemeals Availabity</label>
+                    <select name="School_Reemeals_Availability">
+                        <option value="Yes">Yes</option>
+                        <option value="No" selected>No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-grid-3">
+                <div class="form-group">
+                    <label>GALOP</label>
+                    <select name="GALOP_Status">
+                        <option value="Beneficiary">Beneficiary</option>
+                        <option value="Non-Beneficiary" selected>Non-Beneficiary</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Name of Headteacher</label><input type="text" name="Headteacher_Name" value="JAGUAR GANYO MENSAH"></div>
+                <div class="form-group"><label>Headteacher Contact</label><input type="text" name="Headteacher_Contact" value="111111"></div>
+            </div>
+
+            <div class="form-grid-3">
+                <div class="form-group"><label>Education Management</label><input type="text" name="Education_Management" placeholder="e.g. GES Municipal Office"></div>
+                <div class="form-group"><label>Locality</label><input type="text" name="Locality" placeholder="Enter Community Name"></div>
+                <div class="form-group"><label>Type of Locality</label><input type="text" name="Type_of_Locality" placeholder="e.g. Rural / Urban"></div>
+            </div>
+
+            <div class="form-grid-3">
+                <div class="form-group"><label>School Address</label><input type="text" name="School_Address" placeholder="P.O. Box ..."></div>
+                <div class="form-group"><label>School E-mail</label><input type="email" name="School_Email" placeholder="school@example.com"></div>
+                <div class="form-group"><label>GPS Address</label><input type="text" name="GPS_Address" placeholder="e.g. AN-0002-1234"></div>
+            </div>
+            <!-- Image 2 Segment: Utilities & Facility Audits -->
+            <div class="form-section-divider">2. Structural Access, Utilities & Facility Counts</div>
+            <div class="form-grid-2">
+                <!-- Left Hand Utility Column Inputs -->
+                <div>
+                    <div class="form-group"><label>Vehicle Accessbility</label><select name="Vehicle_Accessibility"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                    <div class="form-group"><label>Type of Road</label><select name="Type_of_Road"><option value="Tarred">Tarred</option><option value="Dirt / Off-road">Dirt / Off-road</option></select></div>
+                    <div class="form-group"><label>Wired for Electricity</label><select name="Wired_for_Electricity"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                    <div class="form-group"><label>Electricity Functional</label><select name="Electricity_Functional"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                    <div class="form-group"><label>Main Source of Water</label><select name="Main_Source_of_Water"><option value="Borehole">Borehole</option><option value="Pipe-borne">Pipe-borne</option><option value="None">None</option></select></div>
+                    <div class="form-group"><label>Water Storage Facility</label><select name="Water_Storage_Facility"><option value="Available">Available</option><option value="Not Available">Not Available</option></select></div>
+                    <div class="form-group"><label>Main Toilet Facility</label><select name="Main_Toilet_Facility"><option value="KVIP">KVIP</option><option value="Water Closet">Water Closet</option><option value="None">None</option></select></div>
+                    <div class="form-group"><label>Number Class Under Tree</label><input type="number" name="Number_Class_Under_Tree" value="0"></div>
+                    <div class="form-group"><label>Number of Permanent Classroom</label><input type="number" name="Number_Permanent_Classroom" value="0"></div>
+                    <div class="form-group"><label>Number of Temporary Classroom</label><input type="number" name="Number_Temporary_Classroom" value="0"></div>
+                    <div class="form-group"><label>Number of Uncompleted Classroom</label><input type="number" name="Number_Uncompleted_Classroom" value="0"></div>
+                    <div class="form-group"><label>Number of Office</label><input type="number" name="Number_Office" value="0"></div>
+                    <div class="form-group"><label>Number of Library</label><input type="number" name="Number_Library" value="0"></div>
+                    <div class="form-group"><label>Number of Staff Room</label><input type="number" name="Number_Staff_Room" value="0"></div>
+                    <div class="form-group"><label>Number of Storeroom</label><input type="number" name="Number_Storeroom" value="0"></div>
+                </div>
+                
+                <!-- Right Hand Management Logs Checklist Column Inputs -->
+                <div>
+                    <div class="form-group"><label>Computer Lab</label><select name="Computer_Lab"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                    <div class="form-group"><label>Science Lab</label><select name="Science_Lab"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                    <div class="form-group"><label>Headquarters Available</label><select name="Headquarters_Available"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                    <div class="form-group"><label>Number of Teachers Quarters</label><input type="number" name="Number_Teachers_Quarters" value="0"></div>
+                    <div class="form-group"><label>Inventory Book</label><input type="text" name="Inventory_Book" placeholder="Status tracking description"></div>
+                    <div class="form-group"><label>Teacher Attendance Book</label><input type="text" name="Teacher_Attendance_Book" value="Functional"></div>
+                    <div class="form-group"><label>Class Register</label><input type="text" name="Class_Register" value="Functional"></div>
+                    <div class="form-group"><label>Logbook</label><input type="text" name="Logbook" value="Available"></div>
+                    <div class="form-group"><label>Visitors Book</label><input type="text" name="Visitors_Book" value="Available"></div>
+                    <div class="form-group"><label>Printers</label><input type="number" name="Number_Printers" value="0"></div>
+                    <div class="form-group"><label>Number of Laptop</label><input type="number" name="Number_Laptop" value="0"></div>
+                    <div class="form-group"><label>Number of Desktop Computer</label><input type="number" name="Number_Desktop_Computer" value="0"></div>
+                    <div class="form-group"><label>Financial Record Book</label><input type="text" name="Financial_Record_Book" value="Maintained"></div>
+                    <div class="form-group"><label>Staff Movement Book</label><input type="text" name="Staff_Movement_Book" value="Available"></div>
+                    <div class="form-group"><label>Library Books</label><input type="number" name="Number_Library_Books" value="0"></div>
+                    <div class="form-group"><label>Admission Register</label><input type="text" name="Admission_Register" value="Maintained"></div>
+                    <div class="form-group"><label>Playground</label><select name="Playground_Status"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                </div>
+            </div>
+
+            <!-- Image 3 Segment: Detailed Log Furniture Parameters -->
+            <div class="form-section-divider">3. Furniture & Equipment Log Counts</div>
+            <div class="form-grid-3">
+                <div class="form-group"><label>Number Teachers Table</label><input type="number" name="Num_Teachers_Table" value="0"></div>
+                <div class="form-group"><label>Number Teachers Chair</label><input type="number" name="Num_Teachers_Chair" value="0"></div>
+                <div class="form-group"><label>Number Cupboard</label><input type="number" name="Num_Cupboard" value="0"></div>
+                <div class="form-group"><label>Number Mono Chair</label><input type="number" name="Num_Mono_Chair" value="0"></div>
+                <div class="form-group"><label>Number Dual Chair</label><input type="number" name="Num_Dual_Chair" value="0"></div>
+                <div class="form-group"><label>Number of Bench</label><input type="number" name="Num_Bench" value="0"></div>
+                <div class="form-group"><label>Number of Mono Table</label><input type="number" name="Num_Mono_Table" value="0"></div>
+                <div class="form-group"><label>Number of Dual Table</label><input type="number" name="Num_Dual_Table" value="0"></div>
+                <div class="form-group"><label>Number of Hexagonal</label><input type="number" name="Num_Hexagonal" value="0"></div>
+            </div>
+            
+            <button type="submit" id="btnSave">Submit Infrastructure Report</button>
         </form>
     </div>
 
     <script>
-        document.getElementById("infraForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById("btnSave");
-            btn.disabled = true; 
-            btn.innerText = "POSTING STRUCTURE STATISTICS...";
-            
-            const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_WEB_APP_URL_HERE";
-            const formData = new FormData(e.target);
-            const payloadData = {};
-            formData.forEach((val, key) => payloadData[key] = val);
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("infrastructureForm");
+            const saveButton = document.getElementById("btnSave");
 
-            const payload = { formType: "Infrastructure", data: payloadData };
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                
+                // UPDATE VALUE: Replace with your actual live deployed Web App URL string execution token
+                const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE";
+                
+                saveButton.disabled = true;
+                saveButton.innerText = "SUBMITTING TRANSMISSION...";
 
-            try {
-                const res = await fetch(APP_SCRIPT_URL, { 
-                    method: "POST", 
-                    mode: "cors", 
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify(payload) 
+                const formData = new FormData(form);
+                const payloadData = {};
+                formData.forEach((val, key) => {
+                    payloadData[key] = val;
                 });
-                const result = await res.json();
-                if(result.result === "success") { 
-                    alert(result.message); 
-                    e.target.reset();
-                    document.getElementsByName("EMIS_Code")[0].value = "1066340072";
-                    document.getElementsByName("Circuit")[0].value = "KOJOBETIAKO";
-                    document.getElementsByName("School_Name")[0].value = "ABONSUASO M/A JHS";
-                } else {
-                    alert("Write failure: " + result.message);
+
+                const payload = {
+                    formType: "Infrastructure",
+                    data: payloadData
+                };
+
+                try {
+                    const res = await fetch(APP_SCRIPT_URL, {
+                        method: "POST",
+                        mode: "cors",
+                        headers: { "Content-Type": "text/plain;charset=utf-8" },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    const result = await res.json();
+                    if (result.result === "success") {
+                        alert(result.message);
+                        form.reset();
+                    } else {
+                        alert("Database Routing Failure: " + result.message);
+                    }
+                } catch (err) {
+                    console.error("API Transmission Exception caught: ", err);
+                    alert("Network Error: Link timed out while communicating with your Google Sheets database.");
+                } finally {
+                    saveButton.disabled = false;
+                    saveButton.innerText = "Submit Infrastructure Report";
                 }
-            } catch (err) { 
-                alert("Infrastructure transmission pipeline connection failed."); 
-                console.error(err);
-            } finally { 
-                btn.disabled = false; 
-                btn.innerText = "SUBMIT STRUCTURE REPORT"; 
-            }
+            });
         });
     </script>
 </body>

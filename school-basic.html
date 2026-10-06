@@ -16,7 +16,7 @@
         .hub-nav-btn.logout:hover { background-color: #d4d4d4; }
 
         /* Form Presentation Layout Setup */
-        .form-container { background: #ffffff; padding: 30px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 700px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .form-container { background: #ffffff; padding: 30px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 750px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
         .form-title { color: #800000; font-size: 20px; font-weight: bold; text-transform: uppercase; border-bottom: 3px solid #800000; padding-bottom: 8px; margin-bottom: 25px; letter-spacing: 0.5px; }
         
         .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 6px; }
@@ -46,14 +46,20 @@
         
         <form id="basicSchoolForm">
             <div class="form-group">
-                <label>EMIS Code</label>
-                <input type="text" name="EMIS_Code" value="1066340072" required>
+                <label>MMDA Name</label>
+                <input type="text" name="MMDA_Name" value="Ahafo Ano North Municipal Assembly" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Name of School</label>
+                <input type="text" name="School_Name" placeholder="Enter institutional official name" required>
             </div>
             
             <div class="form-group">
                 <label>Circuit</label>
                 <select name="Circuit" required>
-                    <option value="KOJOBETIAKO" selected>KOJOBETIAKO</option>
+                    <option value="" disabled selected>Select Circuit</option>
+                    <option value="KOJOBETIAKO">KOJOBETIAKO</option>
                     <option value="AKWASIASE">AKWASIASE</option>
                     <option value="ANYINASUSO">ANYINASUSO</option>
                     <option value="DWAAHO">DWAAHO</option>
@@ -65,29 +71,92 @@
                     <option value="TWABIDI">TWABIDI</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
-                <label>Name of School</label>
-                <input type="text" name="School_Name" placeholder="Enter institutional official name" required>
+                <label>EMIS Code</label>
+                <input type="text" name="EMIS_Code" placeholder="Enter 10-digit EMIS code" required>
             </div>
-            
+
             <div class="form-group">
-                <label>Locality / Community</label>
-                <input type="text" name="Locality" placeholder="e.g. Abonsuaso Community">
+                <label>School Email</label>
+                <input type="email" name="School_Email" placeholder="e.g. schoolname@ges.gov.gh">
+            </div>
+
+            <div class="form-group">
+                <label>School Model</label>
+                <select name="School_Model" required>
+                    <option value="" disabled selected>Select School Model</option>
+                    <option value="Mainstream">Mainstream</option>
+                    <option value="Integrated">Integrated</option>
+                    <option value="Special">Special</option>
+                    <option value="STEM Only">STEM Only</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Level</label>
+                <select name="Level_Scope" required>
+                    <option value="" disabled selected>Select Level Scope</option>
+                    <option value="KG Only">KG Only</option>
+                    <option value="Primary Only">Primary Only</option>
+                    <option value="JHS Only">JHS Only</option>
+                    <option value="KG and Primary">KG and Primary</option>
+                    <option value="Primary and JHS">Primary and JHS</option>
+                    <option value="KG, Primary and JHS">KG, Primary and JHS</option>
+                </select>
             </div>
             <div class="form-group">
-                <label>Year Established</label>
-                <input type="number" name="Year_Established" value="1995" min="1800" max="2100">
+                <label>Affiliation Type</label>
+                <select name="Affiliation_Type" required>
+                    <option value="" disabled selected>Select Affiliation Type</option>
+                    <option value="Public/non-religious (government)">Public/non-religious (government)</option>
+                    <option value="Religious (missionary based faith)">Religious (missionary based faith)</option>
+                    <option value="Private">Private</option>
+                </select>
             </div>
-            
+
             <div class="form-group">
-                <label>Headteacher Full Name</label>
+                <label>Sector</label>
+                <select name="Sector_Type" required>
+                    <option value="" disabled selected>Select Sector</option>
+                    <option value="Public">Public</option>
+                    <option value="Private">Private</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Headteacher Name</label>
                 <input type="text" name="Headteacher_Name" placeholder="First and last name">
             </div>
-            
+
             <div class="form-group">
-                <label>Contact Telephone Number</label>
-                <input type="text" name="Contact_Number" placeholder="e.g. +233 XX XXX XXXX">
+                <label>Headteacher Staff ID</label>
+                <input type="text" name="Headteacher_Staff_ID" placeholder="e.g. TS-XXXXX">
+            </div>
+
+            <div class="form-group">
+                <label>Headteacher Phone</label>
+                <input type="text" name="Headteacher_Phone" placeholder="e.g. +233 XX XXX XXXX">
+            </div>
+
+            <div class="form-group">
+                <label>Headteacher Email</label>
+                <input type="email" name="Headteacher_Email" placeholder="e.g. headteacher@gmail.com">
+            </div>
+
+            <div class="form-group">
+                <label>Area Type</label>
+                <select name="Area_Type" required>
+                    <option value="" disabled selected>Select Area Type</option>
+                    <option value="Urban">Urban</option>
+                    <option value="Peri-Urban">Peri-Urban</option>
+                    <option value="Rural">Rural</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Location / Physical Address</label>
+                <input type="text" name="Location_Address" placeholder="e.g. Off Tepa Main Road, Community 4">
             </div>
             
             <button type="submit" id="btnSave">Submit School Account</button>
@@ -102,7 +171,7 @@
             form.addEventListener("submit", async (e) => {
                 e.preventDefault();
                 
-                // UPDATE VALUE: Define your operational deployed web app execution URL here
+                // UPDATE VALUE: Replace with your deployed Google Web App URL link
                 const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE";
                 
                 saveButton.disabled = true;
@@ -132,11 +201,11 @@
                         alert(result.message);
                         form.reset();
                     } else {
-                        alert("Database Routing Failure: " + result.message);
+                        alert("Database API Failure: " + result.message);
                     }
                 } catch (err) {
-                    console.error("API transmission exception: ", err);
-                    alert("Network Connection Error: Failure communicating with spreadsheet endpoint database API.");
+                    console.error("API Gateway connectivity exception: ", err);
+                    alert("Network Error: Unable to transmit data logs to your Google Sheets database engine.");
                 } finally {
                     saveButton.disabled = false;
                     saveButton.innerText = "Submit School Account";

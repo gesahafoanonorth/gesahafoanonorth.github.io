@@ -17,6 +17,7 @@
 
         /* Form Presentation Layout Setup */
         .register-container { background: #ffffff; padding: 30px; border: 1px solid #ebdcd0; border-radius: 8px; max-width: 1300px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
+        .main-form-heading { color: #800000; font-size: 22px; font-weight: bold; text-align: center; text-transform: uppercase; margin-bottom: 25px; border-bottom: 3px solid #800000; padding-bottom: 10px; letter-spacing: 0.5px; }
         
         /* Main Grid Matrices matching image structure */
         .top-row-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
@@ -70,8 +71,10 @@
     </div>
 
     <div class="register-container">
+        <!-- Main Form Title Heading -->
+        <h2 class="main-form-heading">Personnel & Staff Registration Form</h2>
+        
         <form id="staffForm">
-            
             <!-- Top Column Grid Layout Slots Row -->
             <div class="top-row-grid">
                 
@@ -109,8 +112,28 @@
                 <!-- Academic And School Details Fieldset -->
                 <fieldset class="academic">
                     <legend class="academic">Academic And School Details</legend>
-                    <div class="field-row"><label>Circuit</label><input type="text" name="Circuit" value="" class="read-only-bg" readonly></div>
-                    <div class="field-row"><label>Name of School</label><input type="text" name="School_Name" value="" class="read-only-bg" readonly></div>
+                    <div class="field-row">
+                        <label>Circuit</label>
+                        <select name="Circuit" required>
+                            <option value="" disabled selected>Select Circuit</option>
+                            <option value="AKWASIASE">AKWASIASE</option>
+                            <option value="ANYINASUSO">ANYINASUSO</option>
+                            <option value="DWAAHO">DWAAHO</option>
+                            <option value="KOJOBETIAKO">KOJOBETIAKO</option>
+                            <option value="MANFO">MANFO</option>
+                            <option value="SUBRISO">SUBRISO</option>
+                            <option value="SUPONSO">SUPONSO</option>
+                            <option value="TEPA URBAN A">TEPA URBAN A</option>
+                            <option value="TEPA URBAN B">TEPA URBAN B</option>
+                            <option value="TWABIDI">TWABIDI</option>
+                        </select>
+                    </div>
+                    <div class="field-row">
+                        <label>Name of School</label>
+                        <select name="School_Name" required>
+                            <option value="" disabled selected>Select Circuit First</option>
+                        </select>
+                    </div>
                     <div class="field-row">
                         <label>Association Type</label>
                         <select name="Association_Type">
@@ -223,25 +246,27 @@
                 </div>
             </fieldset>
 
-            <!-- Lower Workspace Controls Footer Panel -->
+            <!-- Lower Workspace Controls Footer Panel containing search and explicit submit buttons -->
             <div class="bottom-action-bar">
                 <div class="search-bar">
                     <label>Search by StaffID, Surname, Phone Number</label>
                     <input type="text" id="search_query_input" placeholder="Enter keywords...">
                     <button type="button" class="search-btn" onclick="alert('Local database query index lookups initiated...')">🔍</button>
                 </div>
+                <!-- Re-engineered explicit submission action control key -->
                 <button type="submit" id="btnSubmit">Add New Entry</button>
             </div>
 
         </form>
     </div>
 
+    <!-- Master Interceptor Scripts Pipeline Sequencing -->
+    <script src="circuit-data.js"></script>
+    <script src="circuit-filter.js"></script>
+    <script src="form-handler.js"></script>
     <script>
+        // Automatic runtime data math engine loop
         document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("staffForm");
-            const saveButton = document.getElementById("btnSubmit");
-
-            // Live Automated Age & Retirement Calculation Controllers
             const dobInput = document.getElementById("dob_input");
             const appointmentInput = document.getElementById("appointment_input");
             
@@ -251,93 +276,37 @@
             const yearsToRetireBox = document.getElementById("years_to_retire_box");
 
             const performLiveDateMath = () => {
-                const standardCurrentYear = 2026; // Grounded to system timeframe
-                
+                const currentYear = 2026;
                 if (dobInput.value) {
                     const birthYear = new Date(dobInput.value).getFullYear();
-                    const calculatedAge = Math.max(0, standardCurrentYear - birthYear);
+                    const calculatedAge = Math.max(0, currentYear - birthYear);
                     ageBox.value = calculatedAge;
-
-                    // Standard civil service retirement baseline threshold in Ghana is 60 years
                     const remainingYears = Math.max(0, 60 - calculatedAge);
                     yearsToRetireBox.value = remainingYears;
                     retirementBox.value = remainingYears <= 0 ? "Retired" : "Active";
                 }
-
                 if (appointmentInput.value) {
                     const entryYear = new Date(appointmentInput.value).getFullYear();
-                    serviceBox.value = Math.max(0, standardCurrentYear - entryYear);
+                    serviceBox.value = Math.max(0, currentYear - entryYear);
                 }
             };
 
             dobInput.addEventListener("change", performLiveDateMath);
             appointmentInput.addEventListener("change", performLiveDateMath);
 
-            // POST Submission Logic Engine Gateway Pipeline
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault();
-                
-                const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE";
-                saveButton.disabled = true;
-                saveButton.innerText = "SAVING ROWS...";
-
-                const formData = new FormData(form);
-                const payloadData = {};
-                formData.forEach((val, key) => {
-                    payloadData[key] = val;
-                });
-
-                // Inject dynamic properties fields calculated by engine into payload mapping
-                payloadData["Age"] = ageBox.value;
-                payloadData["Years_In_Service"] = serviceBox.value;
-                payloadData["Years_To_Retired"] = yearsToRetireBox.value;
-                payloadData["Retirement_Status"] = retirementBox.value;
-
-                const payload = {
-                    formType: "Staff",
-                    data: payloadData
-                };
-
-                try {
-                    const res = await fetch(APP_SCRIPT_URL, {
-                        method: "POST",
-                        mode: "cors",
-                        headers: { "Content-Type": "text/plain;charset=utf-8" },
-                        body: JSON.stringify(payload)
-                    });
-                    
-                    const result = await res.json();
-                    if (result.result === "success") {
-                        alert(result.message);
-                        form.reset();
-                        performLiveDateMath();
-                    } else {
-                        alert("Database API Failure: " + result.message);
-                    }
-                } catch (err) {
-                    console.error("Transmission caught exception: ", err);
-                    alert("Network Error: Link timed out while communicating with your Google Sheets backend API.");
-                } finally {
-                    saveButton.disabled = false;
-                    saveButton.innerText = "Add New Entry";
+            // Bind global tracker module submission wrapper interceptor
+            handleGlobalFormSubmission(
+                "staffForm",
+                "btnSubmit",
+                "Staff",
+                "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE",
+                () => {
+                    document.getElementById("staffForm").reset();
+                    performLiveDateMath();
                 }
-            });
+            );
         });
     </script>
-    
-    <!-- Centralized Database Form Upload Status Controller Gateway Pipeline -->
-<script>
-  handleGlobalFormSubmission(
-    "staffForm", 
-    "btnSubmit", 
-    "Staff", 
-    "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE"
-);
-</script>
-
-<!-- Secure Central Session Access Protection Checkpoint -->
-<script src="session-manager.js"></script>
-
+    <script src="session-manager.js"></script>
 </body>
 </html>
-

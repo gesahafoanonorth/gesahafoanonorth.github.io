@@ -51,11 +51,12 @@
         <div class="form-title">School Infrastructure Setup Profile</div>
         
         <form id="infrastructureForm">
-            <!-- Image 1 Segment: Baseline Identification -->
+            <!-- 1. School Identification & Metadata -->
             <div class="form-section-divider">1. School Identification & Metadata</div>
+            
             <div class="form-grid-2">
                 <div class="form-group"><label>Infra ID</label><input type="text" name="Infra_ID" value="(New)" readonly></div>
-                <div class="form-group"><label>EMIS Code</label><input type="text" name="EMIS_Code" value=""></div>
+                <div class="form-group"><label>EMIS Code</label><input type="text" name="EMIS_Code" value="1066340072"></div>
             </div>
             
             <div class="form-grid-3">
@@ -75,11 +76,31 @@
                         <option value="Primary & JHS">Primary & JHS</option>
                     </select>
                 </div>
-                <div class="form-group"><label>Circuit</label><input type="text" name="Circuit" value=""></div>
+                <div class="form-group">
+                    <label>Circuit</label>
+                    <select name="Circuit" required>
+                        <option value="" disabled selected>Select Circuit</option>
+                        <option value="AKWASIASE">AKWASIASE</option>
+                        <option value="ANYINASUSO">ANYINASUSO</option>
+                        <option value="DWAAHO">DWAAHO</option>
+                        <option value="KOJOBETIAKO">KOJOBETIAKO</option>
+                        <option value="MANFO">MANFO</option>
+                        <option value="SUBRISO">SUBRISO</option>
+                        <option value="SUPONSO">SUPONSO</option>
+                        <option value="TEPA URBAN A">TEPA URBAN A</option>
+                        <option value="TEPA URBAN B">TEPA URBAN B</option>
+                        <option value="TWABIDI">TWABIDI</option>
+                    </select>
+                </div>
             </div>
 
             <div class="form-grid-2">
-                <div class="form-group"><label>Name of Institution</label><input type="text" name="School_Name" value=""></div>
+                <div class="form-group">
+                    <label>Name of Institution</label>
+                    <select name="School_Name" required>
+                        <option value="" disabled selected>Select Circuit First</option>
+                    </select>
+                </div>
                 <div class="form-group"><label>WAEC Code</label><input type="text" name="WAEC_Code" placeholder="Enter WAEC Centre Number"></div>
             </div>
 
@@ -113,8 +134,8 @@
                         <option value="Non-Beneficiary" selected>Non-Beneficiary</option>
                     </select>
                 </div>
-                <div class="form-group"><label>Name of Headteacher</label><input type="text" name="Headteacher_Name" value=""></div>
-                <div class="form-group"><label>Headteacher Contact</label><input type="text" name="Headteacher_Contact" value=""></div>
+                <div class="form-group"><label>Name of Headteacher</label><input type="text" name="Headteacher_Name" placeholder="Headteacher Full Name"></div>
+                <div class="form-group"><label>Headteacher Contact</label><input type="text" name="Headteacher_Contact" placeholder="Contact number"></div>
             </div>
 
             <div class="form-grid-3">
@@ -124,14 +145,13 @@
             </div>
 
             <div class="form-grid-3">
-                <div class="form-group"><label>School Address</label><input type="text" name="School_Address" placeholder="P.O. Box ..."></div>
+                <div class="form-group"><label>School Address</label><input type="text" name="School_Address" placeholder="School Mailing Address"></div>
                 <div class="form-group"><label>School E-mail</label><input type="email" name="School_Email" placeholder="school@example.com"></div>
                 <div class="form-group"><label>GPS Address</label><input type="text" name="GPS_Address" placeholder="e.g. AN-0002-1234"></div>
             </div>
-            <!-- Image 2 Segment: Utilities & Facility Audits -->
+            <!-- 2. Structural Access, Utilities & Facility Counts -->
             <div class="form-section-divider">2. Structural Access, Utilities & Facility Counts</div>
             <div class="form-grid-2">
-                <!-- Left Hand Utility Column Inputs -->
                 <div>
                     <div class="form-group"><label>Vehicle Accessbility</label><select name="Vehicle_Accessibility"><option value="Yes">Yes</option><option value="No">No</option></select></div>
                     <div class="form-group"><label>Type of Road</label><select name="Type_of_Road"><option value="Tarred">Tarred</option><option value="Dirt / Off-road">Dirt / Off-road</option></select></div>
@@ -150,13 +170,12 @@
                     <div class="form-group"><label>Number of Storeroom</label><input type="number" name="Number_Storeroom" value="0"></div>
                 </div>
                 
-                <!-- Right Hand Management Logs Checklist Column Inputs -->
                 <div>
                     <div class="form-group"><label>Computer Lab</label><select name="Computer_Lab"><option value="Yes">Yes</option><option value="No">No</option></select></div>
                     <div class="form-group"><label>Science Lab</label><select name="Science_Lab"><option value="Yes">Yes</option><option value="No">No</option></select></div>
                     <div class="form-group"><label>Headquarters Available</label><select name="Headquarters_Available"><option value="Yes">Yes</option><option value="No">No</option></select></div>
                     <div class="form-group"><label>Number of Teachers Quarters</label><input type="number" name="Number_Teachers_Quarters" value="0"></div>
-                    <div class="form-group"><label>Inventory Book</label><input type="text" name="Inventory_Book" placeholder="Status tracking description"></div>
+                    <div class="form-group"><label>Inventory Book</label><input type="text" name="Inventory_Book" placeholder="Status description"></div>
                     <div class="form-group"><label>Teacher Attendance Book</label><input type="text" name="Teacher_Attendance_Book" value="Functional"></div>
                     <div class="form-group"><label>Class Register</label><input type="text" name="Class_Register" value="Functional"></div>
                     <div class="form-group"><label>Logbook</label><input type="text" name="Logbook" value="Available"></div>
@@ -172,7 +191,7 @@
                 </div>
             </div>
 
-            <!-- Image 3 Segment: Detailed Log Furniture Parameters -->
+            <!-- 3. Furniture & Equipment Log Counts -->
             <div class="form-section-divider">3. Furniture & Equipment Log Counts</div>
             <div class="form-grid-3">
                 <div class="form-group"><label>Number Teachers Table</label><input type="number" name="Num_Teachers_Table" value="0"></div>
@@ -190,70 +209,19 @@
         </form>
     </div>
 
+    <!-- Master Interceptor Scripts Pipeline Sequencing -->
+    <script src="circuit-data.js"></script>
+    <script src="circuit-filter.js"></script>
+    <script src="form-handler.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("infrastructureForm");
-            const saveButton = document.getElementById("btnSave");
-
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault();
-                
-                // UPDATE VALUE: Replace with your actual live deployed Web App URL string execution token
-                const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE";
-                
-                saveButton.disabled = true;
-                saveButton.innerText = "SUBMITTING TRANSMISSION...";
-
-                const formData = new FormData(form);
-                const payloadData = {};
-                formData.forEach((val, key) => {
-                    payloadData[key] = val;
-                });
-
-                const payload = {
-                    formType: "Infrastructure",
-                    data: payloadData
-                };
-
-                try {
-                    const res = await fetch(APP_SCRIPT_URL, {
-                        method: "POST",
-                        mode: "cors",
-                        headers: { "Content-Type": "text/plain;charset=utf-8" },
-                        body: JSON.stringify(payload)
-                    });
-                    
-                    const result = await res.json();
-                    if (result.result === "success") {
-                        alert(result.message);
-                        form.reset();
-                    } else {
-                        alert("Database Routing Failure: " + result.message);
-                    }
-                } catch (err) {
-                    console.error("API Transmission Exception caught: ", err);
-                    alert("Network Error: Link timed out while communicating with your Google Sheets database.");
-                } finally {
-                    saveButton.disabled = false;
-                    saveButton.innerText = "Submit Infrastructure Report";
-                }
-            });
-        });
+        // Bind submission wrapper link
+        handleGlobalFormSubmission(
+            "infrastructureForm",
+            "btnSave",
+            "Infrastructure",
+            "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE"
+        );
     </script>
-<!-- Centralized Database Form Upload Status Controller Gateway Pipeline -->
-<script>
-   handleGlobalFormSubmission(
-    "infrastructureForm", 
-    "btnSave", 
-    "Infrastructure", 
-    "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE"
-);
-</script>
-
-<!-- Secure Central Session Access Protection Checkpoint -->
-<script src="session-manager.js"></script>
-
+    <script src="session-manager.js"></script>
 </body>
 </html>
-
-

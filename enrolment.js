@@ -95,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   form.addEventListener("input", calculateLiveTotals);
-
   // --- Reset Forms Control Subroutines ---
   const clearFormAndResetTotals = () => {
     form.reset();

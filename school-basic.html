@@ -51,11 +51,6 @@
             </div>
 
             <div class="form-group">
-                <label>Name of School</label>
-                <input type="text" name="School_Name" placeholder="Enter institutional official name" required>
-            </div>
-            
-            <div class="form-group">
                 <label>Circuit</label>
                 <select name="Circuit" required>
                     <option value="" disabled selected>Select Circuit</option>
@@ -73,17 +68,21 @@
             </div>
 
             <div class="form-group">
+                <label>Name of School</label>
+                <select name="School_Name" required>
+                    <option value="" disabled selected>Select Circuit First</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label>EMIS Code</label>
                 <input type="text" name="EMIS_Code" placeholder="Enter 10-digit EMIS code" required>
             </div>
 
             <div class="form-group">
-    <label>Name of School</label>
-    <select name="School_Name" required>
-        <option value="" disabled selected>Select Circuit First</option>
-    </select>
-</div>
-
+                <label>School Email</label>
+                <input type="email" name="School_Email" placeholder="e.g. schoolname@ges.gov.gh">
+            </div>
 
             <div class="form-group">
                 <label>School Model</label>
@@ -166,75 +165,19 @@
         </form>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("basicSchoolForm");
-            const saveButton = document.getElementById("btnSave");
-
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault();
-                
-                // UPDATE VALUE: Replace with your deployed Google Web App URL link
-                const APP_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE";
-                
-                saveButton.disabled = true;
-                saveButton.innerText = "SUBMITTING...";
-
-                const formData = new FormData(form);
-                const payloadData = {};
-                formData.forEach((val, key) => {
-                    payloadData[key] = val;
-                });
-
-                const payload = {
-                    formType: "Basic_School",
-                    data: payloadData
-                };
-
-                try {
-                    const res = await fetch(APP_SCRIPT_URL, {
-                        method: "POST",
-                        mode: "cors",
-                        headers: { "Content-Type": "text/plain;charset=utf-8" },
-                        body: JSON.stringify(payload)
-                    });
-                    
-                    const result = await res.json();
-                    if (result.result === "success") {
-                        alert(result.message);
-                        form.reset();
-                    } else {
-                        alert("Database API Failure: " + result.message);
-                    }
-                } catch (err) {
-                    console.error("API Gateway connectivity exception: ", err);
-                    alert("Network Error: Unable to transmit data logs to your Google Sheets database engine.");
-                } finally {
-                    saveButton.disabled = false;
-                    saveButton.innerText = "Submit School Account";
-                }
-            });
-        });
-    </script>
-    
-    <!-- Secure Central Session Access Protection Checkpoint -->
-    <script src="session-manager.js"></script>
-    <!-- 1. Master Dictionary Dataset (Pre-populated list values) -->
+    <!-- Master Interceptor Scripts Pipeline Sequencing -->
     <script src="circuit-data.js"></script>
-
-    <!-- 2. Dynamic Filtering Manager Engine (Cascading dropdown connector link) -->
     <script src="circuit-filter.js"></script>
-
-    <!-- 3. Form Handling Utility Status Controller Interceptor Pipeline -->
     <script src="form-handler.js"></script>
-
-    <!-- 4. Module-Specific Implementation Core (e.g., enrolment.js, staff logic, etc.) -->
-    <script src="enrolment.js"></script>
-
-    <!-- 5. Secure Session Inactivity Idle Timeout Countdown Guard Protection -->
+    <script>
+        // Bind central data status interceptor wrapper link
+        handleGlobalFormSubmission(
+            "basicSchoolForm",
+            "btnSave",
+            "Basic_School",
+            "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE"
+        );
+    </script>
     <script src="session-manager.js"></script>
-
 </body>
 </html>
-
-

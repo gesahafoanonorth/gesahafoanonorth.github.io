@@ -28,8 +28,8 @@
         #btnClear:hover { background-color: #ffe1e1; }
 
         .meta-fieldset { border: 1px solid #ccc; margin-bottom: 25px; padding: 15px; background: #fafafa; border-radius: 4px; }
-        .grid-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 15px; }
-        .grid-row.last { margin-bottom: 0; }
+        .grid-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 15px; }
+        .grid-row.last { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 0; }
         .input-group { display: flex; flex-direction: column; gap: 4px; }
         .input-group label { font-size: 11px; font-weight: bold; color: #333; text-transform: uppercase; }
         .input-group select, .input-group input { padding: 6px; border: 1px solid #aaa; border-radius: 4px; font-size: 13px; width: 100%; box-sizing: border-box; }
@@ -84,6 +84,10 @@
             <fieldset class="meta-fieldset">
                 <div class="grid-row">
                     <div class="input-group">
+                        <label>MMDA Name</label>
+                        <input type="text" name="MMDA_Name" value="Ahafo Ano North Municipal Assembly" readonly>
+                    </div>
+                    <div class="input-group">
                         <label>Academic Year</label>
                         <select name="Academic_Year">
                             <option value="" disabled selected>Select Year</option>
@@ -103,7 +107,6 @@
                         <label style="color: red;">Select Level</label>
                         <select name="Selected_Level" id="select_level">
                             <option value="" disabled selected>Select Level</option>
-                            <option value="Select Level">Select Level</option>
                             <option value="KG ONLY">KG ONLY</option>
                             <option value="PRIMARY ONLY">PRIMARY ONLY</option>
                             <option value="JHS ONLY">JHS ONLY</option>
@@ -114,7 +117,10 @@
                     </div>
                 </div>
                 <div class="grid-row last">
-                    <div class="input-group"><label>EMIS Code</label><input type="text" name="EMIS_Code" value="">
+                    <div class="input-group">
+                        <label>EMIS Code</label>
+                        <input type="text" name="EMIS_Code" value="1066340072">
+                    </div>
                     <div class="input-group">
                         <label>Circuit</label>
                         <select name="Circuit">
@@ -131,11 +137,14 @@
                             <option value="TWABIDI">TWABIDI</option>
                         </select>
                     </div>
-                    <div class="input-group"><label>Name of School</label><input type="text" name="School_Name" value="">
+                    <div class="input-group">
+                        <label>Name of School</label>
+                        <input type="text" name="School_Name" value="ABONSUASO M/A JHS">
+                    </div>
                 </div>
             </fieldset>
             <div class="sections-wrapper">
-                <!-- KG Section Table -->
+                <!-- KG Section -->
                 <fieldset id="kg_fieldset" class="section-fieldset kg">
                     <legend>KG Enrolment</legend>
                     <table class="data-table">
@@ -148,7 +157,7 @@
                     </table>
                 </fieldset>
 
-                <!-- Primary Section Table -->
+                <!-- Primary Section -->
                 <fieldset id="primary_fieldset" class="section-fieldset primary">
                     <legend>Primary Enrolment</legend>
                     <table class="data-table">
@@ -165,7 +174,7 @@
                     </table>
                 </fieldset>
 
-                <!-- JHS Section Table -->
+                <!-- JHS Section -->
                 <fieldset id="jhs_fieldset" class="section-fieldset jhs">
                     <legend>JHS Enrolment</legend>
                     <table class="data-table">
@@ -181,9 +190,10 @@
             </div>
         </form>
     </div>
+
+    <!-- Active Script Hook-ups Array -->
+    <script src="form-handler.js"></script>
     <script src="enrolment.js"></script>
-                    
-        <!-- Secure Central Session Access Protection Checkpoint -->
     <script src="session-manager.js"></script>
 </body>
 </html>

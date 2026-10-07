@@ -138,12 +138,11 @@
                         </select>
                     </div>
                     <div class="input-group">
-    <label>Name of School</label>
-    <select name="School_Name" required>
-        <option value="" disabled selected>Select Circuit First</option>
-    </select>
-</div>
-
+                        <label>Name of School</label>
+                        <select name="School_Name" required>
+                            <option value="" disabled selected>Select Circuit First</option>
+                        </select>
+                    </div>
                 </div>
             </fieldset>
             <div class="sections-wrapper">
@@ -195,25 +194,19 @@
     </div>
 
     <!-- Active Script Hook-ups Array -->
-    <script src="form-handler.js"></script>
-    <script src="enrolment.js"></script>
-    <script src="session-manager.js"></script>
-        <!-- 1. Master Dictionary Dataset (Pre-populated list values) -->
     <script src="circuit-data.js"></script>
-
-    <!-- 2. Dynamic Filtering Manager Engine (Cascading dropdown connector link) -->
     <script src="circuit-filter.js"></script>
-
-    <!-- 3. Form Handling Utility Status Controller Interceptor Pipeline -->
     <script src="form-handler.js"></script>
-
-    <!-- 4. Module-Specific Implementation Core (e.g., enrolment.js, staff logic, etc.) -->
+    <script>
+        // Bind central data status interceptor wrapper link
+        handleGlobalFormSubmission(
+            "enrolmentForm",
+            "btnSubmit",
+            "Enrolment",
+            "PASTE_YOUR_DEPLOYED_GOOGLE_WEB_APP_URL_HERE"
+        );
+    </script>
     <script src="enrolment.js"></script>
-
-    <!-- 5. Secure Session Inactivity Idle Timeout Countdown Guard Protection -->
     <script src="session-manager.js"></script>
-
 </body>
 </html>
-
-
